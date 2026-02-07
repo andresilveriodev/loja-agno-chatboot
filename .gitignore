@@ -1,0 +1,42 @@
+# Dependencies
+node_modules/
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.Python
+*.egg-info/
+.eggs/
+
+# Build / output
+dist/
+build/
+.next/
+out/
+*.tsbuildinfo
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Logs and OS
+*.log
+.DS_Store
+Thumbs.db
+
+# IDE / Editor
+.idea/
+*.swp
+*.swo
+.vscode/
+
+# Optional: descomente para não versionar regras do Cursor
+# .cursor/
+
+# Docker
+.docker/
+
+# Cache
+.cache/
+*.cache

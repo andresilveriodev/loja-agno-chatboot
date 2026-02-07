@@ -1,0 +1,302 @@
+[
+  {
+    "id": "prod_001",
+    "name": "Bosch Furadeira de Impacto GSB 13 RE-M - 750W 220V",
+    "category": "Ferramentas & Máquinas Profissionais",
+    "price": 381.65,
+    "description": "Furadeira de impacto Bosch GSB 13 RE-M com 750W de potência, leve e compacta. Motor de alto desempenho com menor vibração e menos ruído. Ideal para perfuração em concreto, alvenaria, madeira e metal.",
+    "image": "furadeira-impacto-750w.webp",
+    "specs": "Potência: 750W, Tensão: 220V, Tamanho mandril: 10mm, Peso: 1.6kg, Velocidade variável 0-3000 RPM",
+    "features": ["Motor de alto desempenho 750W", "Interruptor com velocidade variável", "Botão trava para trabalhos contínuos", "Empunhadura emborrachada com agarre seguro", "Inclui maleta, chave de mandril, limitador de profundidade e manual", "Garantia 2 anos Bosch"]
+  },
+  {
+    "id": "prod_002",
+    "name": "Bosch Parafusadeira/Chave Impacto GDX 18V-285 - 285Nm",
+    "category": "Ferramentas & Máquinas Profissionais",
+    "price": 582.90,
+    "description": "Parafusadeira e chave de impacto 2 em 1 Bosch com potente torque de 285 Nm. Versátil para apertar e afrouxar parafusos, porcas e parafusos em aplicações exigentes.",
+    "image": "parafusadeira-18v.webp",
+    "specs": "Tensão: 18V, Torque máximo: 285 Nm, Velocidade: 2800 RPM, Peso: conforme especificação, Tipo: Chave de impacto profissional",
+    "features": ["Potência e versatilidade 2 em 1", "Modo ABR: desliga automaticamente ao desparafusar", "Modo Metal: interrompe ao nivelar parafuso", "Modo Madeira: reduz velocidade para maior controle", "Duas velocidades com modos predefinidos", "Garantia 1 ano + 1 ano adicional ao cadastro BeConnected"]
+  },
+  {
+    "id": "prod_003",
+    "name": "Vonder Motocompressor de Ar MCV 50 - 50 Litros",
+    "category": "Ferramentas & Máquinas Profissionais",
+    "price": 1448.91,
+    "description": "Motocompressor de ar compacto e portátil Vonder com potência 2 cv (hp). Indicado para limpeza de peças, pequenas pinturas, pulverizações e acionamento de ferramentas pneumáticas.",
+    "image": "compressor-50l.webp",
+    "specs": "Capacidade: 50 litros, Potência: 2.0 cv (hp), Produção: 8.0 pcm, Pressão máxima: 120 lbf/pol², Tensão: 220V, Peso: 28kg",
+    "features": ["Compacto e portátil", "Chave liga/desliga", "Rodas e alça facilitam transporte", "Dupla proteção térmica com desligamento automático", "Carcaça em plástico com proteção antichama", "Regularador de pressão e válvula de segurança", "Dois manômetros e duas válvulas de saída", "Certificado conforme Portaria Inmetro"]
+  },
+  {
+    "id": "prod_004",
+    "name": "Start Máquina Inversora de Solda TOP ARC 200 - 200A",
+    "category": "Ferramentas & Máquinas Profissionais",
+    "price": 334.90,
+    "description": "Máquina inversora de solda MMA portátil TOP ARC 200 Start com tecnologia inversora para soldagem com eletrodo revestido. Projetada para entregar desempenho e mobilidade.",
+    "image": "soldadora-200a.webp",
+    "specs": "Corrente: 200A, Voltagem: 220V, Fator de Trabalho: 100%, Display Digital, Entrada: 3.3kW, Saída: 2.8kW, Tensão em vazio: 72V, Eletrodos: 2.0/2.5/3.25mm",
+    "features": ["Tecnologia inversora para máximo desempenho", "Hot start reduz chance de eletrodo grudar", "Anti-stick para economizar tempo e aumentar produtividade", "Corpo robusto mas leve oferece mobilidade", "Solda eletrodos E6013 e E7018", "Ventilação turbo para melhor refrigeração", "Soldas com menos escória e alta eficiência", "TIG Tocha Seca 9mm compatível"]
+  },
+  {
+    "id": "prod_005",
+    "name": "Cortag Cortador de Piso New Master 90cm - Profissional",
+    "category": "Ferramentas & Máquinas Profissionais",
+    "price": 605.99,
+    "description": "Cortador de piso/azulejo manual Cortag New Master 90cm profissional. Cortes precisos em pisos, azulejos, cerâmica, granito, mármore e porcelanato. Rodel em tungstênio com precisão milimétrica.",
+    "image": "cortadora-piso.webp",
+    "specs": "Comprimento máximo corte reto: 90cm, Comprimento máximo corte diagonal: 64cm, Espessura máxima: 12mm, Material rodel: Tungstênio, Base: Chapa de aço carbono, Peso: 8kg",
+    "features": ["Rodel de tungstênio para máxima resistência", "Corte reto e diagonal até 90cm", "Base de apoio em chapa de aço carbono", "Guias de corte em aço niquelado", "Carrinho guia com rolamentos", "Punho ergonômico", "Inclui carrinho guia, rodel, chave Allen e manual", "Precisão milimétrica em escala monumental"]
+  },
+  {
+    "id": "prod_006",
+    "name": "WAP Lavadora de Alta Pressão OUSADA PLUS 2200 - 1750psi",
+    "category": "Ferramentas & Máquinas Profissionais",
+    "price": 429.90,
+    "description": "Lavadora de alta pressão WAP OUSADA PLUS 2200 com jato leque e concentrado. Potência 1500W e vazão de 342L/h ideal para limpeza profissional e manutenção.",
+    "image": "lavadora-alta-pressao.webp",
+    "specs": "Pressão máxima: 1750 PSI (2200 PSI modelo), Vazão: 5.7 litros/min - 342L/h, Potência: 1500W, Comprimento mangueira: 3 metros, Tensão: 127V/220V, Peso: 4.6kg",
+    "features": ["Alças e rodas para fácil transporte", "Pistola com trava de segurança", "Sistema stop total economiza energia", "Engate rápido para montar/desmontar sem ferramentas", "Lança com bico regulável (leque e concentrado)", "Mangueira 3 metros de alta pressão", "Inclui múltiplos acessórios e suporte", "Garantia 1 ano"]
+  },
+  {
+    "id": "prod_007",
+    "name": "Toyama Gerador a Gasolina TG3100CXR - 3.1kW",
+    "category": "Energia & Infraestrutura",
+    "price": 1200.00,
+    "description": "Gerador a gasolina Toyama TG3100CXR monofásico com 3.1kW de potência. Motorbomba profissional com partida manual, ideal para obras e uso contínuo.",
+    "image": "gerador-6.5kva.webp",
+    "specs": "Potência de saída: 3.1kW, Voltagem: 115/230V bifásico, Frequência: 60Hz, Tipo de combustível: Gasolina, Motor: 4 tempos - 196cc, Volume tanque: 15 litros, Deslocamento: 196cc, Número de tomadas: 2",
+    "features": ["Gerador monofásico 115/230V", "Motor a gasolina 4 tempos confiável", "Partida manual", "Ideal para alimentação de ferramentas e equipamentos", "Design compacto e portátil", "Autonomia com tanque de 15L", "Voltagem bifásica 115/230V"]
+  },
+  {
+    "id": "prod_008",
+    "name": "Intech Machine Bomba d'Água Periférica BP1000 - 1HP",
+    "category": "Energia & Infraestrutura",
+    "price": 337.90,
+    "description": "Bomba d'água periférica Intech Machine BP1000 com 1HP ideal para transferência de água limpa de poços, cisternas e abastecimento de residências até 6 andares.",
+    "image": "bomba-agua-1hp.webp",
+    "specs": "Potência: 1HP (746W), Vazão: 50 L/min - 3000 L/h, Altura manométrica máxima: 45m, Sucção máxima: 8m profundidade, Bocais: 1 polegada, Motor: 3450 RPM, Voltagem: 110/220V bivolt",
+    "features": ["Rotor em bronze para resistência à corrosão", "Rolamento blindado DDU", "Corpo e tampa em ferro fundido", "Selo mecânico de qualidade", "Difusor de aço", "Eixo blindado e flange acoplamento", "Protetor térmico integrado", "Ideal para poços, cisternas e pequenas irrigações", "Rede de 500+ assistências técnicas no Brasil"]
+  },
+  {
+    "id": "prod_009",
+    "name": "Steck Quadro Elétrico Ouro Box 48 Módulos Din - Porta Opaca",
+    "category": "Energia & Infraestrutura",
+    "price": 214.00,
+    "description": "Quadro elétrico de embutir Steck Ouro Box com 48 módulos DIN. Design branco para aplicação residencial e industrial com porta opaca.",
+    "image": "quadro-eletrico.webp",
+    "specs": "Número de módulos: 48 DIN, Material: Embutir, Tipo de fase: Monofásico, Dimensões: 31cm(C) x 8.7cm(L) x 70.2cm(A), Peso: 2.27kg, Barramentos: SBN11 (neutro) e SBT11 (terra) vendidos separadamente",
+    "features": ["Quadro de distribuição padrão industrial", "48 módulos DIN", "Porta opaca branca", "Linha Ouro Box com design moderno", "Aplicação residencial e industrial", "Facil instalação e manutenção", "Acabamento profissional", "Fabricação brasileira"]
+  },
+  {
+    "id": "prod_010",
+    "name": "Medidor Digital de Energia Elétrica - Trifásico 220/380V",
+    "category": "Energia & Infraestrutura",
+    "price": 285.00,
+    "description": "Medidor de energia digital com tela LCD. Trifásico 220V a 380V com 100 amperes. Display digital para medição precisa de consumo elétrico.",
+    "image": "medidor-digital.webp",
+    "specs": "Tipo: Trifásico 220V a 380V, Capacidade: 100 amperes, Frequência: 60Hz, Display: LCD Digital, Voltagem operacional: 5V a 380V CA, Temperatura máxima: 150°C, Dimensões: 10 x 7.6 x 6.5cm",
+    "features": ["Tela LCD cristal líquido digital", "Medição trifásica 220V a 380V", "Capacidade 100 amperes", "Display claro e de fácil leitura", "Tecnologia de medição precisa", "Ideal para instalações industriais e comerciais", "Design compacto"]
+  },
+  {
+    "id": "prod_011",
+    "name": "Vulcan Trent Roçadeira Lateral a Gasolina VR520H - 52cc",
+    "category": "Jardinagem & Áreas Externas",
+    "price": 699.00,
+    "description": "Roçadeira profissional a gasolina Vulcan Trent VR520H com motor 2 tempos 52cc e 2.5HP. Ideal para roçada de capim, arbustos e pastagens em sítios e fazendas.",
+    "image": "cortador-grama.webp",
+    "specs": "Motor: Gasolina 2 tempos, Cilindradas: 52cc, Potência: 2.50 HP (1.85kW), Rotação: 10.000 RPM, Guidão: Bi-partido com suportes parafusados, Eixo Cardã: 1.53 metros, Peso: 7.85kg",
+    "features": ["Sistema partida extremamente leve - Easy Start", "Punhos ergonômicos de fácil aceleração", "Cinto sustentação duplo com ombreiras almofadadas", "Eixo cardã rígido de 8mm com 9 estrias", "Arranque manual com mola retrátil", "Inclui carretel, faca 3 pontas, dosador combustível e jogo de chaves", "Máximo conforto e segurança do operador", "Alta qualidade e durabilidade"]
+  },
+  {
+    "id": "prod_012",
+    "name": "Tekna Motosserra CS58P18 - 54.5cc 3.2HP",
+    "category": "Jardinagem & Áreas Externas",
+    "price": 631.36,
+    "description": "Motosserra profissional a gasolina Tekna CS58P18 com motor 54.5cc e 3.2HP. Sabre Tekna 18\" + Corrente Oregon para cortes pesados e trabalhos intensivos.",
+    "image": "motosserra-45cc.webp",
+    "specs": "Cilindrada: 54.5cc, Potência: 3.2HP, Sabre: Tekna 18\" SN, Corrente: Oregon passo 3/8\" x calibre 0.058\" (73D), Rotação máxima: 12.000 rpm, Peso: 5.9kg, Dimensões: 27 x 28 x 51cm",
+    "features": ["Motor a gasolina 2 tempos 54.5cc", "Potência de 3.2HP para trabalhos pesados", "Sabre Tekna 18\" + Corrente Oregon premium", "Sistema antivibração avançado reduz fadiga", "Lubrificação automática mantém corrente sempre lubrificada", "Freio de segurança automático contra kickback", "Empunhaduras ergonômicas emborrachadas", "Inclui corrente, sabre, capa protetora, misturador combustível e kit ferramentas"]
+  },
+  {
+    "id": "prod_013",
+    "name": "Midea Ar-Condicionado Split Inverter 9000 BTUs - AI Ecomaster",
+    "category": "Climatização & Refrigeração Comercial",
+    "price": 2136.18,
+    "description": "Ar-condicionado split inverter 9000 BTUs Midea AI Ecomaster High Wall com tecnologia de ponta. Economia até 30% de energia e conectividade inteligente.",
+    "image": "ar-condicionado-18k.webp",
+    "specs": "Capacidade: 9000 BTUs, Resfriamento rápido com tecnologia Inverter, Compressor rotary scroll, Tensão: 220V, Nível de ruído: 56 decibéis, Dimensões: 19.9P x 72.3L x 28.6A cm, Peso: 7kg",
+    "features": ["Tecnologia AI ECOMASTER com até 30% economia de energia", "Compatível com comandos de voz (Alexa, Google, Siri)", "Sistema Air Magic com tripla filtragem e íons negativos", "Autolimpeza em 4 etapas", "Função curva de sono inteligente", "Pet Care e controle automático de umidade", "Resfriamento rápido Smart Turbo", "Brisa Indireta e função Siga-me", "Prime Guard com Gold Fin para alta durabilidade", "Garantia 2 anos + 10 anos no compressor"]
+  },
+  {
+    "id": "prod_014",
+    "name": "EOS Freezer Horizontal EFH450X EcoGelo - 398 Litros",
+    "category": "Climatização & Refrigeração Comercial",
+    "price": 2489.00,
+    "description": "Freezer horizontal EOS EcoGelo 398 litros com dupla ação (freezer -18°C e refrigerador +8°C). Compressor de alta potência com gás ecológico.",
+    "image": "freezer-500l.webp",
+    "specs": "Capacidade: 398 litros, Temperatura: +8°C até -18°C, Dimensões: 70P x 130L x 84.5A cm, Peso: 54kg, Compressor de alta potência, Gás ecológico, Voltagem: 110V/220V",
+    "features": ["Dupla ação: Freezer e Refrigerador", "Compressor de alta potência congela rápido", "Condensador helicoidal com dimensões otimizadas", "Gás ecológico que não agride o ambiente", "Fechadura de segurança para proteção", "Dreno frontal dispensa deslocamento para degelo", "Reduz consumo de energia", "Garantia 12 meses"]
+  },
+  {
+    "id": "prod_015",
+    "name": "EOS Refrigerador Expositor Vertical EEV300B - 295 Litros",
+    "category": "Climatização & Refrigeração Comercial",
+    "price": 3299.00,
+    "description": "Refrigerador comercial expositor vertical EOS Eco Gelo 295 litros. Faixa de operação 0 a 16°C ideal para bares e comércios. Baixo consumo de energia.",
+    "image": "geladeira-expositora.webp",
+    "specs": "Capacidade: 295 litros, Faixa operação: 0 a 16°C, Dimensões: 60P x 57.5L x 180.5A cm, Peso: 64kg, Tensão: 220V, Tipo compressor, Degelo automático, Compacto",
+    "features": ["Design compacto perfeito para bares", "Baixo consumo de energia", "Porta em vidro temperado", "Prateleiras ajustáveis", "Termostato digital", "Rodas com freio para mobilidade", "Avaliação 5 estrelas BEE", "Conformidade Energy Star", "Instalação independente"]
+  },
+  {
+    "id": "prod_016",
+    "name": "Roa Fogão Industrial 6 Bocas de Alta Pressão - Vinho",
+    "category": "Cozinha Industrial & Alimentação",
+    "price": 1387.90,
+    "description": "Fogão industrial 6 bocas de alta pressão Roa. Queimadores duplos com 8 caulins (bicos). Estrutura em chapa de ferro pintada cor vinho.",
+    "image": "fogao-6bocas.webp",
+    "specs": "Quantidade bocas: 6 de alta pressão, Caulins: 8 bicos espalhadores de chama, Funcionamento: Gás GLP (P45, P13, P5, P2), Dimensões: 75.5P x 96.5L x 81.5A cm, Peso: 13.2kg, Material: Chapa de ferro pintada",
+    "features": ["6 bocas de alta pressão", "8 caulins para distribuição de chama", "Funcionamento com gás GLP", "Estrutura reforçada em chapa de ferro", "Acompanha mangueira normalizada e registro de alta pressão", "Pés ajustáveis", "Ideal para cozinhas industriais e restaurantes", "Garantia 3 meses fabricante", "Loja de fábrica com envio imediato"]
+  },
+  {
+    "id": "prod_017",
+    "name": "Electrolux Forno de Embutir Elétrico OE8EA - 80 Litros",
+    "category": "Cozinha Industrial & Alimentação",
+    "price": 2242.98,
+    "description": "Forno de embutir elétrico Electrolux 80L com Experience Air Fryer, PerfectCook360 e painel touch. Tecnologia avançada para resultados perfeitos.",
+    "image": "forno-eletrico-80l.webp",
+    "specs": "Capacidade: 80 litros, Potência: 1700W, Tensão: 220V, Método aquecimento: Convecção, Dimensões: 61P x 59L x 59A cm, Peso: 24kg, Cores: Preto",
+    "features": ["Tecnologia PerfectCook360 com cavidade selada", "Convecção uniforme até 30% mais rápido", "Função Air Fryer reduz 70% de gorduras", "Painel Full Touch com precisão 100%", "Timer digital com aviso sonoro", "Função Gratinar para acabamento perfeito", "Função Dourar para carnes suculentas", "5 modos de preparo diferentes", "Garantia 1 ano"]
+  },
+  {
+    "id": "prod_018",
+    "name": "Tramontina Churrasqueira Inox a Carvão TCP 400",
+    "category": "Cozinha Industrial & Alimentação",
+    "price": 616.55,
+    "description": "Churrasqueira profissional a carvão Tramontina em aço inox TCP 400. Corpo e grelha 100% aço inox de alta durabilidade. Bandeja para carvão em aço esmaltado.",
+    "image": "churrasqueira-inox.webp",
+    "specs": "Dimensões: 37.1P x 36.7L x 44.1A cm, Peso: 8.2kg, Material: Aço inoxidável 304, Grelha: Cromada, Tipo combustível: Carvão, Número de grelhas: 1, Montagem: Sim",
+    "features": ["Corpo e grelha 100% aço inox", "Alças com dobra para melhor conforto", "Bandeja para carvão em aço esmaltado", "Design concentra calor onde importa", "Proteções laterais contra vento", "Maior concentração de calor", "Gordura derrete melhor realçando sabor", "Usa apenas 1.5kg de carvão completo", "Estrutura reforçada e durável"]
+  },
+  {
+    "id": "prod_019",
+    "name": "Kit EPI Proteção Individual Pintor - Teknoluvas",
+    "category": "Segurança do Trabalho (EPIs)",
+    "price": 67.20,
+    "description": "Kit EPI completo para proteção individual do pintor. Inclui macacão, máscara respirador, filtro, luva latex, óculos ampla visão e mais. Certificado CA.",
+    "image": "kit-epi.webp",
+    "specs": "Tamanho: G, Cor: Branco, Material: Nylon, Latex, Certificação: CA (conforme aplicável), Composição: Macacão TNT + Máscara + Filtro + Luva + Óculos",
+    "features": ["Macacão de segurança em TNT impermeável", "Fechamento em zíper com elástico", "Máscara respirador com filtro Voga", "Filtro para proteção de vapores e gases", "Luva latex amarela reforçada", "Óculos ampla visão com proteção química", "Inclui 1 macacão, 1 máscara, 1 filtro, 1 luva, 1 óculos", "Segurança e conforto para pintura profissional"]
+  },
+  {
+    "id": "prod_020",
+    "name": "BootShield Botina de Segurança Monodensidade - CA 17137",
+    "category": "Segurança do Trabalho (EPIs)",
+    "price": 54.90,
+    "description": "Botina de segurança BootShield em couro com biqueira de aço. Certificado CA 17137 para proteção contra riscos leves e agentes abrasivos.",
+    "image": "botina-aco.webp",
+    "specs": "Modelo: BS 010 MONO, Tipo: Biqueira redonda, Material: Couro Vacum, Solado: Monodensidade poliuretano, Dimensões: 20P x 18L x 34A cm, Peso: 600g, Tamanhos: 33 a 45",
+    "features": ["Certificado CA 17137 conforme normas de segurança", "Couro Vacum de alta qualidade", "Adaptação perfeita ao formato do pé", "Solado monodensidade sem emendas", "Palmilha sistema Strobel costurada direto ao cabedal", "Proteção contra cortes, lesões e impactos", "Resistência contra frio, vento e umidade", "Material transpirável mantém pés secos"]
+  },
+  {
+    "id": "prod_021",
+    "name": "3M Aura 9322 Máscara Respiratória PFF2 - Com Válvula",
+    "category": "Segurança do Trabalho (EPIs)",
+    "price": 19.90,
+    "description": "Respirador descartável 3M Aura 9322 classe PFF-2 com válvula 3M Cool-Flow. Proteção eficaz contra poeiras, névoas e fumos. CA: 30594.",
+    "image": "mascara-pff2.webp",
+    "specs": "Classe: PFF-2 (S), Filtração: 98%, Elásticos: Branco (indica PFF-2), Válvula: 3M Cool-Flow, Certificação: CA 30594, Design: 3 painéis para ajuste universal",
+    "features": ["Sistema antiembaçante protege óculos", "Válvula 3M Cool-Flow reduz temperatura interna", "Aumenta durabilidade do filtro", "Mais conforto durante uso prolongado", "Excelente vedação aos diferentes rostos", "3 painéis para ajuste adequado", "Elásticos brancos indicam PFF-2", "Respiração mais natural e confortável"]
+  },
+  {
+    "id": "prod_022",
+    "name": "Colete Refletivo de Segurança Tipo Blusão - Laranja",
+    "category": "Segurança do Trabalho (EPIs)",
+    "price": 23.90,
+    "description": "Colete refletivo de segurança tipo blusão em poliéster com fitas refletivas de alta luminosidade. Ideal para sinalização em rodovias, fábricas e obras.",
+    "image": "colete-refletivo.webp",
+    "specs": "Material: 100% poliéster, Fitas refletivas: Alta luminosidade, Fechamento: Zíper, Cores: Amarelo e laranja fluorescente, Tamanhos: G (58cm) - XG (70cm) - XXG (71cm)",
+    "features": ["Visibilidade imbatível em baixa luz", "Cores fluorescentes amarelo e laranja", "Fitas refletivas de alta luminosidade", "Design tipo blusão com bolso prático", "Fechamento em zíper para facilidade", "Manutenção simples: lavar com água e sabão", "Conformidade NBR Classe 2 e NBR 15292", "Ideal para profissionais em tráfego intenso"]
+  },
+  {
+    "id": "prod_023",
+    "name": "Kit Parafusos Marcenaria Bicromatizados - 500 Unidades",
+    "category": "Materiais Industriais & Hidráulicos",
+    "price": 47.00,
+    "description": "Kit parafusos marcenaria bicromatizados em aço carbono. 500 unidades em 5 tamanhos diferentes. Cabeça Phillips antidesgaste e rosca fina.",
+    "image": "parafusos-kit.webp",
+    "specs": "Quantidade total: 500 unidades, Material: Aço carbono, Tamanhos: 4.0x50 / 4.0x45 / 3.5x40 / 3.5x25 / 3.5x16, Acabamento: Bicromatizado, Cabeça: Phillips, Rosca: Fina",
+    "features": ["Aço de alta resistência", "Acabamento bicromatizado anticorrosão", "Cabeça Phillips reforçada contra espanar", "Rosca fina com penetração suave", "Ideal para MDF, compensado e madeira maciça", "100 unidades por tamanho", "Embalagem organizada e prática", "Qualidade profissional garantida"]
+  },
+  {
+    "id": "prod_024",
+    "name": "Tramontina Mangueira Flex com Esguicho - 20 Metros",
+    "category": "Materiais Industriais & Hidráulicos",
+    "price": 72.52,
+    "description": "Mangueira para jardim Tramontina 20 metros com esguicho regulável e suporte mural. Flexível, leve e fácil de manusear com 3 camadas resistentes.",
+    "image": "mangueira-20m.webp",
+    "specs": "Comprimento: 20 metros, Material: PVC com 3 camadas (interna PVC, intermediária poliéster trançado, externa PVC), Pressão máxima: 12 bar (174 psi), Temperatura: até 50°C, Peso: 2.862kg",
+    "features": ["Mangueira flexível e fácil manuseio", "3 camadas para maior resistência", "Esguicho com jato regulável", "Suporte fixo para mangueira", "Adaptador com engate rosqueado", "Engate rosqueado facilita conexão", "Regulador frontal de fluxo d'água", "Ideal para manutenção jardins e hortas"]
+  },
+  {
+    "id": "prod_025",
+    "name": "Kit Manômetro de Pressão Hidráulica Profissional",
+    "category": "Materiais Industriais & Hidráulicos",
+    "price": 745.08,
+    "description": "Kit manômetro de pressão hidráulica profissional com 3 medidores em 25MPa, 40MPa e 60MPa. 6 acoplamentos de aço inoxidável e mangueiras de teste.",
+    "image": "manometro-hidraulico.webp",
+    "specs": "Manômetros: 3 unidades (25/40/60MPa), Diâmetro: 63mm, Acoplamentos: 6 de aço inoxidável, Tamanhos acoplamento: 10*1 / 1/8 / 10*1.25 / 1/4 / 9/16 / 3/8, Mangueiras: 1600mm com óleo integrado",
+    "features": ["3 manômetros em 25MPa / 40MPa / 60MPa", "Óleo hidráulico embutido anti-desgaste", "Acoplamentos aço inoxidável resistentes", "À prova de vazamento", "Mangueiras com 1600mm de comprimento", "Caixa de transporte portátil", "Inclui luvas para proteção", "Ideal para escavadeiras e máquinas construção"]
+  },
+  {
+    "id": "prod_026",
+    "name": "Compace Estante Kuadra Multiuso 5 Prateleiras - 80x187cm",
+    "category": "Armazenagem & Logística",
+    "price": 389.90,
+    "description": "Estante multiuso Compace Kuadra 5 prateleiras com design industrial moderno. Versátil para quarto, sala, cozinha e escritório. MDP com acabamento BP acetinado.",
+    "image": "estante-metal.webp",
+    "specs": "Dimensões: 40P x 80L x 187A cm, Prateleiras: 5, Material: MDP, Capacidade máxima: 22.8kg por prateleira, Acabamento: BP Acetinado (carvalho), Peso: 23.902kg",
+    "features": ["Design industrial inspirado em Lofts", "Versátil para múltiplos ambientes", "Montagem no chão estável", "Prateleiras em camadas", "Estrutura reforçada", "Acabamento carvalho/preto moderno", "Harmonia metal e tons madeira", "Fácil manutenção"]
+  },
+  {
+    "id": "prod_027",
+    "name": "INSMEER Carrinho de Carga Dobrável - 140kg",
+    "category": "Armazenagem & Logística",
+    "price": 174.97,
+    "description": "Carrinho de carga dobrável INSMEER com capacidade 140kg. Rodas de montanha todo-terreno. Alça ajustável em 3 níveis. Ideal para viagens e transporte.",
+    "image": "carrinho-transporte.webp",
+    "specs": "Capacidade: 140kg (até 310 libras), Rodas: 2 de montanha todo-terreno, Material: Aço inoxidável com tubo de aço, Alça: Ajustável 3 níveis (38.5cm / 64.5cm / 92cm), Peso: 2.55kg, Dimensões: 36.5C x 30L x 92A cm",
+    "features": ["Resistente e durável", "Rodas de montanha atualizadas", "Haste de tração espessada", "Estrutura robusta sem vibrações", "Dobra/desdobra em poucos segundos", "Armazenamento conveniente", "Cabe em veículos e debaixo de camas", "Alça ergonômica 3 alturas", "Inclui 2 cordas elásticas flexíveis"]
+  },
+  {
+    "id": "prod_028",
+    "name": "Ordene Caixa Organizadora Plástica 55 Litros - Vig",
+    "category": "Armazenagem & Logística",
+    "price": 142.66,
+    "description": "Caixa organizadora plástica ultra reforçada Ordene 55L com tampa trava de fechamento. Empilhável e resistente para organização industrial.",
+    "image": "caixa-organizadora.webp",
+    "specs": "Capacidade: 55 litros, Material: Polipropileno reforçado, Peso máximo: 40kg armazenamento, Dimensões: 38.5C x 59L x 38.5A cm, Peso: 2.1kg, Cores: Preta/Amarela",
+    "features": ["Material plástico ultra resistente", "Tampa com trava de fechamento seguro", "Empilhável otimiza espaço", "Alças resistentes para transporte", "Múltiplos compartimentos", "Reutilizável e durável", "Ideal armazenamento e organização", "Conforme polipropileno de qualidade"]
+  },
+  {
+    "id": "prod_029",
+    "name": "Kit Sensor de Presença Bocal E27 - 110/220V",
+    "category": "Automação & Controle",
+    "price": 47.90,
+    "description": "Kit com 2 sensores de presença bocal E27 para iluminação automática. Compatível 110/220V com fotocélula integrada. Iluminação inteligente e econômica.",
+    "image": "sensor-presenca.webp",
+    "specs": "Quantidade: Kit 2 sensores, Voltagem: 110/220V, Frequência: 50/60Hz, Alcance máximo: 3 metros, Tipo: Bocal E27, Compatibilidade: Lâmpadas até 60W LED",
+    "features": ["Detecção automática de movimento", "Funciona com lâmpadas E27 110/220V", "Ajuste de sensibilidade personalizável", "Economia automática de energia", "Desligamento após inatividade", "Instalação simples - substitui lâmpada", "Materiais alta qualidade", "Garantia 3 meses contra defeito fabrica"]
+  },
+  {
+    "id": "prod_030",
+    "name": "Termômetro Digital Infravermelho Laser - -55 a 400°C",
+    "category": "Automação & Controle",
+    "price": 89.00,
+    "description": "Termômetro digital infravermelho com laser para medição sem contato. Faixa -55°C a 400°C com display LCD e mira laser para precisão.",
+    "image": "termometro-laser.webp",
+    "specs": "Faixa medição: -55°C a 400°C, Display: LCD digital, Resolução: 0.1°C, Tempo resposta: 1 segundo, Tecnologia: Infravermelho com laser, Tipo bateria: 2 AAA, Dimensões: 15cm comprimento",
+    "features": ["Medição precisa sem contato direto", "Display LCD com iluminação de fundo", "Mira laser para direcionamento preciso", "Tecnologia infravermelha avançada", "Design ergonômico laranja e preto", "Múltiplas aplicações industriais", "Ar condicionado, manutenção automotiva", "Preparação alimentos, sistemas hidráulicos", "Desligamento automático economiza bateria"]
+}
+]
