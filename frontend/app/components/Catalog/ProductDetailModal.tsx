@@ -1,13 +1,11 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import Image from "next/image";
 import type { Product } from "@/lib/types";
 import { formatPrice } from "@/lib/format";
 import { useChatStore } from "@/app/store/chatStore";
 import { X, Check } from "lucide-react";
-
-const PLACEHOLDER_IMAGE = "https://placehold.co/600x400/e2e8f0/64748b?text=Produto";
+import { ProductImage } from "./ProductImage";
 
 interface ProductDetailModalProps {
   product: Product | null;
@@ -53,12 +51,11 @@ export function ProductDetailModal({ product, onClose, open }: ProductDetailModa
       >
         {product ? (
           <>
-            <div className="relative aspect-[16/10] w-full overflow-hidden bg-primary-50">
-              <Image
-                src={PLACEHOLDER_IMAGE}
-                alt={product.name}
-                width={600}
-                height={400}
+            <div className="relative aspect-[571/368] w-full overflow-hidden bg-primary-50">
+              <ProductImage
+                product={product}
+                width={571}
+                height={368}
                 className="object-cover"
                 priority
               />

@@ -1,13 +1,15 @@
 import { Injectable } from "@nestjs/common";
-import { InjectModel } from "@nestjs/mongoose";
-import { Model } from "mongoose";
-import { ProductDocument } from "./schemas/product.schema";
+import { InjectRepository } from "@nestjs/typeorm";
+import { Repository } from "typeorm";
+import { Product as ProductEntity } from "../../entities/product.entity";
 
 export interface ProductFilter {
   category?: string;
+  /** Busca por texto em nome, descrição e especificações (todas as categorias). */
+  search?: string;
 }
 
-/** Objeto plano retornado pela API (sem métodos do Mongoose). */
+/** Objeto plano retornado pela API. */
 export interface Product {
   id: string;
   name: string;
@@ -22,21 +24,28 @@ export interface Product {
 @Injectable()
 export class ProductsService {
   constructor(
-    @InjectModel(ProductDocument.name)
-    private productModel: Model<ProductDocument>,
+    @InjectRepository(ProductEntity)
+    private productRepo: Repository<ProductEntity>,
   ) {}
 
   async findAll(filter?: ProductFilter): Promise<Product[]> {
-    const query: Record<string, unknown> = {};
+    const qb = this.productRepo.createQueryBuilder("p");
     if (filter?.category) {
-      query.category = filter.category;
+      qb.andWhere("p.category = :category", { category: filter.category });
     }
-    const result = await this.productModel.find(query).lean().exec();
-    return result as Product[];
+    if (filter?.search?.trim()) {
+      const term = `%${filter.search.trim()}%`;
+      qb.andWhere(
+        "(p.name LIKE :term OR p.description LIKE :term OR p.specs LIKE :term OR p.category LIKE :term OR p.features LIKE :term)",
+        { term },
+      );
+    }
+    const list = await qb.getMany();
+    return list as Product[];
   }
 
   async findById(id: string): Promise<Product | null> {
-    const result = await this.productModel.findOne({ id }).lean().exec();
-    return result as Product | null;
+    const one = await this.productRepo.findOne({ where: { id } });
+    return one as Product | null;
   }
 }

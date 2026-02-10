@@ -1,27 +1,30 @@
 import { Injectable } from "@nestjs/common";
-import { InjectModel } from "@nestjs/mongoose";
-import { Model } from "mongoose";
-import { MessageDocument } from "./schemas/message.schema";
+import { InjectRepository } from "@nestjs/typeorm";
+import { Repository } from "typeorm";
+import { Message } from "../../entities/message.entity";
 import type { SendMessageDto } from "./dto/send-message.dto";
 
 @Injectable()
 export class ChatService {
   constructor(
-    @InjectModel(MessageDocument.name)
-    private messageModel: Model<MessageDocument>,
+    @InjectRepository(Message)
+    private messageRepo: Repository<Message>,
   ) {}
 
-  async saveMessage(dto: SendMessageDto): Promise<MessageDocument> {
-    const doc = {
+  async saveMessage(dto: SendMessageDto): Promise<Message> {
+    const msg = this.messageRepo.create({
       sessionId: dto.sessionId,
       sender: dto.sender ?? "user",
       content: dto.content,
       type: dto.type ?? "text",
-    };
-    return this.messageModel.create(doc);
+    });
+    return this.messageRepo.save(msg);
   }
 
-  async getHistory(sessionId: string): Promise<MessageDocument[]> {
-    return this.messageModel.find({ sessionId }).sort({ createdAt: 1 }).exec();
+  async getHistory(sessionId: string): Promise<Message[]> {
+    return this.messageRepo.find({
+      where: { sessionId },
+      order: { createdAt: "ASC" },
+    });
   }
 }

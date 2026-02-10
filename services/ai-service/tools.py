@@ -8,12 +8,45 @@ import httpx
 BACKEND_URL = os.getenv("BACKEND_URL", "http://localhost:3001").rstrip("/")
 
 
+def search_products(query: str) -> str:
+    """
+    Busca produtos em todo o catálogo por nome, tipo, marca ou característica.
+    Use quando o cliente mencionar um produto (ex: furadeira, freezer), uma marca (ex: Bosch)
+    ou uma necessidade (ex: 220v, profissional). A busca é por texto em todas as categorias.
+    query: termo de busca (ex: furadeira, Bosch, freezer restaurante, 220v).
+    Retorna uma string com nome, preço e id dos produtos para você recomendar.
+    """
+    if not (query or "").strip():
+        return "Informe um termo de busca (ex: furadeira, Bosch, freezer)."
+    try:
+        with httpx.Client(timeout=10.0) as client:
+            r = client.get(
+                f"{BACKEND_URL}/api/products",
+                params={"search": query.strip()},
+            )
+            r.raise_for_status()
+            data = r.json()
+    except Exception as e:
+        return f"Erro ao buscar produtos: {e}"
+
+    if not data:
+        return f"Nenhum produto encontrado para '{query.strip()}'."
+
+    lines = []
+    for p in data:
+        price = p.get("price", 0)
+        lines.append(
+            f"- {p.get('name', '?')} (id: {p.get('id', '?')}) - R$ {price:,.2f}"
+        )
+    return f"Produtos encontrados para '{query.strip()}':\n" + "\n".join(lines)
+
+
 def get_products_by_category(category: str) -> str:
     """
-    Lista produtos do catálogo por categoria.
-    Use quando o cliente perguntar por tipo de produto (ex: furadeiras, geladeiras).
-    category: nome da categoria (ex: Ferramentas, Eletrodomésticos, Climatização).
-    Retorna uma string com nome, preço e id dos produtos para você recomendar.
+    Lista produtos por nome exato da categoria. Use SOMENTE quando o cliente pedir
+    explicitamente "produtos da categoria X" ou "tudo da categoria Y".
+    NÃO use para tipo de produto (furadeira, freezer, Bosch): para isso use search_products.
+    category: nome exato da categoria no catálogo (ex: Ferramentas & Máquinas Profissionais).
     """
     try:
         with httpx.Client(timeout=10.0) as client:

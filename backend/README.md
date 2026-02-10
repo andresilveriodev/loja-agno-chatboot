@@ -1,21 +1,21 @@
 # Backend - Loja Multidepartamental
 
-API REST em NestJS com MongoDB.
+API REST em NestJS com SQLite (TypeORM).
 
 ## Pré-requisitos
 
 - Node.js 20+
-- MongoDB (local ou via Docker)
-- Redis (opcional, para fases futuras)
+
+Não é necessário instalar MongoDB nem outro banco: o SQLite usa um arquivo local (`data/loja.db`).
 
 ## Setup
 
-**Obrigatório (só uma vez):** instalar dependências. Sem isso, `nest` e `ts-node` não são encontrados.
+**Obrigatório (só uma vez):** instalar dependências.
 
 ```bash
 cd backend
 copy .env.example .env
-# Ajuste DATABASE_URL se necessário (Windows: use copy em vez de cp)
+# Opcional: ajuste DATABASE_PATH (padrão: data/loja.db)
 npm install
 ```
 
@@ -24,23 +24,15 @@ No **PowerShell** (Windows), use `;` para encadear comandos em vez de `&&`:
 cd "C:\caminho\para\Loja multidepartamental\backend"; npm install
 ```
 
-## Rodar com Docker (Mongo + Redis)
-
-Na **raiz do projeto**:
-
-```bash
-docker-compose up -d
-```
-
-Isso sobe MongoDB (porta 27017) e Redis (apenas na rede Docker; o backend ainda não usa Redis). Depois inicie o backend localmente.
-
 ## Desenvolvimento
 
-Os scripts usam o CLI do projeto (`node_modules`). **Rode `npm install` na pasta `backend` antes** de usar `npm run start:dev` ou `npm run seed`.
+Rode `npm install` na pasta `backend` antes de usar `npm run start:dev` ou `npm run seed`.
 
 ```bash
 npm run start:dev
 ```
+
+Na primeira execução, a pasta `data/` e o arquivo `data/loja.db` são criados automaticamente (se ainda não existirem).
 
 API em `http://localhost:3001`.
 
@@ -50,28 +42,28 @@ API em `http://localhost:3001`.
 
 ## Seed (popular produtos)
 
-Com MongoDB rodando (e backend na pasta `backend`):
+Popula o SQLite com o catálogo a partir de `PRODUTOS_CATALOGO.json` (raiz do projeto). Execute **pelo menos uma vez** após instalar:
 
 ```bash
 cd backend
 npm run seed
 ```
 
-Ou com ts-node direto (a partir da raiz do repositório):
+Ou com ts-node direto:
 
 ```bash
 cd backend
-DATABASE_URL=mongodb://localhost:27017/loja-db npx ts-node src/scripts/seed-products.ts
+npx ts-node src/scripts/seed-products.ts
 ```
 
-O script usa o arquivo `PRODUTOS_CATALOGO.json` da raiz do projeto.
+O script recria a tabela de produtos e insere todos os itens do JSON. Mensagens do chat permanecem no banco.
 
-## Erro de conexão com o banco (ECONNREFUSED 127.0.0.1:27017)
+## Variáveis de ambiente
 
-Se aparecer `MongooseServerSelectionError: connect ECONNREFUSED 127.0.0.1:27017`:
+| Variável         | Descrição                          | Padrão       |
+|------------------|------------------------------------|--------------|
+| `PORT`           | Porta do servidor                  | `3001`       |
+| `NODE_ENV`       | `development` / `production`       | -            |
+| `DATABASE_PATH`  | Caminho do arquivo SQLite          | `data/loja.db` |
 
-- **MongoDB não está em execução.** O backend espera um MongoDB em `localhost:27017` (ou na URL em `DATABASE_URL`).
-- **Soluções:**
-  1. Subir o MongoDB localmente (instalação nativa ou via Docker: `docker-compose up -d` na raiz do projeto).
-  2. Usar MongoDB Atlas (ou outro serviço) e definir no `.env`: `DATABASE_URL=mongodb+srv://usuario:senha@cluster.mongodb.net/loja-db`.
-  3. Se usar Docker, aguardar o container do MongoDB estar pronto antes de iniciar o backend.
+Em produção, evite `synchronize: true` (já desativado quando `NODE_ENV=production`). Prefira migrações TypeORM para alterar o schema.

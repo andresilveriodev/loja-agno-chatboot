@@ -41,6 +41,7 @@ export class ChatGateway
     client: Socket,
     payload: { sessionId: string; content: string },
   ) {
+    console.log("[ChatGateway] message recebida:", { sessionId: payload?.sessionId, content: payload?.content?.substring(0, 50) });
     if (!payload?.content?.trim()) return;
 
     const sessionId = payload.sessionId || client.id;
@@ -52,15 +53,18 @@ export class ChatGateway
         content: payload.content.trim(),
       });
 
+      console.log("[ChatGateway] Chamando aiService.chat()...");
       let botReply: string;
       const aiResult = await this.aiService.chat({
         message: payload.content.trim(),
         sessionId,
         userId: payload.sessionId ?? sessionId,
       });
+      console.log("[ChatGateway] aiResult:", aiResult === null ? "null" : { hasReply: !!aiResult?.reply, replyLen: aiResult?.reply?.length });
       if (aiResult?.reply) {
         botReply = aiResult.reply;
       } else {
+        console.warn("[ChatGateway] aiResult null ou sem reply — usando mensagem de fallback");
         botReply =
           "Obrigado pela sua mensagem! Nosso assistente está temporariamente indisponível. Explore o catálogo ou use os filtros por categoria.";
       }

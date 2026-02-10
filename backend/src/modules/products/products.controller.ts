@@ -6,8 +6,13 @@ export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}
 
   @Get()
-  async findAll(@Query("category") category?: string) {
-    const filter: ProductFilter = category ? { category } : {};
+  async findAll(
+    @Query("category") category?: string,
+    @Query("search") search?: string,
+  ) {
+    const filter: ProductFilter = {};
+    if (category) filter.category = category;
+    if (search?.trim()) filter.search = search.trim();
     return this.productsService.findAll(filter);
   }
 

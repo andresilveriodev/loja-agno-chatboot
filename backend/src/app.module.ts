@@ -1,15 +1,24 @@
 import { Module } from "@nestjs/common";
-import { MongooseModule } from "@nestjs/mongoose";
+import { TypeOrmModule } from "@nestjs/typeorm";
 import { AppController } from "./app.controller";
 import { ProductsModule } from "./modules/products/products.module";
 import { ChatModule } from "./modules/chat/chat.module";
 import { AiModule } from "./modules/ai/ai.module";
+import { Product } from "./entities/product.entity";
+import { Message } from "./entities/message.entity";
 
-const databaseUrl = process.env.DATABASE_URL || "mongodb://localhost:27017/loja-db";
+const databasePath =
+  process.env.DATABASE_PATH || "data/loja.db";
 
 @Module({
   imports: [
-    MongooseModule.forRoot(databaseUrl),
+    TypeOrmModule.forRoot({
+      type: "better-sqlite3",
+      database: databasePath,
+      entities: [Product, Message],
+      synchronize: process.env.NODE_ENV !== "production",
+      logging: process.env.NODE_ENV === "development",
+    }),
     ProductsModule,
     AiModule,
     ChatModule,

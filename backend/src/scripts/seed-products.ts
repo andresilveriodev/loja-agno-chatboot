@@ -1,13 +1,14 @@
 /**
- * Script para popular o MongoDB com os produtos do catálogo.
- * Execute: npx ts-node src/scripts/seed-products.ts
- * Ou com DATABASE_URL: DATABASE_URL=mongodb://localhost:27017/loja-db npx ts-node src/scripts/seed-products.ts
+ * Popula o SQLite com os produtos do catálogo.
+ * Execute na pasta backend: npm run seed
+ * Ou: npx ts-node src/scripts/seed-products.ts
  */
-import * as mongoose from "mongoose";
 import * as fs from "fs";
 import * as path from "path";
+import { DataSource } from "typeorm";
+import { Product } from "../entities/product.entity";
 
-const COLLECTION = "products";
+const defaultDbPath = "data/loja.db";
 
 interface ProductSeed {
   id: string;
@@ -21,30 +22,47 @@ interface ProductSeed {
 }
 
 async function seed() {
-  const databaseUrl = process.env.DATABASE_URL ?? "mongodb://localhost:27017/loja-db";
+  const databasePath = process.env.DATABASE_PATH ?? defaultDbPath;
+  const dbDir = path.dirname(databasePath);
+  if (!fs.existsSync(dbDir)) {
+    fs.mkdirSync(dbDir, { recursive: true });
+  }
 
-  const conn = await mongoose.connect(databaseUrl);
-  const client = conn.connection.getClient();
-  const db = client.db();
+  const dataSource = new DataSource({
+    type: "better-sqlite3",
+    database: databasePath,
+    entities: [Product],
+    synchronize: true,
+  });
 
-  // Executando de backend/: cwd = backend → ../PRODUTOS_CATALOGO.json
+  await dataSource.initialize();
+
   const fromBackend = path.join(process.cwd(), "..", "PRODUTOS_CATALOGO.json");
   const fromRoot = path.join(process.cwd(), "PRODUTOS_CATALOGO.json");
   const filePath = fs.existsSync(fromBackend) ? fromBackend : fromRoot;
 
   if (!fs.existsSync(filePath)) {
-    console.error("Arquivo PRODUTOS_CATALOGO.json não encontrado. Procure em:", fromBackend, "ou", fromRoot);
-    await mongoose.disconnect();
+    console.error(
+      "Arquivo PRODUTOS_CATALOGO.json não encontrado. Procure em:",
+      fromBackend,
+      "ou",
+      fromRoot,
+    );
+    await dataSource.destroy();
     process.exit(1);
   }
 
   const raw = fs.readFileSync(filePath, "utf-8");
   const products: ProductSeed[] = JSON.parse(raw);
 
-  await db.collection(COLLECTION).deleteMany({});
-  const result = await db.collection(COLLECTION).insertMany(products as unknown as Record<string, unknown>[]);
-  console.log(`Seed concluído: ${result.insertedCount} produtos inseridos em ${COLLECTION}.`);
-  await mongoose.disconnect();
+  const repo = dataSource.getRepository(Product);
+  await repo.clear();
+  await repo.save(products);
+
+  console.log(
+    `Seed concluído: ${products.length} produtos inseridos em ${databasePath}.`,
+  );
+  await dataSource.destroy();
 }
 
 seed().catch((err) => {

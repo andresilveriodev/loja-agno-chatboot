@@ -1,10 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import type { Product } from "@/lib/types";
 import { formatPrice } from "@/lib/format";
-
-const PLACEHOLDER_IMAGE = "https://placehold.co/400x300/e2e8f0/64748b?text=Produto";
+import { ProductImage } from "./ProductImage";
 
 /** Ícone Info inline para evitar problema de bundle com lucide-react no SSR (Next 15). */
 function InfoIcon({ className }: { className?: string }) {
@@ -43,14 +41,13 @@ export function ProductCard({ product, onSelect }: ProductCardProps) {
       className="group flex flex-col overflow-hidden rounded-xl border border-primary-200 bg-white shadow-sm transition hover:shadow-md"
       aria-label={product.name}
     >
-      <div className="relative aspect-[4/3] w-full overflow-hidden bg-primary-50">
-        <Image
-          src={PLACEHOLDER_IMAGE}
-          alt={product.name}
-          width={400}
-          height={300}
+      <div className="relative h-48 w-64 overflow-hidden bg-primary-50">
+        <ProductImage
+          product={product}
+          width={256}
+          height={192}
           className="object-cover transition group-hover:scale-105"
-          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          sizes="256px"
         />
         <span className="absolute left-2 top-2 rounded bg-primary-600 px-2 py-0.5 text-xs font-medium text-white">
           {product.category.split(" ")[0]}
