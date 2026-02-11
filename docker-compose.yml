@@ -1,5 +1,5 @@
 # Loja Multidepartamental - Ambiente de desenvolvimento
-# Uso: docker-compose up -d (sobe mongo + redis; frontend e backend rodam localmente com npm run dev)
+# Uso: docker-compose up -d (sobe mongo + redis + evolution; frontend e backend rodam localmente com npm run dev)
 # ai-service: rodar localmente com Python (ver services/ai-service/README.md)
 
 services:
@@ -18,16 +18,54 @@ services:
     image: redis:7-alpine
     container_name: loja-redis
     restart: unless-stopped
-    # Sem ports: Redis só na rede interna (evita conflito com 6379/6380 no host).
-    # Quando o backend usar Redis, conectar em redis:6379 de outro container.
     volumes:
       - redis_data:/data
+    networks:
+      - loja-network
+
+  # Evolution API - WhatsApp (Fase 6). Requer Postgres próprio.
+  evolution-postgres:
+    image: postgres:15-alpine
+    container_name: loja-evolution-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: evolution
+      POSTGRES_USER: evolution
+      POSTGRES_PASSWORD: evolution
+    volumes:
+      - evolution_postgres_data:/var/lib/postgresql/data
+    networks:
+      - loja-network
+
+  # Evolution API - porta 8081 para não conflitar com outro Evolution na 8080
+  evolution-api:
+    image: evoapicloud/evolution-api:latest
+    container_name: loja-evolution-api
+    restart: unless-stopped
+    ports:
+      - "8081:8080"
+    depends_on:
+      - evolution-postgres
+      - redis
+    environment:
+      AUTHENTICATION_API_KEY: ${EVOLUTION_API_KEY:-change-me}
+      SERVER_URL: http://localhost:8081
+      DATABASE_ENABLED: "true"
+      DATABASE_PROVIDER: postgresql
+      DATABASE_CONNECTION_URI: postgresql://evolution:evolution@evolution-postgres:5432/evolution
+      CACHE_REDIS_ENABLED: "true"
+      CACHE_REDIS_URI: redis://redis:6379/6
+      LOG_LEVEL: INFO
+    volumes:
+      - evolution_instances:/evolution/instances
     networks:
       - loja-network
 
 volumes:
   mongo_data:
   redis_data:
+  evolution_postgres_data:
+  evolution_instances:
 
 networks:
   loja-network:

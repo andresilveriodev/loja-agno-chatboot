@@ -313,11 +313,66 @@ Response: { "reply": "texto da resposta do agente" }
 - [ ] Agendamentos
 
 ### 📌 Fase 6: WhatsApp
-- [ ] Evolution API rodando
-- [ ] Webhook configurado
-- [ ] Mensagens trocadas
-- [ ] Sincronização com CRM
-- [ ] Omnichannel funcionando
+- [x] Evolution API no Docker (evolution-api + evolution-postgres)
+- [x] Módulo WhatsApp no backend (webhook + envio via Evolution)
+- [x] Webhook `POST /api/whatsapp/webhook` e status `GET /api/whatsapp/status`
+- [ ] Conectar instância (QR Code) e configurar webhook na Evolution
+- [ ] Mensagens trocadas (testar envio/recebimento)
+- [ ] Sincronização com CRM (quando Fase 5 estiver pronta)
+- [ ] Omnichannel (mesmo sessionId/contexto web + WhatsApp)
+
+---
+
+## 🔨 Construindo a Fase 6 (WhatsApp)
+
+### 6.1 Subir Evolution API
+
+```bash
+# No .env da raiz (ou do backend), defina se quiser chave própria:
+# EVOLUTION_API_KEY=sua-chave-segura
+
+docker-compose up -d
+# Sobe: mongo, redis, evolution-postgres, evolution-api (porta 8081)
+```
+
+### 6.2 Criar instância e conectar WhatsApp
+
+1. Acesse a Evolution API (Manager ou API direta):
+   - **Evolution Manager:** se usar o frontend oficial, acesse a URL do Manager (ver docs da Evolution).
+   - **API:** criar instância: `POST http://localhost:8081/instance/create` (body: `{"instanceName": "loja"}`). Ver [Evolution API Docs](https://doc.evolution-api.com).
+2. Conectar WhatsApp: `GET http://localhost:8081/instance/connect/loja` (ou pelo Manager) e escanear o QR Code com o celular.
+
+### 6.3 Configurar webhook no backend
+
+No backend `.env`:
+
+```env
+EVOLUTION_API_URL=http://localhost:8081
+EVOLUTION_API_KEY=change-me
+EVOLUTION_INSTANCE_NAME=loja
+```
+
+Na Evolution, configure o webhook para receber mensagens:
+
+- **URL:** `http://host.docker.internal:3001/api/whatsapp/webhook` (Windows/Mac com backend rodando no host)
+- **Evento:** `messages.upsert`
+
+Se o backend também rodar em Docker, use a URL interna do serviço (ex: `http://backend:3001/api/whatsapp/webhook`).
+
+### 6.4 Testar
+
+1. Backend: `cd backend && npm run start:dev`
+2. Envie uma mensagem para o número conectado no WhatsApp.
+3. O webhook será chamado, o AGNO responderá e a resposta será enviada via Evolution.
+
+**Endpoints:**
+
+- `GET /api/whatsapp/status` — retorna `{ configured: true/false }`
+- `POST /api/whatsapp/webhook` — chamado pela Evolution (não usar manualmente além de testes)
+
+**Referência:** `docs/CONFIGURAR_WEBHOOK_EVOLUTION.md`, `docs/GUIA_INTEGRACAO_AGNO Wahtsapp Service.md`, `docs/TROUBLESHOOTING_EVOLUTION_API_KEY.md` (erros de API Key e porta), `ARQUITETURA_PROJETO.md` (Integração WhatsApp).
+
+---
 
 ### 📌 Fase 7: Refinamento
 - [ ] Testes completos
@@ -339,6 +394,7 @@ Response: { "reply": "texto da resposta do agente" }
 | "Como setup?" | README.md |
 | "Qual é o comando X?" | README.md > Comandos Úteis |
 | "Deu erro, como fixo?" | README.md > Troubleshooting |
+| "Erro Evolution API Key / porta 8080?" | docs/TROUBLESHOOTING_EVOLUTION_API_KEY.md |
 | "Qual é o produto Y?" | PRODUTOS_CATALOGO.json |
 | "Preciso de mais detalhes" | docs/AGNO/*.md |
 

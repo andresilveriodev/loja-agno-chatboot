@@ -4,6 +4,7 @@ import { AppController } from "./app.controller";
 import { ProductsModule } from "./modules/products/products.module";
 import { ChatModule } from "./modules/chat/chat.module";
 import { AiModule } from "./modules/ai/ai.module";
+import { WhatsAppModule } from "./modules/whatsapp/whatsapp.module";
 import { Product } from "./entities/product.entity";
 import { Message } from "./entities/message.entity";
 
@@ -22,6 +23,7 @@ const databasePath =
     ProductsModule,
     AiModule,
     ChatModule,
+    WhatsAppModule,
   ],
   controllers: [AppController],
 })

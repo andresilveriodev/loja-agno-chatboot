@@ -10,5 +10,6 @@ import { AiModule } from "../ai/ai.module";
   imports: [TypeOrmModule.forFeature([Message]), AiModule],
   controllers: [ChatController],
   providers: [ChatService, ChatGateway],
+  exports: [ChatService],
 })
 export class ChatModule {}

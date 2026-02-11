@@ -1,123 +1,113 @@
 # 🔧 Como Configurar Webhook da Evolution API
 
-## ❌ PROBLEMA IDENTIFICADO
+Este projeto usa o **backend NestJS** como receptor do webhook (não um serviço separado). O endpoint é:
 
-O webhook está configurado mas **DESABILITADO**:
-- ✅ URL: `http://whatsapp-service:3006/webhooks/whatsapp` (correta)
-- ❌ **Enabled**: `false` (precisa ser `true`)
-- ❌ **Events**: `[]` (vazio, precisa ter eventos)
+- **URL do webhook:** `POST /api/whatsapp/webhook`
+- **Evento esperado:** `messages.upsert` (mensagens recebidas)
 
 ---
 
-## ✅ SOLUÇÃO: Configurar via Evolution Manager (RECOMENDADO)
+## 1. Conferir o `.env` do backend
 
-### **Passo 1: Acessar Evolution Manager**
+No `backend/.env` (ou raiz, conforme seu setup), tenha:
 
-1. Abra o navegador
-2. Acesse: **http://localhost:8081/manager**
-3. Faça login com:
-   - **Server URL**: `http://localhost:8081`
-   - **API Key Global**: `W7F32PCvoLZdi5nng3pfkEOaD3RN9o/YDrIuCmH24OA=`
+```env
+EVOLUTION_API_URL=http://localhost:8081
+EVOLUTION_API_KEY=change-me
+EVOLUTION_INSTANCE_NAME=loja
+```
 
-### **Passo 2: Configurar Webhook**
-
-1. Na lista de instâncias, clique em **"Sitio MultiTrem"**
-2. Vá na aba **"Webhooks"** ou **"Configurações"**
-3. Configure:
-   - **URL**: `http://whatsapp-service:3006/webhooks/whatsapp`
-   - **Enabled**: ✅ **Marcar como habilitado**
-   - **Events**: Selecionar:
-     - ✅ `MESSAGES_UPSERT` (novas mensagens)
-     - ✅ `MESSAGES_UPDATE` (atualizações de mensagens)
-     - ✅ `CONNECTION_UPDATE` (status da conexão)
-4. **Salvar** as configurações
+Use a mesma `EVOLUTION_API_KEY` que está no `docker-compose` (variável `EVOLUTION_API_KEY` ou `AUTHENTICATION_API_KEY` no container).
 
 ---
 
-## 🔄 ALTERNATIVA: Configurar via API (se Manager não funcionar)
+## 2. Escolher a URL do webhook
 
-### **Opção 1: Usar nome da instância sem espaços**
+- **Backend rodando no seu PC (fora do Docker):**  
+  A Evolution roda dentro do Docker e precisa alcançar o host. Use:
+  - **Windows/Mac:** `http://host.docker.internal:3001/api/whatsapp/webhook`
+- **Backend rodando dentro do Docker (no mesmo docker-compose):**  
+  Use o nome do serviço, ex.: `http://backend:3001/api/whatsapp/webhook`.
 
-Se a instância tiver um nome alternativo sem espaços, use:
+Neste guia assumimos backend **no host** e Evolution no Docker, então a URL é:
+
+`http://host.docker.internal:3001/api/whatsapp/webhook`
+
+---
+
+## 3. Configurar o webhook na Evolution API
+
+### Opção A: Evolution Manager (recomendado)
+
+1. Abra no navegador: **http://localhost:8081/manager**
+2. Faça login:
+   - **Server URL:** `http://localhost:8081`
+   - **API Key:** a mesma do seu `.env` (`EVOLUTION_API_KEY`)
+3. Clique na instância (ex.: **loja**).
+4. Vá na aba **Webhooks** (ou **Configurações**).
+5. Preencha:
+   - **URL:** `http://host.docker.internal:3001/api/whatsapp/webhook`
+   - **Enabled:** ✅ habilitado
+   - **Events:** marque pelo menos:
+     - ✅ **MESSAGES_UPSERT** (novas mensagens — obrigatório para o bot responder)
+     - Opcional: **MESSAGES_UPDATE**, **CONNECTION_UPDATE**
+6. Salve.
+
+### Opção B: Via API (PowerShell)
+
+Substitua `loja` pelo nome da sua instância (sem espaços) e `SUA_API_KEY` pela `EVOLUTION_API_KEY`:
 
 ```powershell
-$headers = @{ 
-    'apikey' = 'W7F32PCvoLZdi5nng3pfkEOaD3RN9o/YDrIuCmH24OA='
-    'Content-Type' = 'application/json' 
+$headers = @{
+    'apikey' = 'SUA_API_KEY'
+    'Content-Type' = 'application/json'
 }
 
 $body = @{
     webhook = @{
         enabled = $true
-        url = 'http://whatsapp-service:3006/webhooks/whatsapp'
+        url = 'http://host.docker.internal:3001/api/whatsapp/webhook'
         webhook_by_events = $false
-        events = @('MESSAGES_UPSERT', 'MESSAGES_UPDATE', 'CONNECTION_UPDATE')
+        events = @('MESSAGES_UPSERT')
     }
 } | ConvertTo-Json -Depth 10
 
-# Tentar com nome sem espaços
-$instanceName = 'sitio-multitrem'  # ou outro nome alternativo
-Invoke-WebRequest -Uri "http://localhost:8081/webhook/set/$instanceName" -Method POST -Headers $headers -Body $body
+Invoke-WebRequest -Uri 'http://localhost:8081/webhook/set/loja' -Method POST -Headers $headers -Body $body
 ```
-
-### **Opção 2: Renomear a instância**
-
-Se possível, renomeie a instância para um nome sem espaços (ex: `sitio-multitrem`) e então configure o webhook.
 
 ---
 
-## 🧪 TESTE APÓS CONFIGURAR
+## 4. Testar
 
-1. **Configure o webhook** (via Manager ou API)
-2. **Envie uma mensagem** no WhatsApp
-3. **Verifique os logs**:
+1. Subir o backend: `cd backend && npm run start:dev`
+2. Verificar status: `GET http://localhost:3001/api/whatsapp/status` → deve retornar `{ "configured": true }`
+3. Enviar uma mensagem de WhatsApp para o número conectado na instância.
+4. O webhook será chamado, o backend processa com o AGNO e envia a resposta pelo WhatsApp.
+
+Se não responder, confira os logs do backend no terminal onde rodou `npm run start:dev`.
+
+---
+
+## 5. Verificar configuração atual do webhook
 
 ```powershell
-# Terminal 1: Logs do Evolution API
-docker-compose logs -f evolution-api | Select-String "webhook|MESSAGES"
-
-# Terminal 2: Logs do WhatsApp Service  
-docker-compose logs -f whatsapp-service | Select-String "webhook|POST|message"
+$headers = @{ 'apikey' = 'SUA_API_KEY' }
+$response = Invoke-WebRequest -Uri 'http://localhost:8081/webhook/find/loja' -Method GET -Headers $headers
+$response.Content | ConvertFrom-Json | ConvertTo-Json -Depth 5
 ```
 
-4. **O que você deve ver:**
-   - Evolution API: `webhook sent to http://whatsapp-service:3006/webhooks/whatsapp`
-   - WhatsApp Service: `POST /webhooks/whatsapp` recebido
-   - WhatsApp Service: Processando mensagem e chamando AI
+Confirme que `enabled` é `true` e que `MESSAGES_UPSERT` está em `events`.
 
 ---
 
-## 📊 VERIFICAR CONFIGURAÇÃO ATUAL
+## Resumo
 
-```powershell
-$headers = @{ 'apikey' = 'W7F32PCvoLZdi5nng3pfkEOaD3RN9o/YDrIuCmH24OA=' }
-$response = Invoke-WebRequest -Uri 'http://localhost:8081/webhook/find/Sitio MultiTrem' -Method GET -Headers $headers
-$webhook = $response.Content | ConvertFrom-Json
+| Item        | Valor                                                                 |
+|------------|-----------------------------------------------------------------------|
+| URL        | `http://host.docker.internal:3001/api/whatsapp/webhook` (backend no host) |
+| Evento     | `MESSAGES_UPSERT`                                                     |
+| Backend    | Rodando em `http://localhost:3001`                                    |
+| Endpoint   | `POST /api/whatsapp/webhook` (não chamar manualmente; só Evolution)   |
+| Status     | `GET /api/whatsapp/status` → `{ "configured": true }`                 |
 
-Write-Host "URL: $($webhook.url)"
-Write-Host "Enabled: $($webhook.enabled)"  # Deve ser TRUE
-Write-Host "Events: $($webhook.events.Count)"  # Deve ser > 0
-```
-
----
-
-## ⚠️ PROBLEMA CONHECIDO
-
-A Evolution API não aceita nomes de instância com **espaços** na URL da API REST. Por isso, a configuração via **Evolution Manager (interface web)** é a forma mais confiável.
-
----
-
-## ✅ APÓS CONFIGURAR
-
-Quando o webhook estiver habilitado e com eventos configurados:
-
-1. ✅ Evolution API receberá mensagens
-2. ✅ Evolution API enviará webhook para WhatsApp Service
-3. ✅ WhatsApp Service processará e chamará AI Service
-4. ✅ AI Service responderá
-5. ✅ WhatsApp Service enviará resposta via Evolution API
-
----
-
-**Status Atual**: Webhook configurado mas desabilitado
-**Ação Necessária**: Habilitar webhook e configurar eventos via Evolution Manager
+**Referência:** `GUIA_RAPIDO.md` (seção 6.3 – Construindo a Fase 6).

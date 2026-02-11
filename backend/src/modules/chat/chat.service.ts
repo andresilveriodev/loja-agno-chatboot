@@ -17,6 +17,7 @@ export class ChatService {
       sender: dto.sender ?? "user",
       content: dto.content,
       type: dto.type ?? "text",
+      metadata: dto.metadata,
     });
     return this.messageRepo.save(msg);
   }
