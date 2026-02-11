@@ -1,0 +1,14 @@
+# Deploy do frontend Next.js (monorepo: app está em frontend/)
+# https://docs.netlify.com/frameworks/next-js/overview/
+
+[build]
+  base = "frontend"
+  command = "npm run build"
+  # publish é definido pelo plugin Next.js (não definir manualmente)
+
+[build.environment]
+  NODE_VERSION = "20"
+
+# Plugin obrigatório para Next.js em monorepo (evita 404 / publish directory errado)
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
