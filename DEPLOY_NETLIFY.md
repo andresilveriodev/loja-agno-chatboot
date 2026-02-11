@@ -25,9 +25,9 @@ A configuração do build está no **`netlify.toml`** na raiz do repositório (b
    - **Build command:** `npm run build`
    - **Plugin:** `@netlify/plugin-nextjs` (declarado no toml; dependência no `frontend/package.json`)
 
-Não altere **Publish directory** — o plugin Next.js define isso automaticamente.
+**Publish directory:** deixe **vazio**. O plugin Next.js define sozinho. Se estiver preenchido (ex.: `frontend`), o build falha com *"Your publish directory cannot be the same as the base directory"*. Em **Build settings** → **Edit settings**, apague o valor de **Publish directory** e salve.
 
-**Se ainda der "Page not found":** em **Site configuration** → **Build & deploy** → **Build settings** → **Edit settings**, confirme que **Base directory** está `frontend`. Se estiver vazio, o build roda na raiz e o Next.js não é encontrado. Salve e faça **Trigger deploy**.
+**Se der "Page not found":** confira **Base directory** = `frontend`. Se estiver vazio, o build roda na raiz e o Next.js não é encontrado. Salve e faça **Trigger deploy**.
 
 ### 2. Variáveis de ambiente
 
@@ -68,6 +68,13 @@ Para o frontend funcionar em produção:
 - [ ] Backend no ar com `CORS_ORIGIN` incluindo a URL do frontend (ex: `https://xxx.netlify.app`)
 - [ ] `npm run build` na pasta `frontend` concluindo sem erro
 - [ ] No log do deploy no Netlify: build concluído com sucesso e mensagem do tipo "Using Next.js Runtime" ou "@netlify/plugin-nextjs"
+- [ ] **Publish directory** em Build settings está **vazio** (não pode ser `frontend`)
+
+## Erro: "Your publish directory cannot be the same as the base directory"
+
+Isso acontece quando **Publish directory** está preenchido (geralmente com `frontend`) na interface do Netlify. O plugin Next.js precisa definir sozinho o diretório de publicação.
+
+**Solução:** Netlify → **Site configuration** → **Build & deploy** → **Continuous deployment** → **Build settings** → **Edit settings** → em **Publish directory** apague o valor e deixe em branco → **Save** → **Trigger deploy**.
 
 ## Estrutura do deploy
 
