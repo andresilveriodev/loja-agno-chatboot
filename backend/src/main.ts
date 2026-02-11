@@ -19,7 +19,12 @@ async function bootstrap() {
 
   const app = await NestFactory.create(AppModule);
   const port = process.env.PORT ?? 3001;
-  app.enableCors({ origin: getCorsOrigins(), credentials: true });
+  app.enableCors({
+  origin: getCorsOrigins(),
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+});
   app.useWebSocketAdapter(new IoAdapter(app));
   await app.listen(port);
   console.log(`Backend rodando em http://localhost:${port}`);
