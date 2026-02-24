@@ -19,14 +19,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR" suppressHydrationWarning>
-      <body className="flex min-h-screen flex-col bg-white font-sans text-primary-900 antialiased" suppressHydrationWarning>
-        <Providers>
-          <Header />
-          <main className="flex-1">{children}</main>
-          <Footer />
-          <ChatButton />
-          <ChatWindow />
-        </Providers>
+      <body className="min-h-screen bg-white font-sans text-primary-900 antialiased" suppressHydrationWarning>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

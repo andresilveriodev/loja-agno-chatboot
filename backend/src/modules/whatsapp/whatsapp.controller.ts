@@ -3,6 +3,7 @@ import { WhatsAppService } from "./whatsapp.service";
 import { ChatService } from "../chat/chat.service";
 import { AiService } from "../ai/ai.service";
 import { ProductsService } from "../products/products.service";
+import { CrmService } from "../crm/crm.service";
 import type { EvolutionWebhookPayload } from "./dto/evolution-webhook.dto";
 import {
   extractPhoneFromRemoteJid,
@@ -20,6 +21,7 @@ export class WhatsAppController {
     private readonly chatService: ChatService,
     private readonly aiService: AiService,
     private readonly productsService: ProductsService,
+    private readonly crmService: CrmService,
   ) {}
 
   /**
@@ -55,11 +57,16 @@ export class WhatsAppController {
     const metadata = { source: "whatsapp", phone };
 
     try {
+      const lead = await this.crmService.findOrCreateLeadByPhone(phone);
+      const leadId = lead.id;
+
       await this.chatService.saveMessage({
         sessionId,
         sender: "user",
         content: text,
+        source: "whatsapp",
         metadata,
+        leadId,
       });
 
       const aiResult = await this.aiService.chat({
@@ -76,7 +83,9 @@ export class WhatsAppController {
         sessionId,
         sender: "bot",
         content: reply,
+        source: "whatsapp",
         metadata,
+        leadId,
       });
 
       let productIds = [...new Set((reply.match(PRODUCT_ID_REGEX) || []).map((id) => id.toLowerCase()))];

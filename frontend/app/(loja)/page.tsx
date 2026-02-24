@@ -1,10 +1,10 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { HeroSection } from "./components/Hero/HeroSection";
+import { HeroSection } from "../components/Hero/HeroSection";
 
 const CatalogSection = dynamic(
-  () => import("./components/Catalog/CatalogSection").then((m) => m.CatalogSection),
+  () => import("../components/Catalog/CatalogSection").then((m) => m.CatalogSection),
   { ssr: false, loading: () => <CatalogSectionSkeleton /> },
 );
 

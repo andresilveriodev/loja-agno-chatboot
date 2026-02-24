@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Search, User, ShoppingCart } from "lucide-react";
+import { Search, User } from "lucide-react";
 
 export function Header() {
   return (
@@ -32,6 +32,13 @@ export function Header() {
         </div>
 
         <div className="flex items-center gap-2">
+          <Link
+            href="/crm"
+            className="flex items-center gap-2 rounded-lg p-2 text-primary-700 transition hover:bg-primary-100"
+            aria-label="CRM - Funil de vendas"
+          >
+            <span className="hidden sm:inline text-sm font-medium">CRM</span>
+          </Link>
           <button
             type="button"
             className="flex items-center gap-2 rounded-lg p-2 text-primary-700 transition hover:bg-primary-100"
@@ -39,14 +46,6 @@ export function Header() {
           >
             <User className="h-5 w-5" />
             <span className="hidden sm:inline text-sm font-medium">Conta</span>
-          </button>
-          <button
-            type="button"
-            className="flex items-center gap-2 rounded-lg p-2 text-primary-700 transition hover:bg-primary-100"
-            aria-label="Carrinho"
-          >
-            <ShoppingCart className="h-5 w-5" />
-            <span className="hidden sm:inline text-sm font-medium">Catálogo</span>
           </button>
         </div>
       </div>

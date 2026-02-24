@@ -1,0 +1,419 @@
+/**
+ * Design System — RD Station CRM
+ * CSS autocontido apenas para design-system.html.
+ * Escopo: .ds-root (não afeta outras páginas).
+ */
+
+/* ─── Reset e escopo ─── */
+.ds-root {
+  box-sizing: border-box;
+  font-family: "DM Sans", "Nunito Sans", "Open Sans", Arial, sans-serif;
+  line-height: 1.5;
+  color: #002233;
+  background: #fff;
+  -webkit-font-smoothing: antialiased;
+}
+
+.ds-root *,
+.ds-root *::before,
+.ds-root *::after {
+  box-sizing: inherit;
+}
+
+/* ─── Design tokens (Tangram Lina light) ─── */
+.ds-root {
+  --ds-spacing-01: 4px;
+  --ds-spacing-02: 8px;
+  --ds-spacing-03: 12px;
+  --ds-spacing-04: 16px;
+  --ds-spacing-05: 24px;
+  --ds-spacing-06: 32px;
+  --ds-spacing-07: 40px;
+  --ds-spacing-08: 48px;
+  --ds-spacing-09: 56px;
+  --ds-spacing-10: 64px;
+  --ds-neutral-border: #d6dbde;
+  --ds-neutral-border-low: #e5e8ea;
+  --ds-neutral-icon: #002233;
+  --ds-neutral-icon-low: #596b7a;
+  --ds-neutral-surface: #fff;
+  --ds-neutral-surface-secondary: #e5e8ea;
+  --ds-neutral-surface-hover: #dadee0;
+  --ds-neutral-text: #002233;
+  --ds-neutral-text-low: #405466;
+  --ds-primary: #00dbff;
+  --ds-primary-hover: #66ebff;
+  --ds-primary-text: #0077b2;
+  --ds-primary-text-hover: #005580;
+  --ds-shadow-sm: 0 2px 6px rgba(0, 34, 51, 0.1);
+  --ds-shadow-md: 0 4px 12px rgba(0, 34, 51, 0.14);
+  --ds-radius-sm: 8px;
+  --ds-radius-md: 12px;
+  --ds-motion: 200ms cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+/* ─── Navegação superior ─── */
+.ds-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--ds-neutral-surface);
+  border-bottom: 1px solid var(--ds-neutral-border-low);
+  padding: var(--ds-spacing-03) var(--ds-spacing-05);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ds-spacing-02);
+}
+
+.ds-nav a {
+  color: var(--ds-primary-text);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  padding: var(--ds-spacing-02) var(--ds-spacing-03);
+  border-radius: var(--ds-spacing-01);
+  transition: background var(--ds-motion), color var(--ds-motion);
+}
+
+.ds-nav a:hover {
+  color: var(--ds-primary-text-hover);
+  background: rgba(0, 219, 255, 0.08);
+}
+
+/* ─── Main e seções ─── */
+.ds-main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--ds-spacing-05);
+}
+
+.ds-section {
+  margin-top: var(--ds-spacing-08);
+}
+
+.ds-section:first-of-type {
+  margin-top: 0;
+}
+
+/* ─── Tipografia ─── */
+.ds-text-drawer-title {
+  font: 700 20px/30px "DM Sans", "Nunito Sans", "Open Sans", Arial, sans-serif;
+  color: var(--ds-neutral-text);
+  margin: 0 0 var(--ds-spacing-04);
+}
+
+.ds-text-stage {
+  font: 700 16px/24px "DM Sans", "Nunito Sans", "Open Sans", Arial, sans-serif;
+  color: var(--ds-neutral-text);
+}
+
+.ds-text-name {
+  font: 700 16px/24px "DM Sans", "Nunito Sans", "Open Sans", Arial, sans-serif;
+  color: var(--ds-neutral-text);
+}
+
+.ds-text-subtitle {
+  font: 500 14px/20px "DM Sans", "Nunito Sans", "Open Sans", Arial, sans-serif;
+  color: var(--ds-neutral-text-low);
+}
+
+.ds-text-body {
+  font: 500 14px/20px "DM Sans", "Nunito Sans", "Open Sans", Arial, sans-serif;
+  color: var(--ds-neutral-text);
+  margin: 0 0 var(--ds-spacing-04);
+}
+
+.ds-text-meta {
+  font: 500 12px/16px "DM Sans", "Nunito Sans", "Open Sans", Arial, sans-serif;
+  color: var(--ds-neutral-text-low);
+}
+
+/* ─── Lista de estilos (tipografia) ─── */
+.ds-typo-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.ds-typo-list li {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--ds-spacing-04);
+  margin-bottom: var(--ds-spacing-03);
+  border-bottom: 1px solid var(--ds-neutral-border-low);
+  padding-bottom: var(--ds-spacing-02);
+}
+
+.ds-typo-list li:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+/* ─── Botões ─── */
+.ds-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ds-spacing-02);
+  font: 500 14px/20px "DM Sans", "Nunito Sans", "Open Sans", Arial, sans-serif;
+  padding: var(--ds-spacing-02) var(--ds-spacing-04);
+  border-radius: var(--ds-radius-sm);
+  border: none;
+  cursor: pointer;
+  transition: background var(--ds-motion), color var(--ds-motion), border-color var(--ds-motion);
+}
+
+.ds-btn:focus-visible {
+  outline: 2px solid var(--ds-primary);
+  outline-offset: 2px;
+}
+
+.ds-btn-primary {
+  background: var(--ds-primary);
+  color: var(--ds-primary-text);
+}
+
+.ds-btn-primary:hover:not(:disabled) {
+  background: var(--ds-primary-hover);
+  color: var(--ds-primary-text-hover);
+}
+
+.ds-btn-secondary {
+  background: var(--ds-neutral-surface-secondary);
+  color: var(--ds-neutral-text);
+}
+
+.ds-btn-secondary:hover:not(:disabled) {
+  background: var(--ds-neutral-surface-hover);
+}
+
+.ds-btn-outline {
+  background: transparent;
+  color: var(--ds-neutral-icon);
+  border: 1px solid var(--ds-neutral-border);
+}
+
+.ds-btn-outline:hover:not(:disabled) {
+  background: var(--ds-neutral-surface-hover);
+  border-color: var(--ds-neutral-icon-low);
+}
+
+.ds-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.ds-btn-icon {
+  padding: var(--ds-spacing-02);
+}
+
+.ds-btn-icon svg {
+  width: 24px;
+  height: 24px;
+  fill: currentColor;
+}
+
+/* ─── Card ─── */
+.ds-card {
+  background: var(--ds-neutral-surface);
+  border: 1px solid var(--ds-neutral-border-low);
+  border-radius: var(--ds-radius-sm);
+  padding: var(--ds-spacing-04);
+  box-shadow: var(--ds-shadow-sm);
+}
+
+/* ─── Tag ─── */
+.ds-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-spacing-02);
+  padding: var(--ds-spacing-01) var(--ds-spacing-03);
+  border-radius: 999px;
+  font: 500 12px/16px "DM Sans", "Nunito Sans", "Open Sans", Arial, sans-serif;
+  background: var(--ds-neutral-surface-secondary);
+  color: var(--ds-neutral-text);
+}
+
+/* ─── Select (trigger) ─── */
+.ds-select-trigger {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-spacing-02);
+  min-height: 40px;
+  padding: 0 var(--ds-spacing-04);
+  background: var(--ds-neutral-surface);
+  border: 1px solid var(--ds-neutral-border);
+  border-radius: var(--ds-radius-sm);
+  font: 500 14px/20px "DM Sans", "Nunito Sans", "Open Sans", Arial, sans-serif;
+  color: var(--ds-neutral-text);
+  cursor: pointer;
+  transition: border-color var(--ds-motion), background var(--ds-motion);
+  max-width: 280px;
+}
+
+.ds-select-trigger:hover {
+  border-color: var(--ds-neutral-icon-low);
+}
+
+.ds-select-trigger:focus-visible {
+  outline: 2px solid var(--ds-primary);
+  outline-offset: 2px;
+}
+
+.ds-select-trigger svg {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  fill: var(--ds-neutral-icon);
+}
+
+/* ─── Grid ─── */
+.ds-grid-row {
+  display: grid;
+  gap: var(--ds-spacing-04);
+  align-items: start;
+}
+
+.ds-grid-cols {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: var(--ds-spacing-04);
+}
+
+.ds-grid-stages {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--ds-spacing-04);
+}
+
+.ds-grid-cell {
+  padding: var(--ds-spacing-04);
+  background: var(--ds-neutral-surface-secondary);
+  border-radius: var(--ds-radius-sm);
+}
+
+/* ─── Navbar (hero) ─── */
+.ds-navbar {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-spacing-05);
+  padding: var(--ds-spacing-03) var(--ds-spacing-05);
+  border-bottom: 1px solid var(--ds-neutral-border-low);
+  background: var(--ds-neutral-surface);
+}
+
+.ds-navbar-brand {
+  color: var(--ds-neutral-text);
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.ds-navbar-brand svg {
+  display: block;
+  height: 32px;
+  width: auto;
+}
+
+.ds-navbar-links {
+  display: flex;
+  gap: var(--ds-spacing-02);
+}
+
+.ds-navbar-links a {
+  color: var(--ds-primary-text);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  padding: var(--ds-spacing-02) var(--ds-spacing-03);
+  border-radius: var(--ds-spacing-01);
+  transition: background var(--ds-motion), color var(--ds-motion);
+}
+
+.ds-navbar-links a:hover {
+  color: var(--ds-primary-text-hover);
+  background: rgba(0, 219, 255, 0.08);
+}
+
+/* ─── Hero: barra de filtros e pipeline ─── */
+.ds-hero-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--ds-spacing-04);
+  padding: var(--ds-spacing-04) var(--ds-spacing-05);
+}
+
+.ds-hero-stage {
+  margin-bottom: var(--ds-spacing-04);
+}
+
+.ds-hero-stage-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--ds-spacing-03);
+}
+
+.ds-hero-stage-cards {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-spacing-03);
+}
+
+/* ─── Overlay (demo) ─── */
+.ds-overlay-demo {
+  position: relative;
+  padding: var(--ds-spacing-05);
+  background: var(--ds-neutral-surface-secondary);
+  border-radius: var(--ds-radius-sm);
+  opacity: 0.85;
+}
+
+/* ─── Ícones (wrapper) ─── */
+.ds-icon-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ds-spacing-05);
+  align-items: center;
+}
+
+.ds-icon-item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-spacing-02);
+}
+
+.ds-icon-item svg {
+  flex-shrink: 0;
+  fill: var(--ds-neutral-icon);
+}
+
+.ds-icon-item.ds-icon-low svg {
+  fill: var(--ds-neutral-icon-low);
+}
+
+/* ─── Utilitários ─── */
+.ds-flex-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ds-spacing-03);
+  align-items: center;
+}
+
+.ds-mb-4 { margin-bottom: var(--ds-spacing-04); }
+.ds-mb-2 { margin-bottom: var(--ds-spacing-02); }
+.ds-mt-4 { margin-top: var(--ds-spacing-04); }
+
+.ds-root code {
+  font-size: 12px;
+  padding: 2px 6px;
+  background: var(--ds-neutral-surface-secondary);
+  border-radius: 4px;
+  font-family: ui-monospace, monospace;
+}
+
+/* Smooth scroll (apenas dentro do .ds-root) */
+.ds-root {
+  scroll-behavior: smooth;
+}

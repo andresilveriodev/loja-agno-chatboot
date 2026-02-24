@@ -1,0 +1,347 @@
+/**
+ * Design System — CRM Kanban (referencial RD Station / Tangram Lina)
+ * Escopo: .crm-root — não afeta o restante do frontend (loja).
+ */
+
+.crm-root {
+  box-sizing: border-box;
+  font-family: "DM Sans", "Nunito Sans", "Open Sans", Arial, sans-serif;
+  line-height: 1.5;
+  color: #002233;
+  background: var(--crm-ds-neutral-surface);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  scroll-behavior: smooth;
+}
+
+.crm-root *,
+.crm-root *::before,
+.crm-root *::after {
+  box-sizing: inherit;
+}
+
+/* ─── Design tokens (Tangram Lina light) ─── */
+.crm-root {
+  --crm-ds-spacing-01: 4px;
+  --crm-ds-spacing-02: 8px;
+  --crm-ds-spacing-03: 12px;
+  --crm-ds-spacing-04: 16px;
+  --crm-ds-spacing-05: 24px;
+  --crm-ds-spacing-06: 32px;
+  --crm-ds-spacing-07: 40px;
+  --crm-ds-spacing-08: 48px;
+  --crm-ds-neutral-border: #d6dbde;
+  --crm-ds-neutral-border-low: #e5e8ea;
+  --crm-ds-neutral-icon: #002233;
+  --crm-ds-neutral-icon-low: #596b7a;
+  --crm-ds-neutral-surface: #fff;
+  --crm-ds-neutral-surface-secondary: #e5e8ea;
+  --crm-ds-neutral-surface-hover: #dadee0;
+  --crm-ds-neutral-text: #002233;
+  --crm-ds-neutral-text-low: #405466;
+  --crm-ds-primary: #00dbff;
+  --crm-ds-primary-hover: #66ebff;
+  --crm-ds-primary-text: #0077b2;
+  --crm-ds-primary-text-hover: #005580;
+  --crm-ds-shadow-sm: 0 2px 6px rgba(0, 34, 51, 0.1);
+  --crm-ds-shadow-md: 0 4px 12px rgba(0, 34, 51, 0.14);
+  --crm-ds-radius-sm: 8px;
+  --crm-ds-radius-md: 12px;
+  --crm-ds-motion: 200ms cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+/* ─── Navbar CRM ─── */
+.crm-root .crm-navbar {
+  display: flex;
+  align-items: center;
+  gap: var(--crm-ds-spacing-05);
+  padding: var(--crm-ds-spacing-03) var(--crm-ds-spacing-05);
+  border-bottom: 1px solid var(--crm-ds-neutral-border-low);
+  background: var(--crm-ds-neutral-surface);
+  position: sticky;
+  top: 0;
+  z-index: 40;
+}
+
+.crm-root .crm-navbar-brand {
+  color: var(--crm-ds-neutral-text);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.crm-root .crm-navbar-brand:hover {
+  color: var(--crm-ds-primary-text);
+}
+
+.crm-root .crm-navbar-links {
+  display: flex;
+  gap: var(--crm-ds-spacing-02);
+  margin-left: auto;
+}
+
+.crm-root .crm-navbar-links a {
+  color: var(--crm-ds-primary-text);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  padding: var(--crm-ds-spacing-02) var(--crm-ds-spacing-03);
+  border-radius: var(--crm-ds-spacing-01);
+  transition: background var(--crm-ds-motion), color var(--crm-ds-motion);
+}
+
+.crm-root .crm-navbar-links a:hover {
+  color: var(--crm-ds-primary-text-hover);
+  background: rgba(0, 219, 255, 0.08);
+}
+
+/* ─── Tipografia ─── */
+.crm-root .crm-text-drawer-title {
+  font: 700 20px/30px "DM Sans", "Nunito Sans", "Open Sans", Arial, sans-serif;
+  color: var(--crm-ds-neutral-text);
+  margin: 0 0 var(--crm-ds-spacing-04);
+}
+
+.crm-root .crm-text-stage {
+  font: 700 16px/24px "DM Sans", "Nunito Sans", "Open Sans", Arial, sans-serif;
+  color: var(--crm-ds-neutral-text);
+}
+
+.crm-root .crm-text-name {
+  font: 700 16px/24px "DM Sans", "Nunito Sans", "Open Sans", Arial, sans-serif;
+  color: var(--crm-ds-neutral-text);
+}
+
+.crm-root .crm-text-body {
+  font: 500 14px/20px "DM Sans", "Nunito Sans", "Open Sans", Arial, sans-serif;
+  color: var(--crm-ds-neutral-text);
+  margin: 0 0 var(--crm-ds-spacing-04);
+}
+
+.crm-root .crm-text-meta {
+  font: 500 12px/16px "DM Sans", "Nunito Sans", "Open Sans", Arial, sans-serif;
+  color: var(--crm-ds-neutral-text-low);
+}
+
+/* ─── Botões ─── */
+.crm-root .crm-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--crm-ds-spacing-02);
+  font: 500 14px/20px "DM Sans", "Nunito Sans", "Open Sans", Arial, sans-serif;
+  padding: var(--crm-ds-spacing-02) var(--crm-ds-spacing-04);
+  border-radius: var(--crm-ds-radius-sm);
+  border: none;
+  cursor: pointer;
+  transition: background var(--crm-ds-motion), color var(--crm-ds-motion), border-color var(--crm-ds-motion);
+}
+
+.crm-root .crm-btn:focus-visible {
+  outline: 2px solid var(--crm-ds-primary);
+  outline-offset: 2px;
+}
+
+.crm-root .crm-btn-primary {
+  background: var(--crm-ds-primary);
+  color: var(--crm-ds-primary-text);
+}
+
+.crm-root .crm-btn-primary:hover:not(:disabled) {
+  background: var(--crm-ds-primary-hover);
+  color: var(--crm-ds-primary-text-hover);
+}
+
+.crm-root .crm-btn-secondary {
+  background: var(--crm-ds-neutral-surface-secondary);
+  color: var(--crm-ds-neutral-text);
+}
+
+.crm-root .crm-btn-secondary:hover:not(:disabled) {
+  background: var(--crm-ds-neutral-surface-hover);
+}
+
+.crm-root .crm-btn-outline {
+  background: transparent;
+  color: var(--crm-ds-neutral-icon);
+  border: 1px solid var(--crm-ds-neutral-border);
+}
+
+.crm-root .crm-btn-outline:hover:not(:disabled) {
+  background: var(--crm-ds-neutral-surface-hover);
+  border-color: var(--crm-ds-neutral-icon-low);
+}
+
+.crm-root .crm-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.crm-root .crm-btn-icon {
+  padding: var(--crm-ds-spacing-02);
+}
+
+.crm-root .crm-btn-icon svg {
+  width: 24px;
+  height: 24px;
+  fill: currentColor;
+}
+
+/* ─── Card ─── */
+.crm-root .crm-card {
+  background: var(--crm-ds-neutral-surface);
+  border: 1px solid var(--crm-ds-neutral-border-low);
+  border-radius: var(--crm-ds-radius-sm);
+  padding: var(--crm-ds-spacing-04);
+  box-shadow: var(--crm-ds-shadow-sm);
+}
+
+/* ─── Tag ─── */
+.crm-root .crm-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--crm-ds-spacing-02);
+  padding: var(--crm-ds-spacing-01) var(--crm-ds-spacing-03);
+  border-radius: 999px;
+  font: 500 12px/16px "DM Sans", "Nunito Sans", "Open Sans", Arial, sans-serif;
+  background: var(--crm-ds-neutral-surface-secondary);
+  color: var(--crm-ds-neutral-text);
+}
+
+/* ─── Toolbar e conteúdo ─── */
+.crm-root .crm-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--crm-ds-spacing-04);
+  padding: var(--crm-ds-spacing-04) var(--crm-ds-spacing-05);
+  border-bottom: 1px solid var(--crm-ds-neutral-border-low);
+  background: var(--crm-ds-neutral-surface);
+}
+
+.crm-root .crm-main {
+  flex: 1;
+  overflow: auto;
+  padding: var(--crm-ds-spacing-04) var(--crm-ds-spacing-05);
+}
+
+.crm-root .crm-flex-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--crm-ds-spacing-03);
+  align-items: center;
+}
+
+.crm-root code {
+  font-size: 12px;
+  padding: 2px 6px;
+  background: var(--crm-ds-neutral-surface-secondary);
+  border-radius: 4px;
+  font-family: ui-monospace, monospace;
+}
+
+.crm-root .crm-spinner {
+  width: 40px;
+  height: 40px;
+  border: 2px solid var(--crm-ds-neutral-border-low);
+  border-top-color: var(--crm-ds-primary);
+  border-radius: 50%;
+  animation: crm-spin 0.8s linear infinite;
+}
+
+.crm-root .crm-mb-4 {
+  margin-bottom: var(--crm-ds-spacing-04);
+}
+
+@keyframes crm-spin {
+  to { transform: rotate(360deg); }
+}
+
+.crm-root .crm-kanban-board {
+  display: flex;
+  gap: var(--crm-ds-spacing-03);
+  overflow-x: auto;
+  padding-bottom: var(--crm-ds-spacing-04);
+  padding-top: var(--crm-ds-spacing-02);
+}
+
+.crm-root .crm-column-drag-over {
+  outline: 2px solid var(--crm-ds-primary);
+  outline-offset: 2px;
+}
+
+.crm-root .crm-input {
+  width: 100%;
+  min-height: 40px;
+  padding: 0 var(--crm-ds-spacing-03);
+  font: 500 14px/20px "DM Sans", "Nunito Sans", "Open Sans", Arial, sans-serif;
+  color: var(--crm-ds-neutral-text);
+  background: var(--crm-ds-neutral-surface);
+  border: 1px solid var(--crm-ds-neutral-border);
+  border-radius: var(--crm-ds-radius-sm);
+  transition: border-color var(--crm-ds-motion);
+}
+
+.crm-root .crm-input:focus {
+  outline: none;
+  border-color: var(--crm-ds-primary);
+  box-shadow: 0 0 0 2px rgba(0, 219, 255, 0.2);
+}
+
+.crm-root .crm-filter-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--crm-ds-spacing-01) var(--crm-ds-spacing-02);
+  font-size: 12px;
+  color: var(--crm-ds-neutral-text);
+  background: var(--crm-ds-neutral-surface);
+  border: 1px solid var(--crm-ds-neutral-border-low);
+  border-radius: var(--crm-ds-radius-sm);
+  cursor: pointer;
+  transition: background var(--crm-ds-motion);
+}
+
+.crm-root .crm-filter-chip:hover {
+  background: var(--crm-ds-neutral-surface-hover);
+}
+
+.crm-root .crm-filters-active {
+  border-color: var(--crm-ds-primary);
+  background: rgba(0, 219, 255, 0.08);
+  color: var(--crm-ds-primary-text);
+}
+
+/* Modal (drawer) */
+.crm-root .crm-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: stretch;
+  justify-content: flex-end;
+  background: rgba(0, 0, 0, 0.4);
+  transition: opacity var(--crm-ds-motion);
+}
+
+.crm-root .crm-modal-drawer {
+  width: 100%;
+  max-width: 24rem;
+  overflow: hidden;
+  background: var(--crm-ds-neutral-surface);
+  box-shadow: var(--crm-ds-shadow-md);
+  transition: transform var(--crm-ds-motion);
+}
+
+@media (min-width: 640px) {
+  .crm-root .crm-modal-drawer {
+    max-width: 36rem;
+  }
+}
+
+.crm-root .crm-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--crm-ds-spacing-03) var(--crm-ds-spacing-04);
+  border-bottom: 1px solid var(--crm-ds-neutral-border-low);
+}

@@ -755,7 +755,7 @@ Response:
 - [ ] Sincronizar com leads
 
 #### 6.3 Webhook Handler
-- [ ] Endpoint `POST /api/whatsapp/webhook`
+- [ ] Endpoint `POST /api/webhooks/whatsapp` (padronizado com planejamento CRM)
 - [ ] Validar assinatura
 - [ ] Processar eventos
 - [ ] Chamar AGNO para responder

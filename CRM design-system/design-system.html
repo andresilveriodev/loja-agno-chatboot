@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Design System — RD Station CRM</title>
+  <link rel="stylesheet" href="design-system.css">
+</head>
+<body class="ds-root" style="overflow: unset;">
+  <nav class="ds-nav" role="navigation" aria-label="Seções do design system">
+    <a href="#hero">Hero</a>
+    <a href="#typography">Tipografia</a>
+    <a href="#colors">Cores e superfícies</a>
+    <a href="#components">Componentes</a>
+    <a href="#layout">Layout e espaçamento</a>
+    <a href="#motion">Motion</a>
+    <a href="#icons">Ícones</a>
+  </nav>
+
+  <main class="ds-main">
+    <!-- Section 0: Hero -->
+    <section id="hero" class="ds-section" aria-labelledby="hero-title">
+      <h2 id="hero-title" class="ds-text-drawer-title">0) Hero — Clone do original</h2>
+      <div class="ds-navbar">
+        <button type="button" class="ds-btn ds-btn-icon" aria-label="Menu">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M3.643 6.813h13.714c.355 0 .643-.28.643-.625V4.625A.634.634 0 0017.357 4H3.643A.634.634 0 003 4.625v1.563c0 .345.288.625.643.625zm0 6.25h16.714c.355 0 .643-.28.643-.626v-1.562a.634.634 0 00-.643-.625H3.643a.634.634 0 00-.643.625v1.563c0 .345.288.624.643.624zm0 6.25h13.714c.355 0 .643-.28.643-.625v-1.563a.634.634 0 00-.643-.625H3.643a.634.634 0 00-.643.625v1.563c0 .345.288.625.643.625z"/></svg>
+        </button>
+        <a class="ds-navbar-brand" href="#"><svg width="107" height="32" viewBox="0 0 107 32" fill="none" xmlns="http://www.w3.org/2000/svg" role="img"><path d="M89.5166 8.59999H90.7046C91.0859 8.59999 91.3572 8.73932 91.5186 9.01799L97.8106 19.798L103.883 9.06199C104.059 8.75399 104.33 8.59999 104.697 8.59999H106.017V24H104.059V12.164L98.5806 21.844H96.9526L91.4746 12.494V24H89.5166V8.59999Z" fill="#002233"/><path d="M27.9909 16.5681C27.8442 17.1213 27.498 17.6234 26.9893 18.0174C25.5632 19.123 23.991 20.0991 22.3151 20.9169C20.64 21.7357 18.8543 22.3995 17.0094 22.8905C16.6813 22.9773 16.3425 23.0215 15.9995 23.0215C15.6574 23.0215 15.3177 22.9773 14.9905 22.8905C13.1447 22.3995 11.36 21.7357 9.6848 20.9169C8.00887 20.0991 6.43679 19.123 5.01059 18.0174C4.5011 17.6234 4.15496 17.1213 4.00907 16.5681H4.00814C3.91091 16.1962 3.91091 15.8038 4.00814 15.432H4.00907C4.15496 14.8779 4.5011 14.3766 5.01059 13.9826C6.43679 12.8771 8.00887 11.901 9.6848 11.0831C11.36 10.2644 13.1447 9.60064 14.9905 9.10869C15.3177 9.02272 15.6574 8.97845 15.9995 8.97845C16.3425 8.97845 16.6813 9.02272 17.0094 9.10869C18.8543 9.60064 20.64 10.2644 22.3151 11.0831C23.991 11.901 25.5632 12.8771 26.9893 13.9826C27.498 14.3766 27.8442 14.8779 27.9909 15.432C28.0891 15.8038 28.0891 16.1962 27.9909 16.5681Z" fill="#002233"/></svg></a>
+        <div class="ds-navbar-links" aria-label="Menu principal">
+          <a href="#typography">Tipografia</a>
+          <a href="#components">Componentes</a>
+          <a href="#layout">Layout</a>
+        </div>
+      </div>
+      <div class="ds-hero-toolbar ds-grid-row">
+        <div class="ds-flex-wrap">
+          <div class="ds-select-trigger" role="button" tabindex="0">
+            <svg viewBox="0 0 24 24"><path d="M4.5 8.25h15a.5.5 0 00.5-.5V6.5a.5.5 0 00-.5-.5h-15a.5.5 0 00-.5.5v1.25a.5.5 0 00.5.5zm2 5h11a.5.5 0 00.5-.5V11.5a.5.5 0 00-.5-.5h-11a.5.5 0 00-.5.5v1.25a.5.5 0 00.5.5zm2 5h7a.5.5 0 00.5-.5V16.5a.5.5 0 00-.5-.5h-7a.5.5 0 00-.5.5v1.25a.5.5 0 00.5.5z"/></svg>
+            <span>Design System — Biblioteca de padrões</span>
+            <svg viewBox="0 0 24 24" class="select-caret"><path d="M8.54 10h6.92c.48 0 .72.639.381 1.012l-3.46 3.814a.504.504 0 01-.761 0l-3.461-3.814c-.34-.373-.1-1.012.38-1.012z"/></svg>
+          </div>
+          <button type="button" class="ds-btn ds-btn-primary">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M18.417 10.833h-5.25v-5.25A.583.583 0 0012.583 5h-1.166a.583.583 0 00-.584.583v5.25h-5.25a.583.583 0 00-.583.584v1.166c0 .323.261.584.583.584h5.25v5.25c0 .322.261.583.584.583h1.166a.583.583 0 00.584-.583v-5.25h5.25a.583.583 0 00.583-.584v-1.166a.583.583 0 00-.583-.584z"/></svg>
+            Criar
+          </button>
+        </div>
+        <div class="ds-flex-wrap">
+          <span class="ds-tag">Design System</span>
+        </div>
+      </div>
+      <div class="ds-hero-stage">
+        <div class="ds-hero-stage-header">
+          <span class="ds-text-stage">Biblioteca de padrões</span>
+          <span class="ds-text-stage ds-text-meta">(1)</span>
+        </div>
+        <div class="ds-flex-wrap ds-mb-2">
+          <span class="ds-tag">RD Station CRM</span>
+          <button type="button" class="ds-btn ds-btn-outline ds-btn-icon" aria-label="Sincronizar">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path d="M16.163 7.546a6.053 6.053 0 00-4.168-1.643 6.104 6.104 0 00-5.908 4.604.437.437 0 01-.423.332h-2.08a.435.435 0 01-.428-.515A9.001 9.001 0 0112 3a8.97 8.97 0 016.217 2.493l1.296-1.297c.549-.548 1.487-.16 1.487.616v4.865c0 .481-.39.871-.871.871h-4.865c-.776 0-1.165-.938-.616-1.486l1.515-1.516zM3.871 13.452h4.865c.776 0 1.165.938.616 1.486l-1.515 1.516a6.054 6.054 0 004.169 1.643 6.104 6.104 0 005.907-4.604.436.436 0 01.423-.332h2.08c.272 0 .479.247.428.515A9.001 9.001 0 0112 21a8.97 8.97 0 01-6.217-2.493l-1.296 1.296c-.549.55-1.487.16-1.487-.615v-4.865c0-.481.39-.871.871-.871z"/></svg>
+          </button>
+        </div>
+        <div class="ds-hero-stage-cards">
+          <div class="ds-card">
+            <p class="ds-text-name ds-mb-2">Design System</p>
+            <p class="ds-text-body">Padrões visuais e componentes — clone fiel do produto. Tipografia, cores, botões, cards e motion conforme o referencial.</p>
+            <p class="ds-text-meta">RD Station CRM · Tangram Lina</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 1: Typography -->
+    <section id="typography" class="ds-section" aria-labelledby="typography-title">
+      <h2 id="typography-title" class="ds-text-drawer-title">1) Tipografia</h2>
+      <p class="ds-text-body">Estilos presentes no referencial. Preview ao vivo com as mesmas classes.</p>
+      <ul class="ds-typo-list">
+        <li>
+          <span class="ds-text-drawer-title">DrawerTitle (Drawer / Modal)</span>
+          <span class="ds-text-meta">— do tema</span>
+        </li>
+        <li>
+          <span class="ds-text-stage">Stage title (nome da etapa)</span>
+          <span class="ds-text-meta">— do tema</span>
+        </li>
+        <li>
+          <span class="ds-text-name">Nome / Título (NavbarAccount, card)</span>
+          <span class="ds-text-meta">— do tema</span>
+        </li>
+        <li>
+          <span class="ds-text-subtitle">Subtítulo / Account name</span>
+          <span class="ds-text-meta">— do tema</span>
+        </li>
+        <li>
+          <span class="ds-text-body">Parágrafo / Body (notificações, descrições)</span>
+          <span class="ds-text-meta">— do tema</span>
+        </li>
+        <li>
+          <span class="ds-text-meta">Metadata / Data (ex.: "Criada há 23 dias")</span>
+          <span class="ds-text-meta">— do tema</span>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Section 2: Colors & Surfaces -->
+    <section id="colors" class="ds-section" aria-labelledby="colors-title">
+      <h2 id="colors-title" class="ds-text-drawer-title">2) Cores e superfícies</h2>
+      <p class="ds-text-body">Fundos, bordas e tags usados no referencial.</p>
+      <div class="ds-grid-cols ds-mb-4">
+        <div class="ds-card"><p class="ds-text-name">Card — superfície padrão</p></div>
+        <span class="ds-tag">Tag neutra</span>
+        <span class="ds-tag">Tag com ícone</span>
+      </div>
+      <p class="ds-text-body">Bordas e divisores vêm de <code>--ds-neutral-border-low</code>; fundo de página de <code>--ds-neutral-surface</code> (tema Tangram Lina).</p>
+    </section>
+
+    <!-- Section 3: UI Components -->
+    <section id="components" class="ds-section" aria-labelledby="components-title">
+      <h2 id="components-title" class="ds-text-drawer-title">3) Componentes de interface</h2>
+      <p class="ds-text-body">Botões e controles. Estados: padrão, hover, active, focus, disabled.</p>
+      <div class="ds-flex-wrap ds-mb-4">
+        <button type="button" class="ds-btn ds-btn-primary">Primário</button>
+        <button type="button" class="ds-btn ds-btn-secondary">Secundário</button>
+        <button type="button" class="ds-btn ds-btn-outline">Outline</button>
+        <button type="button" class="ds-btn ds-btn-primary" disabled>Disabled</button>
+        <button type="button" class="ds-btn ds-btn-icon" aria-label="Adicionar">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M18.417 10.833h-5.25v-5.25A.583.583 0 0012.583 5h-1.166a.583.583 0 00-.584.583v5.25h-5.25a.583.583 0 00-.583.584v1.166c0 .323.261.584.583.584h5.25v5.25c0 .322.261.583.584.583h1.166a.583.583 0 00.584-.583v-5.25h5.25a.583.583 0 00.583-.584v-1.166a.583.583 0 00-.583-.584z"/></svg>
+        </button>
+      </div>
+      <div class="ds-select-trigger" role="button" tabindex="0">
+        <span>Select (gatilho)</span>
+        <svg viewBox="0 0 24 24"><path d="M8.54 10h6.92c.48 0 .72.639.381 1.012l-3.46 3.814a.504.504 0 01-.761 0l-3.461-3.814c-.34-.373-.1-1.012.38-1.012z"/></svg>
+      </div>
+    </section>
+
+    <!-- Section 4: Layout & Spacing -->
+    <section id="layout" class="ds-section" aria-labelledby="layout-title">
+      <h2 id="layout-title" class="ds-text-drawer-title">4) Layout e espaçamento</h2>
+      <p class="ds-text-body">Padrões de grid e conteúdo do referencial.</p>
+      <div class="ds-grid-row ds-grid-cell" style="min-height: 120px;">
+        Grid — linha de filtros / ações
+      </div>
+      <div class="ds-grid-stages ds-mt-4">
+        <div class="ds-grid-cell">Coluna 1 (stage)</div>
+        <div class="ds-grid-cell">Coluna 2 (stage)</div>
+        <div class="ds-grid-cell">Coluna 3 (stage)</div>
+      </div>
+    </section>
+
+    <!-- Section 5: Motion -->
+    <section id="motion" class="ds-section" aria-labelledby="motion-title">
+      <h2 id="motion-title" class="ds-text-drawer-title">5) Motion e interação</h2>
+      <p class="ds-text-body">Transições: Overlay e Drawer usam <code>opacity 300ms</code> e <code>transform 300ms/400ms ease-in-out</code>.</p>
+      <div class="ds-overlay-demo ds-mb-4">
+        Overlay — exemplo de superfície (opacidade reduzida para demonstração).
+      </div>
+      <p class="ds-text-body">Botões herdam transições de hover/focus do tema Tangram.</p>
+    </section>
+
+    <!-- Section 6: Icons -->
+    <section id="icons" class="ds-section" aria-labelledby="icons-title">
+      <h2 id="icons-title" class="ds-text-drawer-title">6) Ícones</h2>
+      <p class="ds-text-body">Sistema de ícones: SVG inline, <code>fill</code> via variável. Variantes 16 e 24.</p>
+      <div class="ds-icon-row">
+        <span class="ds-icon-item">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path d="M18.417 10.833h-5.25v-5.25A.583.583 0 0012.583 5h-1.166a.583.583 0 00-.584.583v5.25h-5.25a.583.583 0 00-.583.584v1.166c0 .323.261.584.583.584h5.25v5.25c0 .322.261.583.584.583h1.166a.583.583 0 00.584-.583v-5.25h5.25a.583.583 0 00.583-.584v-1.166a.583.583 0 00-.583-.584z"/></svg>
+          <span class="ds-text-meta">16×16 (plus)</span>
+        </span>
+        <span class="ds-icon-item">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M18.417 10.833h-5.25v-5.25A.583.583 0 0012.583 5h-1.166a.583.583 0 00-.584.583v5.25h-5.25a.583.583 0 00-.583.584v1.166c0 .323.261.584.583.584h5.25v5.25c0 .322.261.583.584.583h1.166a.583.583 0 00.584-.583v-5.25h5.25a.583.583 0 00.583-.584v-1.166a.583.583 0 00-.583-.584z"/></svg>
+          <span class="ds-text-meta">24×24 (plus)</span>
+        </span>
+        <span class="ds-icon-item">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path d="M14.274 12l3.412-3.411a1.072 1.072 0 000-1.517l-.758-.758a1.072 1.072 0 00-1.517 0L12 9.725 8.589 6.314a1.072 1.072 0 00-1.517 0l-.758.758a1.072 1.072 0 000 1.517L9.725 12l-3.411 3.412a1.072 1.072 0 000 1.516l.758.758a1.072 1.072 0 001.517 0L12 14.274l3.412 3.412a1.072 1.072 0 001.516 0l.758-.758a1.072 1.072 0 000-1.517L14.274 12z"/></svg>
+          <span class="ds-text-meta">16×16 (close)</span>
+        </span>
+        <span class="ds-icon-item ds-icon-low">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M11.534 15.09l-5.34-5.341a.66.66 0 010-.933l.622-.623a.66.66 0 01.932 0L12 12.424l4.252-4.233a.66.66 0 01.932.001l.623.623a.66.66 0 010 .933l-5.34 5.34a.66.66 0 01-.933 0z"/></svg>
+          <span class="ds-text-meta">24×24 (caret) low-emphasis</span>
+        </span>
+      </div>
+    </section>
+  </main>
+
+  <script src="design-system.js"></script>
+</body>
+</html>
