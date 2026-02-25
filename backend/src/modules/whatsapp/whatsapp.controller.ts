@@ -8,7 +8,36 @@ import type { EvolutionWebhookPayload } from "./dto/evolution-webhook.dto";
 import {
   extractPhoneFromRemoteJid,
   extractTextFromMessage,
+  extractAudioUrlFromMessage,
+  isAudioMessage,
 } from "./dto/evolution-webhook.dto";
+import { AudioService } from "../audio/audio.service";
+
+function extractCustomerName(text: string): string | null {
+  if (!text) return null;
+
+  const normalized = text.trim();
+
+  const patterns: RegExp[] = [
+    /(?:meu nome é|meu nome eh|meu nome e|me chamo|eu me chamo)\s+([A-Za-zÀ-ÖØ-öø-ÿ\s]+)$/i,
+    /(?:eu sou o|eu sou a|sou o|sou a)\s+([A-Za-zÀ-ÖØ-öø-ÿ\s]+)$/i,
+    /(?:aqui é o|aqui é a|aqui e o|aqui e a)\s+([A-Za-zÀ-ÖØ-öø-ÿ\s]+)$/i,
+  ];
+
+  for (const regex of patterns) {
+    const match = normalized.match(regex);
+    if (match?.[1]) {
+      const name = match[1].trim();
+      if (name.length >= 2 && name.length <= 80) {
+        return name
+          .replace(/\s+/g, " ")
+          .replace(/\b\w/g, (c) => c.toUpperCase());
+      }
+    }
+  }
+
+  return null;
+}
 
 const SESSION_PREFIX = "wa:";
 /** IDs de produto mencionados na resposta (ex: prod_001, prod_005). */
@@ -22,6 +51,7 @@ export class WhatsAppController {
     private readonly aiService: AiService,
     private readonly productsService: ProductsService,
     private readonly crmService: CrmService,
+    private readonly audioService: AudioService,
   ) {}
 
   /**
@@ -45,9 +75,90 @@ export class WhatsAppController {
     }
 
     const phone = extractPhoneFromRemoteJid(key?.remoteJid);
-    const text = extractTextFromMessage(payload.data.message);
-    if (!phone || !text) {
-      console.log("[WhatsApp] Ignorado: phone ou texto ausente. remoteJid:", key?.remoteJid ?? "(vazio)", "| message keys:", payload.data.message ? Object.keys(payload.data.message) : "null");
+    if (!phone) {
+      console.log("[WhatsApp] Ignorado: phone ausente. remoteJid:", key?.remoteJid ?? "(vazio)");
+      return { ok: true };
+    }
+
+    let text = extractTextFromMessage(payload.data.message);
+
+    // Fluxo de áudio: quando não há texto e mensagem contém audio/PTT
+    if (!text && isAudioMessage(payload.data)) {
+      const audioUrl = extractAudioUrlFromMessage(payload.data.message);
+      const durationSeconds =
+        (payload.data.message as any)?.audioMessage?.seconds ??
+        (payload.data.message as any)?.pttMessage?.seconds;
+      const mimetype =
+        (payload.data.message as any)?.audioMessage?.mimetype ??
+        (payload.data.message as any)?.pttMessage?.mimetype;
+
+      // Preferir áudio via Evolution API (getBase64FromMediaMessage) — evita mmg.whatsapp.net que pode vir criptografado/HTML
+      let audioResult: Awaited<ReturnType<AudioService["processWhatsAppAudio"]>>;
+      if (key?.id) {
+        const base64Result = await this.whatsappService.getMediaBase64FromMessage({
+          id: key.id,
+          remoteJid: key.remoteJid,
+          fromMe: key.fromMe,
+        });
+        if (base64Result.success && base64Result.base64) {
+          let base64Data = base64Result.base64.trim();
+          if (base64Data.includes(",")) base64Data = base64Data.split(",")[1] ?? base64Data;
+          try {
+            const audioBuffer = Buffer.from(base64Data, "base64");
+            if (audioBuffer.length > 0) {
+              audioResult = await this.audioService.processWhatsAppAudio({
+                audioBuffer,
+                mimetype,
+                remoteJid: key?.remoteJid,
+                durationSeconds,
+              });
+            } else {
+              audioResult = await this.audioService.processWhatsAppAudio({
+                audioUrl: audioUrl ?? "",
+                remoteJid: key?.remoteJid,
+                durationSeconds,
+              });
+            }
+          } catch {
+            audioResult = await this.audioService.processWhatsAppAudio({
+              audioUrl: audioUrl ?? "",
+              remoteJid: key?.remoteJid,
+              durationSeconds,
+            });
+          }
+        } else {
+          console.warn("[WhatsApp] getBase64FromMediaMessage falhou:", !base64Result.success ? base64Result.error : "sem base64", "— usando audioUrl");
+          audioResult = await this.audioService.processWhatsAppAudio({
+            audioUrl: audioUrl ?? "",
+            remoteJid: key?.remoteJid,
+            durationSeconds,
+          });
+        }
+      } else {
+        audioResult = await this.audioService.processWhatsAppAudio({
+          audioUrl: audioUrl ?? "",
+          remoteJid: key?.remoteJid,
+          durationSeconds,
+        });
+      }
+
+      if (!audioResult.success) {
+        console.warn("[WhatsApp] Falha ao processar áudio:", audioResult.details ?? audioResult.error);
+        await this.whatsappService.sendText(
+          phone,
+          audioResult.error || "Não consegui entender seu áudio, pode repetir em texto?",
+        );
+        return { ok: true };
+      }
+
+      text = audioResult.text;
+    }
+
+    if (!text) {
+      console.log(
+        "[WhatsApp] Ignorado: mensagem sem texto nem áudio suportado. message keys:",
+        payload.data.message ? Object.keys(payload.data.message) : "null",
+      );
       return { ok: true };
     }
 
@@ -60,10 +171,21 @@ export class WhatsAppController {
       const lead = await this.crmService.findOrCreateLeadByPhone(phone);
       const leadId = lead.id;
 
+      const extractedName = extractCustomerName(text);
+      if (extractedName && extractedName !== lead.name) {
+        try {
+          await this.crmService.updateLead(leadId, { name: extractedName });
+          console.log("[WhatsApp] Nome do lead atualizado para:", extractedName);
+        } catch (err) {
+          console.error("[WhatsApp] Erro ao atualizar nome do lead:", err);
+        }
+      }
+
       await this.chatService.saveMessage({
         sessionId,
         sender: "user",
         content: text,
+        type: isAudioMessage(payload.data) ? "audio" : "text",
         source: "whatsapp",
         metadata,
         leadId,

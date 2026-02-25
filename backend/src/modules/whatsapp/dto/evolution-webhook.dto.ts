@@ -14,6 +14,16 @@ export interface EvolutionWebhookPayload {
     message?: {
       conversation?: string;
       extendedTextMessage?: { text?: string };
+      audioMessage?: {
+        url?: string;
+        mimetype?: string;
+        seconds?: number;
+      };
+      pttMessage?: {
+        url?: string;
+        mimetype?: string;
+        seconds?: number;
+      };
     };
     messageTimestamp?: number;
   };
@@ -40,5 +50,25 @@ export function extractTextFromMessage(message: MessagePayload): string | null {
   if (ext && typeof ext.text === "string" && ext.text.trim()) {
     return ext.text.trim();
   }
+  return null;
+}
+
+export function isAudioMessage(data: Data | undefined): boolean {
+  if (!data || !data.message) return false;
+  const msg = data.message as {
+    audioMessage?: { url?: string };
+    pttMessage?: { url?: string };
+  };
+  return Boolean(msg.audioMessage?.url || msg.pttMessage?.url);
+}
+
+export function extractAudioUrlFromMessage(message: MessagePayload | undefined): string | null {
+  if (!message || typeof message !== "object") return null;
+  const msg = message as {
+    audioMessage?: { url?: string };
+    pttMessage?: { url?: string };
+  };
+  if (msg.audioMessage?.url) return msg.audioMessage.url;
+  if (msg.pttMessage?.url) return msg.pttMessage.url;
   return null;
 }

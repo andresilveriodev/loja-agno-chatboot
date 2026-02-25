@@ -212,6 +212,45 @@ export class WhatsAppService {
     }
   }
 
+  /**
+   * Obtém mídia de uma mensagem em base64 via Evolution API (evita download direto do mmg.whatsapp.net).
+   * Útil para áudio: a Evolution devolve o arquivo já decodificado.
+   * @param messageKey Objeto key da mensagem (id obrigatório; remoteJid/fromMe podem ser úteis em algumas versões).
+   */
+  async getMediaBase64FromMessage(messageKey: { id: string; remoteJid?: string; fromMe?: boolean }): Promise<
+    | { success: true; base64: string }
+    | { success: false; error: string }
+  > {
+    if (!EVOLUTION_API_URL || !messageKey?.id) {
+      return { success: false, error: "Evolution não configurada ou messageKey.id ausente" };
+    }
+    const instanceEncoded = encodeURIComponent(EVOLUTION_INSTANCE || "loja");
+    const url = `${EVOLUTION_API_URL}/chat/getBase64FromMediaMessage/${instanceEncoded}`;
+    try {
+      const res = await fetch(url, {
+        method: "POST",
+        headers: this.headers,
+        body: JSON.stringify({
+          message: { key: messageKey },
+          convertToMp4: false,
+        }),
+      });
+      const body = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        const msg = (body?.message ?? body?.error ?? res.statusText) || String(res.status);
+        return { success: false, error: msg };
+      }
+      const base64 = body?.base64 ?? body?.data?.base64;
+      if (typeof base64 !== "string" || !base64) {
+        return { success: false, error: "Resposta sem base64" };
+      }
+      return { success: true, base64 };
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : String(err);
+      return { success: false, error: msg };
+    }
+  }
+
   /** Verifica se a integração está configurada (URL e instância). */
   isConfigured(): boolean {
     return Boolean(EVOLUTION_API_URL && EVOLUTION_INSTANCE);
