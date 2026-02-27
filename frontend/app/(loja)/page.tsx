@@ -10,19 +10,19 @@ const CatalogSection = dynamic(
 
 function CatalogSectionSkeleton() {
   return (
-    <section className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+    <section className="mb-16">
       <div className="flex flex-col gap-8 lg:flex-row">
-        <div className="h-10 w-48 animate-pulse rounded-lg bg-primary-100" />
+        <div className="h-10 w-48 animate-pulse rounded-lm-md bg-[var(--lm-surface-alt)]" />
         <div className="min-w-0 flex-1">
           <div className="mb-4 flex items-center justify-between">
-            <div className="h-7 w-48 animate-pulse rounded bg-primary-200" />
-            <div className="h-5 w-24 animate-pulse rounded bg-primary-100" />
+            <div className="h-8 w-48 animate-pulse rounded bg-[var(--lm-surface-alt)]" />
+            <div className="h-5 w-24 animate-pulse rounded bg-[var(--lm-surface-alt)]" />
           </div>
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {[1, 2, 3].map((i) => (
               <div
                 key={i}
-                className="h-80 animate-pulse rounded-xl border border-primary-200 bg-primary-50"
+                className="h-80 animate-pulse rounded-lm-md border border-[var(--lm-border)] bg-[var(--lm-surface)]"
               />
             ))}
           </div>

@@ -8,4 +8,7 @@ export interface UpdateScheduleDto {
   description?: string;
   /** pending | completed | cancelled */
   status?: string;
+  address?: string;
+  cep?: string;
+  deliveryItems?: string;
 }

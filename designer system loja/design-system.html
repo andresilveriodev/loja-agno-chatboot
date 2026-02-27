@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Leroy Merlin – Design System da Homepage</title>
+    <base href="./" />
+
+    <!-- Fonte do design system: Inter (legível, neutra, comum em design systems) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- CSS dedicado do design system -->
+    <link rel="stylesheet" href="./design-system.css" />
+  </head>
+  <body>
+    <a href="#main-content" class="ds-skip-link">Pular para o conteúdo</a>
+    <!-- Navegação principal do Design System -->
+    <header>
+      <nav>
+        <ul>
+          <li><a href="#hero">Hero</a></li>
+          <li><a href="#typography">Tipografia</a></li>
+          <li><a href="#colors-surfaces">Cores &amp; Superfícies</a></li>
+          <li><a href="#ui-components">Componentes de UI</a></li>
+          <li><a href="#icons">Ícones</a></li>
+          <li><a href="#product-cards">Cards de produto</a></li>
+          <li><a href="#layout-spacing">Layout &amp; Espaçamento</a></li>
+          <li><a href="#header-patterns">Header</a></li>
+          <li><a href="#footer-patterns">Footer</a></li>
+          <li><a href="#motion-interaction">Movimento &amp; Interação</a></li>
+          <li><a href="#reference">Referência CSS/JS</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- 0) Hero – seção de apresentação do Design System -->
+    <main id="main-content">
+      <section id="hero">
+        <div class="hero-text">
+          <span>Design System Leroy Merlin</span>
+        </div>
+        <p>
+          Este documento vivo reúne a tipografia, cores, componentes, padrões de
+          layout e comportamentos de movimento utilizados na homepage da Leroy
+          Merlin.
+        </p>
+        <p>
+          Use esta página como referência para criar experiências consistentes,
+          acessíveis e alinhadas com a identidade visual atual.
+        </p>
+        <div>
+          <button type="button">Explorar componentes</button>
+          <button type="button">Ver padrões de layout</button>
+        </div>
+      </section>
+
+      <!-- 1) Tipografia -->
+      <section id="typography">
+        <h2>Tipografia</h2>
+        <p>
+          A tipografia define hierarquia, ritmo e legibilidade. Abaixo estão os
+          estilos principais utilizados na experiência.
+        </p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Estilo</th>
+              <th>Pré-visualização</th>
+              <th align="right">Tamanho / Altura de linha</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Heading 1</td>
+              <td>
+                <h1>Heading 1 – Títulos principais</h1>
+              </td>
+              <td align="right">40px / 48px</td>
+            </tr>
+            <tr>
+              <td>Heading 2</td>
+              <td>
+                <h2>Heading 2 – Títulos de seção</h2>
+              </td>
+              <td align="right">32px / 40px</td>
+            </tr>
+            <tr>
+              <td>Heading 3</td>
+              <td>
+                <h3>Heading 3 – Subtítulos e destaques</h3>
+              </td>
+              <td align="right">28px / 36px</td>
+            </tr>
+            <tr>
+              <td>Heading 4</td>
+              <td>
+                <h4>Heading 4 – Agrupadores de conteúdo</h4>
+              </td>
+              <td align="right">24px / 32px</td>
+            </tr>
+            <tr>
+              <td>Bold L</td>
+              <td>
+                <p><strong>Texto Bold L – Destaques em listas e cards</strong></p>
+              </td>
+              <td align="right">20px / 28px</td>
+            </tr>
+            <tr>
+              <td>Bold M</td>
+              <td>
+                <p><strong>Texto Bold M – Etiquetas e títulos curtos</strong></p>
+              </td>
+              <td align="right">18px / 24px</td>
+            </tr>
+            <tr>
+              <td>Bold S</td>
+              <td>
+                <p><strong>Texto Bold S – Rótulos e chips</strong></p>
+              </td>
+              <td align="right">16px / 22px</td>
+            </tr>
+            <tr>
+              <td>Parágrafo</td>
+              <td>
+                <p>
+                  Parágrafo – Corpo de texto para descrições mais longas em
+                  cards, banners e seções informativas.
+                </p>
+              </td>
+              <td align="right">16px / 24px</td>
+            </tr>
+            <tr>
+              <td>Regular M</td>
+              <td>
+                <p>Regular M – Texto auxiliar e rótulos de formulário.</p>
+              </td>
+              <td align="right">14px / 20px</td>
+            </tr>
+            <tr>
+              <td>Regular S</td>
+              <td>
+                <p>Regular S – Observações, avisos e meta-informações.</p>
+              </td>
+              <td align="right">12px / 18px</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- 2) Cores & Superfícies -->
+      <section id="colors-surfaces">
+        <h2>Cores &amp; Superfícies</h2>
+        <p>
+          As cores reforçam a identidade da marca e comunicam estados, hierarquia
+          e diferenciação entre superfícies.
+        </p>
+        <ul>
+          <li>
+            <strong>Plano de fundo da página</strong> – Cor base aplicada ao
+            background principal.
+          </li>
+          <li>
+            <strong>Superfícies de seção</strong> – Áreas que agrupam conteúdos
+            relacionados em blocos.
+          </li>
+          <li>
+            <strong>Cards e blocos de conteúdo</strong> – Superfícies elevadas
+            usadas para destacar produtos, ofertas e categorias.
+          </li>
+          <li>
+            <strong>Bordas, divisórias e overlays</strong> – Elementos que separam
+            conteúdos, estruturam a página e criam foco.
+          </li>
+          <li>
+            <strong>Gradientes</strong> – Utilizados em destaques visuais de
+            campanhas e mensagens principais.
+          </li>
+        </ul>
+      </section>
+
+      <!-- 3) Componentes de UI -->
+      <section id="ui-components">
+        <h2>Componentes de UI</h2>
+        <p>
+          Componentes reutilizáveis garantem consistência na experiência e
+          aceleram a criação de novas interfaces.
+        </p>
+
+        <article>
+          <h3>Botões</h3>
+          <p>Exemplo de estados principais de botão.</p>
+          <div>
+            <button type="button">Padrão</button>
+            <button type="button" disabled>Desabilitado</button>
+          </div>
+        </article>
+
+        <article>
+          <h3>Campos de entrada</h3>
+          <p>Estrutura básica para campos de formulário.</p>
+          <div>
+            <label for="input-default">Entrada padrão</label>
+            <input id="input-default" type="text" placeholder="Digite aqui" />
+          </div>
+        </article>
+
+        <article>
+          <h3>Cards de conteúdo</h3>
+          <p>
+            Cards organizam informações em blocos visuais reutilizáveis, ideais
+            para produtos, ofertas e coleções.
+          </p>
+          <div>
+            <div>
+              <h4>Título do card</h4>
+              <p>
+                Texto descritivo curto para explicar o conteúdo do card e o
+                benefício principal.
+              </p>
+              <button type="button">Ver detalhes</button>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <!-- Ícones (header + produtos) -->
+      <section id="icons">
+        <h2>Ícones</h2>
+        <p>
+          Estilo dos ícones do header (navegação) e dos ícones de categorias/produtos
+          em carrosséis e listas.
+        </p>
+
+        <article>
+          <h3>Ícone do header</h3>
+          <p>
+            SVG inline, <code>text-current</code> (herda cor do texto). Tamanho
+            base 24×24px; em telas grandes (lg) 32×32px. Hover e focus: verde
+            (<code>text-green-600</code>). Transição 150ms.
+          </p>
+          <div class="ds-icon-header-demo">
+            <a href="#icons" class="ds-icon-header-link" aria-label="Exemplo ícone">
+              <span class="ds-icon-wrapper">
+                <svg aria-hidden="true" class="ds-icon-header" viewBox="0 0 33 31" fill="none" focusable="false" role="presentation" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M16.5 0L0 10.33v10.34L16.5 31 33 20.67V10.33L16.5 0z" fill="currentColor"/>
+                </svg>
+              </span>
+            </a>
+            <a href="#icons" class="ds-icon-header-link ds-icon-header-link--hover" aria-label="Exemplo ícone hover">
+              <span class="ds-icon-wrapper">
+                <svg aria-hidden="true" class="ds-icon-header" viewBox="0 0 33 31" fill="none" focusable="false" role="presentation" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M16.5 0L0 10.33v10.34L16.5 31 33 20.67V10.33L16.5 0z" fill="currentColor"/>
+                </svg>
+              </span>
+            </a>
+          </div>
+          <p class="ds-caption">Padrão (esq.) e hover/focus (dir.) — ícone verde.</p>
+        </article>
+
+        <article>
+          <h3>Barra de ícones do header (referência)</h3>
+          <p>
+            Container do header: <code>relative z-50 antialiased shadow-sm bg-white</code>; linha de ícones com
+            <code>flex flex-direction row</code>, <code>gap-[var(--stack-spacing-*)]</code> (ex.: <code>--spacing-8</code> = 32px).
+            <code>max-w-7xl mx-auto px-2</code>, <code>gap-y-5 pb-5 pt-6</code>.
+          </p>
+          <div class="ds-icon-header-bar">
+            <div class="ds-icon-header-bar__row">
+              <a href="#icons" class="ds-icon-header-link" aria-label="Buscar">
+                <span class="ds-icon-wrapper">
+                  <svg aria-hidden="true" class="ds-icon-header" viewBox="0 0 24 24" fill="none" focusable="false" role="presentation" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" fill="currentColor"/>
+                  </svg>
+                </span>
+              </a>
+              <a href="#icons" class="ds-icon-header-link" aria-label="Carrinho">
+                <span class="ds-icon-wrapper">
+                  <svg aria-hidden="true" class="ds-icon-header" viewBox="0 0 24 24" fill="none" focusable="false" role="presentation" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z" fill="currentColor"/>
+                  </svg>
+                </span>
+              </a>
+              <a href="#icons" class="ds-icon-header-link" aria-label="Conta">
+                <span class="ds-icon-wrapper">
+                  <svg aria-hidden="true" class="ds-icon-header" viewBox="0 0 24 24" fill="none" focusable="false" role="presentation" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" fill="currentColor"/>
+                  </svg>
+                </span>
+              </a>
+            </div>
+          </div>
+          <p class="ds-caption">Linha de ícones: flex row, gap 32px (--spacing-8), text-current com hover/focus verde.</p>
+        </article>
+
+        <article>
+          <h3>Ícone de categoria / produto (carrossel)</h3>
+          <p>
+            Container fixo: altura 128px, largura 100% (em card 128px). Fundo
+            <code>bg-blue-900</code>, cantos <code>rounded-md</code>. SVG centralizado
+            56×56px, cor branca.
+          </p>
+          <div class="ds-icon-product-row">
+            <div class="ds-icon-product-card">
+              <div class="ds-icon-product-box">
+                <svg aria-hidden="true" class="ds-icon-product" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <span class="ds-icon-product-label">Categoria A</span>
+            </div>
+            <div class="ds-icon-product-card">
+              <div class="ds-icon-product-box ds-icon-product-box--green">
+                <svg aria-hidden="true" class="ds-icon-product" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/>
+                  <path d="M12 2v2M12 20v2M2 12h2M20 12h2" stroke="currentColor" stroke-width="2"/>
+                </svg>
+              </div>
+              <span class="ds-icon-product-label">Categoria B</span>
+            </div>
+            <div class="ds-icon-product-card">
+              <div class="ds-icon-product-box">
+                <svg aria-hidden="true" class="ds-icon-product" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M4 12h16M4 6h16M4 18h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <span class="ds-icon-product-label">Categoria C</span>
+            </div>
+          </div>
+        </article>
+
+        <article>
+          <h3>Carrossel de ícones de categoria (section[12])</h3>
+          <p>
+            Mesmo padrão de carrossel: <code>overflow-hidden cursor-grab</code>,
+            track <code>flex touch-pan-y select-none</code>. Cada item:
+            <code>a.flex w-32 shrink-0 flex-col [&:not(:last-child)]:mr-4</code>.
+            Dentro: <code>div.mb-2 flex h-32 w-full items-center justify-center rounded-md [&_svg]:h-14 [&_svg]:w-14 [&_svg]:text-white bg-blue-900</code> + rótulo.
+          </p>
+          <div class="ds-icon-category-carousel">
+            <div class="ds-icon-category-carousel__track">
+              <a href="#icons" class="ds-icon-category-carousel__item">
+                <div class="ds-icon-category-carousel__box">
+                  <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+                <span class="ds-icon-category-carousel__label">Categoria 1</span>
+              </a>
+              <a href="#icons" class="ds-icon-category-carousel__item">
+                <div class="ds-icon-category-carousel__box">
+                  <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/>
+                    <path d="M12 2v2M12 20v2M2 12h2M20 12h2" stroke="currentColor" stroke-width="2"/>
+                  </svg>
+                </div>
+                <span class="ds-icon-category-carousel__label">Categoria 2</span>
+              </a>
+              <a href="#icons" class="ds-icon-category-carousel__item">
+                <div class="ds-icon-category-carousel__box">
+                  <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 12h16M4 6h16M4 18h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </div>
+                <span class="ds-icon-category-carousel__label">Categoria 3</span>
+              </a>
+              <a href="#icons" class="ds-icon-category-carousel__item">
+                <div class="ds-icon-category-carousel__box">
+                  <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2M12 11a4 4 0 100-8 4 4 0 000 8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+                <span class="ds-icon-category-carousel__label">Categoria 4</span>
+              </a>
+              <a href="#icons" class="ds-icon-category-carousel__item">
+                <div class="ds-icon-category-carousel__box">
+                  <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 3v18M3 12h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </div>
+                <span class="ds-icon-category-carousel__label">Categoria 5</span>
+              </a>
+            </div>
+          </div>
+          <p class="ds-caption">Carrossel horizontal: ícones 56×56px brancos em caixa 128×128px bg-blue-900 rounded-md.</p>
+        </article>
+      </section>
+
+      <!-- Cards de produto -->
+      <section id="product-cards">
+        <h2>Cards de produto</h2>
+        <p>
+          Card com imagem em aspecto quadrado; imagem com zoom suave no hover
+          (<code>group-hover:scale-105</code>, transição 150ms ease-in).
+        </p>
+        <div class="ds-product-cards">
+          <a href="#product-cards" class="ds-product-card">
+            <div class="ds-product-card__img-wrap">
+              <img src="assets/espelho_led_3_cores_redondo_ba_6319d85d5ce1.jpg" alt="Exemplo produto" class="ds-product-card__img" onerror="this.style.display='none';var p=this.nextElementSibling;if(p)p.classList.add('ds-product-card__img-fallback','ds-product-card__img-fallback--visible');" />
+              <span class="ds-product-card__placeholder ds-product-card__img-fallback">Produto</span>
+            </div>
+            <h4 class="ds-product-card__title">Espelho Led 3 Cores Redondo Banheiro</h4>
+            <p class="ds-product-card__desc">Dual Touch c/ Desembaçador</p>
+          </a>
+          <a href="#product-cards" class="ds-product-card">
+            <div class="ds-product-card__img-wrap">
+              <span class="ds-product-card__placeholder">Produto</span>
+            </div>
+            <h4 class="ds-product-card__title">Card com placeholder</h4>
+            <p class="ds-product-card__desc">Quando não há imagem</p>
+          </a>
+        </div>
+
+        <h3 class="ds-subsection-title">Carrossel de cupons / ofertas</h3>
+        <p>
+          Itens em carrossel: <code>flex w-32 shrink-0 flex-col</code>, imagem
+          <code>mb-2 w-full rounded-md bg-gray-100</code>, container
+          <code>overflow-hidden cursor-grab</code>, track
+          <code>flex touch-pan-y select-none</code>.
+        </p>
+        <div class="ds-coupon-carousel">
+          <div class="ds-coupon-carousel__track">
+            <a href="#product-cards" class="ds-coupon-carousel__item">
+              <img class="ds-coupon-carousel__img" src="assets/pegue_seu_cupom_d8e1_300x300_3e8d55ddc58e.png" alt="Pegue seu Cupom" loading="lazy" decoding="async" />
+              <span class="ds-coupon-carousel__label">Pegue seu Cupom</span>
+            </a>
+            <a href="#product-cards" class="ds-coupon-carousel__item">
+              <img class="ds-coupon-carousel__img" src="assets/oportunidades_exclusivas_com_a_747ea1b8eaf5.png" alt="Oportunidades Exclusivas" loading="lazy" decoding="async" />
+              <span class="ds-coupon-carousel__label">Oportunidades Exclusivas</span>
+            </a>
+            <a href="#product-cards" class="ds-coupon-carousel__item">
+              <span class="ds-coupon-carousel__placeholder">Cupom</span>
+              <span class="ds-coupon-carousel__label">Outra oferta</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4) Layout & Espaçamento -->
+      <section id="layout-spacing">
+        <h2>Layout &amp; Espaçamento</h2>
+        <p>
+          Padrões de layout garantem alinhamento visual, ritmo vertical e
+          consistência entre seções.
+        </p>
+
+        <article>
+          <h3>Layout de Hero</h3>
+          <p>
+            Combina título, descrição e ações principais em um bloco destacado na
+            parte superior da página.
+          </p>
+        </article>
+
+        <article>
+          <h3>Grade de Cards</h3>
+          <p>
+            Estrutura em colunas para apresentar coleções de produtos, ofertas ou
+            categorias relacionadas.
+          </p>
+        </article>
+
+        <article>
+          <h3>Layout Dividido (Split)</h3>
+          <p>
+            Utiliza duas colunas principais, geralmente combinando imagem e
+            conteúdo textual lado a lado.
+          </p>
+        </article>
+      </section>
+
+      <!-- Header (referência: relative z-50 antialiased shadow-sm bg-white) -->
+      <section id="header-patterns">
+        <h2>Header (referência)</h2>
+        <p>
+          Cabeçalho da homepage: <code>header.relative z-50 antialiased shadow-sm bg-white</code>;
+          container interno <code>div.relative mx-auto max-w-7xl px-2 z-50 gap-y-5 pb-5 pt-6</code>.
+        </p>
+        <div class="ds-header-ref-wrap">
+          <header class="ds-header-ref">
+            <div class="ds-header-ref__inner">
+              <div class="ds-header-ref__row">
+                <span class="ds-header-ref__logo">Logo</span>
+                <span class="ds-header-ref__search">Busca</span>
+                <div class="ds-icon-header-bar__row">
+                  <a href="#header-patterns" class="ds-icon-header-link" aria-label="Buscar">
+                    <span class="ds-icon-wrapper">
+                      <svg aria-hidden="true" class="ds-icon-header" viewBox="0 0 24 24" fill="none" focusable="false" role="presentation" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" fill="currentColor"/>
+                      </svg>
+                    </span>
+                  </a>
+                  <a href="#header-patterns" class="ds-icon-header-link" aria-label="Carrinho">
+                    <span class="ds-icon-wrapper">
+                      <svg aria-hidden="true" class="ds-icon-header" viewBox="0 0 24 24" fill="none" focusable="false" role="presentation" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z" fill="currentColor"/>
+                      </svg>
+                    </span>
+                  </a>
+                  <a href="#header-patterns" class="ds-icon-header-link" aria-label="Conta">
+                    <span class="ds-icon-wrapper">
+                      <svg aria-hidden="true" class="ds-icon-header" viewBox="0 0 24 24" fill="none" focusable="false" role="presentation" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" fill="currentColor"/>
+                      </svg>
+                    </span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </header>
+        </div>
+        <p class="ds-caption">Header: bg-white, shadow-sm, max-w-7xl, px-2, pt-6 pb-5, gap-y-5.</p>
+      </section>
+
+      <!-- 5) Movimento & Interação -->
+      <section id="motion-interaction">
+        <h2>Movimento &amp; Interação</h2>
+        <p>
+          Animações e interações são usadas para dar feedback ao usuário, indicar
+          estados e criar uma experiência mais fluida.
+        </p>
+
+        <ul>
+          <li>
+            <strong>Animações de entrada</strong> – Elementos que surgem na tela de
+            forma suave ao carregar ou ao entrar na área visível.
+          </li>
+          <li>
+            <strong>Transições em botões</strong> – Mudança visual em hover, foco
+            e clique para reforçar interações.
+          </li>
+          <li>
+            <strong>Carrosséis e destaques</strong> – Movimento horizontal para
+            navegar entre ofertas e coleções.
+          </li>
+          <li>
+            <strong>Feedback de foco</strong> – Indicação clara de elementos
+            selecionáveis para navegação por teclado.
+          </li>
+        </ul>
+      </section>
+
+      <!-- Footer (padrões da homepage – mesmo DOM da referência) -->
+      <section id="footer-patterns">
+        <h2>Footer</h2>
+        <p>
+          Faixa com borda superior cinza e borda inferior verde; grid de blocos
+          brancos, bloco escuro Departamentos, texto institucional com links verde
+          e bloco Sustentabilidade.
+        </p>
+        <footer class="ds-footer-demo">
+          <div class="ds-footer-demo__inner">
+            <div class="ds-footer-demo__flex">
+              <!-- Grid: cards brancos (Baixe app, Televendas, Central) -->
+              <div class="ds-footer-demo__grid">
+                <div class="ds-footer-demo__block">
+                  <h4>Baixe nosso aplicativo</h4>
+                  <p>Disponível para iOS e Android.</p>
+                </div>
+                <div class="ds-footer-demo__block">
+                  <h4>Compre pelo telefone</h4>
+                  <p>Televendas: 8h às 19h (seg–sex), 8h às 14h (sáb).<br/>4007-1380 Capitais · 0800-602-1380 Demais regiões</p>
+                </div>
+                <div class="ds-footer-demo__block">
+                  <h4>Central de atendimento</h4>
+                  <p>A Central de Atendimento funciona das 08h às 19h de segunda a sábado, exceto feriados.<br/>4020-5376 Capitais (Telefone e WhatsApp)<br/>0800-020-5376 Demais Regiões</p>
+                </div>
+              </div>
+              <!-- Bloco escuro: Departamentos -->
+              <div class="ds-footer-demo__block ds-footer-demo__block--dark">
+                <h4>Departamentos</h4>
+                <p>Banheiros · Cama, Mesa e Banho · Climatização e Ventilação · Cozinhas e Áreas de Serviço · Decoração · Eletros · Ferragens · Ferramentas · Iluminação · Jardim e Varanda · Limpeza da Casa · Madeiras · Materiais</p>
+              </div>
+              <!-- Texto institucional: links green-700 -->
+              <div class="ds-footer-demo__text">
+                <p>Considerada multiespecialista do lar, especializada em Construção, Acabamento, Decoração, Jardinagem e Bricolagem, a Leroy Merlin apresenta aos seus Clientes a maior variedade de produtos. <a href="#footer-patterns">Política de privacidade</a> · <a href="#footer-patterns">Institucional</a> · <a href="#footer-patterns">Ouvidoria</a></p>
+              </div>
+              <!-- Sustentabilidade: flex row, rounded-sm p-6 -->
+              <div class="ds-footer-demo__card ds-footer-demo__card--sm">
+                <div class="ds-footer-demo__sustainability">
+                  <h4>Sustentabilidade</h4>
+                  <p>Construir e Sustentar</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </footer>
+      </section>
+
+      <!-- Referência técnica (verificação profunda do index.html e assets) -->
+      <section id="reference">
+        <h2>Referência CSS e JavaScript</h2>
+        <p>
+          Inventário extraído da homepage de referência: arquivos de estilo,
+          comportamentos e tokens usados no site.
+        </p>
+
+        <article class="ds-reference-block">
+          <h3>Stack e assets</h3>
+          <ul class="ds-reference-list">
+            <li><strong>CSS</strong> – <code>ecb088cccb68bfe9_84a6e76fbe66.css</code> (fontes: Leroy Merlin Sans / __LeroyFont_82ed68); <code>f2feb219dd0dc031_42000b4474ab.css</code> (Tailwind v3.3.5).</li>
+            <li><strong>HTML</strong> – <code>html.scroll-smooth</code>, <code>body.__className_82ed68</code> (fonte aplicada).</li>
+            <li><strong>UI</strong> – Radix UI (focus guard, popper); OneTrust (cookie banner); estilos inline para Lenis/scroll.</li>
+          </ul>
+        </article>
+
+        <article class="ds-reference-block">
+          <h3>Tokens de cor (referência)</h3>
+          <table class="ds-reference-table">
+            <thead>
+              <tr><th>Nome</th><th>Valor</th><th>Uso</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>theme-color / green</td><td><code>#158110</code></td><td>Meta theme-color, botões primários, bordas de destaque.</td></tr>
+              <tr><td>green-dark</td><td><code>#0f640c</code></td><td>Hover primário, gradiente header.</td></tr>
+              <tr><td>blue-900</td><td><code>#1e3a8a</code></td><td>Ícones de categoria, bloco Departamentos no footer.</td></tr>
+              <tr><td>gray-200</td><td><code>#e5e7eb</code></td><td>Borda superior do footer.</td></tr>
+              <tr><td>text / neutral-900</td><td><code>#222020</code> / <code>#171717</code></td><td>Texto principal.</td></tr>
+            </tbody>
+          </table>
+        </article>
+
+        <article class="ds-reference-block">
+          <h3>Layout e breakpoints</h3>
+          <ul class="ds-reference-list">
+            <li><strong>Container</strong> – <code>max-w-7xl</code> = 1280px; padding horizontal 8px (px-2) ou 16px.</li>
+            <li><strong>Grid</strong> – Variáveis CSS no ref: <code>--grid-cols-*</code>, <code>--grid-gap-x</code>, <code>--grid-gap-y</code>, <code>--stack-spacing-*</code>, <code>--f-items-*</code>, <code>--f-justify-*</code>.</li>
+          </ul>
+        </article>
+
+        <article class="ds-reference-block">
+          <h3>Transições e animações</h3>
+          <ul class="ds-reference-list">
+            <li><strong>150ms</strong> – Ícones (hover/focus), SVG <code>transition-colors</code>, imagens (scale no hover).</li>
+            <li><strong>400ms ease-in-out</strong> – OneTrust fade-in (modais/overlay).</li>
+            <li><strong>Keyframes ref</strong> – Goober: scale + rotate + opacity; OneTrust: <code>ot-slide-in-left/right</code>, <code>ot-fade-in</code>; Tailwind: <code>animate-in</code>.</li>
+          </ul>
+        </article>
+
+        <article class="ds-reference-block">
+          <h3>Comportamentos JavaScript (referência)</h3>
+          <ul class="ds-reference-list">
+            <li><strong>Scroll</strong> – <code>scroll-behavior: smooth</code> (html); Lenis ou similar (data-scroll-container, data-lenis-prevent).</li>
+            <li><strong>Focus</strong> – Radix <code>data-radix-focus-guard</code>; foco visível em botões/links (outline 2px).</li>
+            <li><strong>Acessibilidade</strong> – <code>aria-label</code> em ícones e ações; <code>role="region"</code>, <code>role="alertdialog"</code> no cookie banner.</li>
+          </ul>
+        </article>
+      </section>
+    </main>
+    <script src="./design-system.js" defer></script>
+  </body>
+</html>
+

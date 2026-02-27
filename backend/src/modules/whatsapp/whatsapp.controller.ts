@@ -1,7 +1,8 @@
 import { Body, Controller, Post, Get } from "@nestjs/common";
 import { WhatsAppService } from "./whatsapp.service";
 import { ChatService } from "../chat/chat.service";
-import { AiService } from "../ai/ai.service";
+import { BotService } from "../bot/bot.service";
+import { IntentionClassifierService } from "../bot/intention-classifier.service";
 import { ProductsService } from "../products/products.service";
 import { CrmService } from "../crm/crm.service";
 import type { EvolutionWebhookPayload } from "./dto/evolution-webhook.dto";
@@ -42,13 +43,19 @@ function extractCustomerName(text: string): string | null {
 const SESSION_PREFIX = "wa:";
 /** IDs de produto mencionados na resposta (ex: prod_001, prod_005). */
 const PRODUCT_ID_REGEX = /\bprod_\d+\b/gi;
+/** Gatilhos fortes para handoff explícito (pedido de humano / reclamação grave). */
+const HANDOFF_USER_TRIGGER_REGEX =
+  /\b(atendente|humano|pessoa\s+real|falar\s+com\s+algu[eê]m|reclamaç[aã]o|reclamacao|procon|processo|cancelar|cancelamento)\b/i;
+/** Padrão na resposta do bot indicando que vai transferir para atendente. */
+const HANDOFF_BOT_MESSAGE_REGEX = /vou te passar para um atendente/i;
 
 @Controller("api/whatsapp")
 export class WhatsAppController {
   constructor(
     private readonly whatsappService: WhatsAppService,
     private readonly chatService: ChatService,
-    private readonly aiService: AiService,
+    private readonly botService: BotService,
+    private readonly intentionClassifier: IntentionClassifierService,
     private readonly productsService: ProductsService,
     private readonly crmService: CrmService,
     private readonly audioService: AudioService,
@@ -181,7 +188,7 @@ export class WhatsAppController {
         }
       }
 
-      await this.chatService.saveMessage({
+      const userMessage = await this.chatService.saveMessage({
         sessionId,
         sender: "user",
         content: text,
@@ -191,17 +198,11 @@ export class WhatsAppController {
         leadId,
       });
 
-      const aiResult = await this.aiService.chat({
-        message: text,
-        sessionId,
-        userId: sessionId,
-      });
+      const botResult = await this.botService.getReply(text, sessionId, sessionId, leadId);
 
-      const reply =
-        aiResult?.reply?.trim() ||
-        "Obrigado pela sua mensagem! Nosso assistente está temporariamente indisponível. Envie outra mensagem em instantes ou acesse nosso site.";
+      const reply = botResult.reply;
 
-      await this.chatService.saveMessage({
+      const botMessage = await this.chatService.saveMessage({
         sessionId,
         sender: "bot",
         content: reply,
@@ -211,6 +212,10 @@ export class WhatsAppController {
       });
 
       let productIds = [...new Set((reply.match(PRODUCT_ID_REGEX) || []).map((id) => id.toLowerCase()))];
+
+      if (productIds.length > 0) {
+        this.botService.setLastProductIdForSession(sessionId, productIds[0]);
+      }
 
       // Fallback: usuário pediu foto/imagem mas a IA não incluiu id na resposta — buscar último produto no histórico
       const fotoKeywords = /\b(foto|imagem|foto\s*dele|foto\s*dela|quero\s*(a\s*)?foto|mostra\s*(a\s*)?foto|manda\s*(a\s*)?foto)\b/i;
@@ -263,6 +268,37 @@ export class WhatsAppController {
         console.log("[WhatsApp] Resposta enviada com sucesso para", phone);
       } else {
         console.error("[WhatsApp] Falha ao enviar resposta:", sendResult.error);
+      }
+
+      // Fase 4 – Handoff para humano: registrar no CRM quando houver gatilho forte
+      try {
+        const lastBotMessage = botMessage?.content ?? null;
+        const intention = this.intentionClassifier.classify(text, lastBotMessage);
+        const shouldHandoffFromUser = HANDOFF_USER_TRIGGER_REGEX.test(text);
+        const shouldHandoffFromBot = HANDOFF_BOT_MESSAGE_REGEX.test(reply);
+
+        if (shouldHandoffFromUser || shouldHandoffFromBot) {
+          const history = await this.chatService.getHistory(sessionId);
+          const recentMessages = history.slice(-10).map((m) => ({
+            sender: m.sender,
+            content: m.content,
+            createdAt: m.createdAt,
+          }));
+
+          await this.crmService.registerWhatsappHandoff({
+            leadId,
+            phone,
+            name: lead.name,
+            source: "whatsapp",
+            reason: shouldHandoffFromUser ? "pedido_explicito_usuario" : "fluxo_bot",
+            intention: lead.intent ?? intention ?? null,
+            sessionId,
+            recentMessages,
+          });
+          console.log("[WhatsApp] Handoff registrado no CRM para lead", leadId);
+        }
+      } catch (handoffErr) {
+        console.error("[WhatsApp] Erro ao registrar handoff no CRM:", handoffErr);
       }
     } catch (err) {
       console.error("[WhatsApp] Erro ao processar webhook:", err);

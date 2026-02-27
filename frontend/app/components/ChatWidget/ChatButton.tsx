@@ -23,7 +23,7 @@ export function ChatButton() {
       type="button"
       onClick={handleClick}
       onKeyDown={handleKeyDown}
-      className="fixed bottom-6 right-6 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-primary-600 text-white shadow-lg transition hover:scale-110 hover:bg-primary-700 focus:outline-none focus:ring-4 focus:ring-primary-500/50"
+      className="fixed bottom-6 right-6 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-[var(--lm-green)] text-white shadow-lm-strong transition hover:scale-110 hover:bg-[var(--lm-green-dark)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--lm-green)]"
       aria-label="Abrir chat com assistente"
       tabIndex={0}
     >

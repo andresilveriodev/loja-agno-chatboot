@@ -23,6 +23,7 @@ const SCHEDULE_TYPE_LABEL: Record<string, string> = {
   call: "Ligação",
   visit: "Visita",
   callback: "Retorno",
+  delivery: "Entrega",
 };
 
 const SCHEDULE_STATUS_LABEL: Record<string, string> = {
@@ -136,7 +137,6 @@ function LeadDetailContent({
   return (
     <div style={{ padding: "var(--crm-ds-spacing-04)", display: "flex", flexDirection: "column", gap: "var(--crm-ds-spacing-06)" }}>
       <ResumoSection lead={lead} />
-      <TimelineSection items={historyData ?? []} />
       <AgendamentosSection
         leadId={lead.id}
         schedules={schedules}
@@ -144,6 +144,7 @@ function LeadDetailContent({
         onUpdateSchedule={onUpdateSchedule}
         isCreating={isCreatingSchedule}
       />
+      <TimelineSection items={historyData ?? []} />
       <PedidosSection orders={orders} />
       {lead.notes && (
         <section>
@@ -294,19 +295,31 @@ function AgendamentosSection({
     scheduledAt: "",
     title: "",
     description: "",
+    address: "",
+    cep: "",
+    deliveryItems: "",
   });
+
+  const isDelivery = form.type === "delivery";
+  const initialForm = { type: "call" as const, scheduledAt: "", title: "", description: "", address: "", cep: "", deliveryItems: "" };
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!form.scheduledAt || !form.title.trim()) return;
-    await onCreateSchedule({
+    const payload: Parameters<typeof onCreateSchedule>[0] = {
       leadId,
       type: form.type,
       scheduledAt: new Date(form.scheduledAt).toISOString(),
       title: form.title.trim(),
       description: form.description.trim(),
-    });
-    setForm({ type: "call", scheduledAt: "", title: "", description: "" });
+    };
+    if (isDelivery) {
+      if (form.address.trim()) payload.address = form.address.trim();
+      if (form.cep.trim()) payload.cep = form.cep.trim();
+      if (form.deliveryItems.trim()) payload.deliveryItems = form.deliveryItems.trim();
+    }
+    await onCreateSchedule(payload);
+    setForm(initialForm);
     setShowForm(false);
   }
 
@@ -342,6 +355,7 @@ function AgendamentosSection({
               <option value="call">Ligação</option>
               <option value="visit">Visita</option>
               <option value="callback">Retorno</option>
+              <option value="delivery">Entrega</option>
             </select>
             <input
               type="datetime-local"
@@ -361,11 +375,36 @@ function AgendamentosSection({
             <textarea
               value={form.description}
               onChange={(e) => setForm((p) => ({ ...p, description: e.target.value }))}
-              placeholder="Descrição (opcional)"
+              placeholder={isDelivery ? "Descrição do local (ex.: portaria, bloco A)" : "Descrição (opcional)"}
               rows={2}
               className="crm-input"
               style={{ minHeight: 60, padding: "var(--crm-ds-spacing-02) var(--crm-ds-spacing-03)" }}
             />
+            {isDelivery && (
+              <>
+                <input
+                  type="text"
+                  value={form.address}
+                  onChange={(e) => setForm((p) => ({ ...p, address: e.target.value }))}
+                  placeholder="Endereço completo"
+                  className="crm-input"
+                />
+                <input
+                  type="text"
+                  value={form.cep}
+                  onChange={(e) => setForm((p) => ({ ...p, cep: e.target.value }))}
+                  placeholder="CEP"
+                  className="crm-input"
+                />
+                <input
+                  type="text"
+                  value={form.deliveryItems}
+                  onChange={(e) => setForm((p) => ({ ...p, deliveryItems: e.target.value }))}
+                  placeholder="Itens (ex.: 2x Furadeira, 1x Serra)"
+                  className="crm-input"
+                />
+              </>
+            )}
             <button
               type="submit"
               disabled={isCreating}
@@ -387,11 +426,18 @@ function AgendamentosSection({
               className="crm-card"
               style={{ padding: "var(--crm-ds-spacing-03)", display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: "var(--crm-ds-spacing-02)" }}
             >
-              <div>
+              <div style={{ flex: 1, minWidth: 0 }}>
                 <p className="crm-text-name" style={{ margin: 0, fontSize: 14 }}>{s.title}</p>
                 <p className="crm-text-meta" style={{ margin: 0 }}>
                   {SCHEDULE_TYPE_LABEL[s.type] ?? s.type} · {new Date(s.scheduledAt).toLocaleString("pt-BR")} · {SCHEDULE_STATUS_LABEL[s.status] ?? s.status}
                 </p>
+                {s.type === "delivery" && (s.address || s.cep || s.deliveryItems || s.description) && (
+                  <div className="crm-text-meta" style={{ marginTop: "var(--crm-ds-spacing-02)", fontSize: 12 }}>
+                    {s.address && <p style={{ margin: 0 }}>📍 {s.address}{s.cep ? ` — CEP ${s.cep}` : ""}</p>}
+                    {s.description && <p style={{ margin: "var(--crm-ds-spacing-01) 0 0" }}>📝 {s.description}</p>}
+                    {s.deliveryItems && <p style={{ margin: "var(--crm-ds-spacing-01) 0 0" }}>📦 {s.deliveryItems}</p>}
+                  </div>
+                )}
               </div>
               {s.status === "pending" && (
                 <div className="crm-flex-wrap">

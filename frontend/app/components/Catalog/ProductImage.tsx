@@ -1,11 +1,12 @@
 "use client";
 
-import { useState } from "react";
-import Image from "next/image";
+import { useState, useMemo } from "react";
 import type { Product } from "@/lib/types";
+import { getApiUrl } from "@/lib/api/client";
 import { getProductImageUrls } from "@/lib/getProductImage";
 
-const PLACEHOLDER = "https://placehold.co/400x300/e2e8f0/64748b?text=Produto";
+/** Placeholder em JPEG (picsum) para evitar Next/Image rejeitar SVG do placehold.co. */
+const PLACEHOLDER = "https://picsum.photos/400/300?blur=1";
 
 interface ProductImageProps {
   product: Product;
@@ -24,7 +25,12 @@ export function ProductImage({
   sizes,
   priority,
 }: ProductImageProps) {
-  const urls = getProductImageUrls(product);
+  const urls = useMemo(() => {
+    const apiImageUrl = getApiUrl(`api/products/${product.id}/image`);
+    const localUrls = getProductImageUrls(product);
+    return [apiImageUrl, ...localUrls];
+  }, [product.id, product.name]);
+
   const [tryIndex, setTryIndex] = useState(0);
   const [usePlaceholder, setUsePlaceholder] = useState(false);
 
@@ -39,14 +45,15 @@ export function ProductImage({
   };
 
   return (
-    <Image
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
       src={src}
       alt={product.name}
       width={width}
       height={height}
       className={className}
-      sizes={sizes}
-      priority={priority}
+      loading={priority ? "eager" : "lazy"}
+      decoding="async"
       onError={handleError}
     />
   );

@@ -16,6 +16,8 @@ import {
   PAYMENT_METHODS,
   PAYMENT_STATUSES,
   SHIPPING_STATUSES,
+  type LeadSource,
+  type ScheduleType,
 } from "../../entities/enums";
 import type {
   LeadsQueryDto,
@@ -233,6 +235,7 @@ export class CrmService {
     if (dto.name !== undefined) lead.name = dto.name;
     if (dto.company !== undefined) lead.company = dto.company;
     if (dto.email !== undefined) lead.email = dto.email;
+    if (dto.city !== undefined) lead.city = dto.city;
     if (dto.intent !== undefined) lead.intent = dto.intent;
     if (dto.productsOfInterest !== undefined)
       lead.productsOfInterest = dto.productsOfInterest;
@@ -314,7 +317,7 @@ export class CrmService {
       throw new NotFoundException("Lead não encontrado");
     }
     const type = (dto.type || "").trim().toLowerCase();
-    if (!SCHEDULE_TYPES.includes(type as "call" | "visit" | "callback")) {
+    if (!SCHEDULE_TYPES.includes(type as ScheduleType)) {
       throw new BadRequestException(
         `Tipo inválido. Valores: ${SCHEDULE_TYPES.join(", ")}`,
       );
@@ -333,7 +336,77 @@ export class CrmService {
       scheduledAt,
       title,
       description: (dto.description ?? "").trim(),
+      address: dto.address?.trim() || null,
+      cep: dto.cep?.trim() || null,
+      deliveryItems: dto.deliveryItems?.trim() || null,
       status: "pending",
+    });
+  }
+
+  /**
+   * Registra handoff (transferência para atendente) na timeline do lead.
+   * Usado na Fase 4 do bot WhatsApp.
+   */
+  async registerWhatsappHandoff(input: {
+    leadId: string;
+    phone: string;
+    name?: string | null;
+    source?: LeadSource;
+    reason: string;
+    intention?: string | null;
+    sessionId?: string;
+    recentMessages: Array<{ sender: string; content: string; createdAt: Date }>;
+  }): Promise<void> {
+    const lead = await this.leadRepo.findOne({ where: { id: input.leadId } });
+    if (!lead) return;
+
+    const source: LeadSource = input.source ?? "whatsapp";
+    const displayName = (input.name || lead.name || "").trim() || "(sem nome)";
+    const phone = (lead.phone || input.phone || "").trim();
+
+    const headerLines: string[] = [
+      `Origem: ${source}`,
+      `Nome: ${displayName}`,
+      `Telefone: ${phone || "(não informado)"}`,
+    ];
+    if (input.intention) {
+      headerLines.push(`Intenção (lead): ${input.intention}`);
+    }
+    headerLines.push(`Motivo: ${input.reason}`);
+
+    const recent = [...input.recentMessages]
+      .slice(-10)
+      .sort((a, b) => a.createdAt.getTime() - b.createdAt.getTime());
+
+    const historyLines = recent.map((m) => {
+      const ts = m.createdAt.toISOString();
+      const sender =
+        m.sender === "bot"
+          ? "bot"
+          : m.sender === "agent"
+            ? "agente"
+            : "cliente";
+      return `[${ts}] ${sender}: ${m.content}`;
+    });
+
+    const description =
+      headerLines.join("\n") +
+      (historyLines.length
+        ? `\n\nÚltimas mensagens:\n${historyLines.join("\n")}`
+        : "");
+
+    await this.activityRepo.save({
+      leadId: input.leadId,
+      type: "handoff",
+      title: "Handoff para atendente (WhatsApp)",
+      description,
+      metadata: {
+        source,
+        reason: input.reason,
+        intention: input.intention ?? null,
+        sessionId: input.sessionId ?? null,
+        messagesCount: recent.length,
+      },
     });
   }
 
@@ -350,7 +423,7 @@ export class CrmService {
     }
     if (dto.type !== undefined) {
       const type = dto.type.trim().toLowerCase();
-      if (!SCHEDULE_TYPES.includes(type as "call" | "visit" | "callback")) {
+      if (!SCHEDULE_TYPES.includes(type as ScheduleType)) {
         throw new BadRequestException(
           `Tipo inválido. Valores: ${SCHEDULE_TYPES.join(", ")}`,
         );
@@ -382,6 +455,15 @@ export class CrmService {
         );
       }
       schedule.status = status;
+    }
+    if (dto.address !== undefined) {
+      schedule.address = dto.address.trim() || null;
+    }
+    if (dto.cep !== undefined) {
+      schedule.cep = dto.cep.trim() || null;
+    }
+    if (dto.deliveryItems !== undefined) {
+      schedule.deliveryItems = dto.deliveryItems.trim() || null;
     }
     return this.scheduleRepo.save(schedule);
   }

@@ -34,12 +34,12 @@ export type LeadSource = "web" | "whatsapp";
 export type MessageSender = "user" | "bot" | "agent";
 
 /** Tipo de agendamento */
-export type ScheduleType = "call" | "visit" | "callback";
+export type ScheduleType = "call" | "visit" | "callback" | "delivery";
 
 /** Status do agendamento */
 export type ScheduleStatus = "pending" | "completed" | "cancelled";
 
-export const SCHEDULE_TYPES: ScheduleType[] = ["call", "visit", "callback"];
+export const SCHEDULE_TYPES: ScheduleType[] = ["call", "visit", "callback", "delivery"];
 export const SCHEDULE_STATUSES: ScheduleStatus[] = [
   "pending",
   "completed",
@@ -47,7 +47,12 @@ export const SCHEDULE_STATUSES: ScheduleStatus[] = [
 ];
 
 /** Tipo de atividade (timeline/auditoria) */
-export type ActivityType = "stage_change" | "note" | "message" | "call";
+export type ActivityType =
+  | "stage_change"
+  | "note"
+  | "message"
+  | "call"
+  | "handoff";
 
 /** Método de pagamento */
 export type PaymentMethod = "pix" | "boleto" | "card" | "transfer";

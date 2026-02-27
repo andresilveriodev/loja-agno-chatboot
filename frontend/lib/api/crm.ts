@@ -26,6 +26,9 @@ export interface Schedule {
   description: string;
   status: string;
   createdAt: string;
+  address?: string | null;
+  cep?: string | null;
+  deliveryItems?: string | null;
 }
 
 export interface LeadDetail extends Lead {
@@ -169,6 +172,9 @@ export async function createSchedule(body: {
   scheduledAt: string;
   title: string;
   description?: string;
+  address?: string;
+  cep?: string;
+  deliveryItems?: string;
 }): Promise<Schedule> {
   const res = await fetch(getApiUrl("api/crm/schedule"), {
     method: "POST",
@@ -182,7 +188,7 @@ export async function createSchedule(body: {
 
 export async function updateSchedule(
   id: string,
-  body: { type?: string; scheduledAt?: string; title?: string; description?: string; status?: string }
+  body: { type?: string; scheduledAt?: string; title?: string; description?: string; status?: string; address?: string; cep?: string; deliveryItems?: string }
 ): Promise<Schedule> {
   const res = await fetch(getApiUrl(`api/crm/schedule/${id}`), {
     method: "PUT",

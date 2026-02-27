@@ -38,36 +38,36 @@ export function ProductCard({ product, onSelect }: ProductCardProps) {
 
   return (
     <article
-      className="group flex flex-col overflow-hidden rounded-xl border border-primary-200 bg-white shadow-sm transition hover:shadow-md"
+      className="group flex flex-col overflow-hidden rounded-lm-md border border-black/6 bg-[var(--lm-surface)] shadow-lm-soft transition-[box-shadow] duration-150 ease-out hover:shadow-lm-strong"
       aria-label={product.name}
     >
-      <div className="relative h-48 w-64 overflow-hidden bg-primary-50">
+      <div className="relative w-full aspect-square overflow-hidden bg-[var(--lm-surface-alt)]">
         <ProductImage
           product={product}
           width={256}
-          height={192}
-          className="object-cover transition group-hover:scale-105"
-          sizes="256px"
+          height={256}
+          className="object-cover transition-transform duration-150 ease-out group-hover:scale-105"
+          sizes="(min-width: 1024px) 208px, 256px"
         />
-        <span className="absolute left-2 top-2 rounded bg-primary-600 px-2 py-0.5 text-xs font-medium text-white">
+        <span className="absolute left-2 top-2 rounded-full bg-[var(--lm-green)] px-2.5 py-0.5 text-xs font-semibold text-white shadow-sm">
           {product.category.split(" ")[0]}
         </span>
       </div>
-      <div className="flex flex-1 flex-col p-4">
-        <h3 className="line-clamp-2 font-semibold text-primary-900">
+      <div className="flex flex-1 flex-col p-2">
+        <h3 className="mt-2 line-clamp-2 text-[13px] font-semibold leading-snug text-[var(--lm-text)]">
           {product.name}
         </h3>
-        <p className="mt-1 line-clamp-2 text-sm text-primary-600">
+        <p className="mt-0.5 line-clamp-2 text-xs text-[var(--lm-text-muted)]">
           {product.description}
         </p>
         <div className="mt-auto pt-4">
-          <p className="text-xl font-bold text-primary-700">
+          <p className="text-lg font-bold tabular-nums text-[var(--lm-text)]">
             {formatPrice(product.price)}
           </p>
           <button
             type="button"
             onClick={handleClick}
-            className="mt-3 flex w-full items-center justify-center gap-2 rounded-lg bg-primary-600 px-4 py-2.5 text-sm font-medium text-white transition hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
+            className="mt-3 flex w-full items-center justify-center gap-2 rounded-full bg-[var(--lm-green)] px-5 py-2.5 text-sm font-medium text-white shadow-[0_10px_30px_rgba(21,129,16,0.35)] transition-[background-color,transform,box-shadow] duration-[220ms] ease-out hover:bg-[var(--lm-green-dark)] hover:-translate-y-px hover:shadow-[0_14px_36px_rgba(21,129,16,0.45)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--lm-green)]"
             aria-label={`Saber mais sobre ${product.name}`}
           >
             <InfoIcon className="h-4 w-4" />

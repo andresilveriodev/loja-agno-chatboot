@@ -23,7 +23,7 @@ export function MessageInput() {
   };
 
   return (
-    <div className="border-t border-primary-200 bg-white p-4">
+    <div className="border-t border-black/5 bg-white p-4">
       <div className="flex gap-2">
         <input
           type="text"
@@ -38,7 +38,7 @@ export function MessageInput() {
           type="button"
           onClick={handleSend}
           disabled={!input.trim()}
-          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary-600 text-white transition hover:bg-primary-700 disabled:opacity-50 disabled:hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
+          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary-600 text-white shadow-[0_8px_24px_rgba(22,163,74,0.4)] transition hover:bg-primary-700 hover:shadow-[0_12px_32px_rgba(21,128,61,0.5)] disabled:opacity-50 disabled:shadow-none disabled:hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
           aria-label="Enviar mensagem"
         >
           <Send className="h-5 w-5" />

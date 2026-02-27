@@ -7,6 +7,7 @@ export interface UpdateLeadDto {
   name?: string;
   company?: string | null;
   email?: string | null;
+  city?: string | null;
   intent?: string | null;
   productsOfInterest?: string[];
   estimatedValue?: number;

@@ -1,31 +1,39 @@
-import Link from "next/link";
-
 export function HeroSection() {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-r from-primary-700 to-primary-800 text-white">
-      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PHBhdGggZD0iTTM2IDM0djItSDI0di0yaDEyek0zNiAyNHYySDI0di0yaDEyeiIvPjwvZz48L2c+PC9zdmc+')] opacity-40" aria-hidden />
-      <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
-        <div className="text-center">
-          <h1 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
-            Equipamentos industriais e profissionais
-          </h1>
-          <p className="mx-auto mt-4 max-w-2xl text-lg text-primary-100">
-            Ferramentas, energia, climatização, cozinha industrial, EPIs e mais. Tudo para o seu negócio.
-          </p>
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-            <a
-              href="#catalogo"
-              className="inline-flex items-center justify-center rounded-lg bg-accent px-6 py-3 text-base font-semibold text-white shadow-lg transition hover:bg-accent-dark focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-primary-800"
-            >
-              Explorar catálogo
-            </a>
-            <a
-              href="#catalogo"
-              className="inline-flex items-center justify-center rounded-lg border-2 border-white/80 bg-white/10 px-6 py-3 text-base font-semibold text-white backdrop-blur transition hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-primary-800"
-            >
-              Ver ofertas
-            </a>
-          </div>
+    <section
+      id="hero"
+      className="relative overflow-hidden rounded-lm-lg bg-[radial-gradient(circle_at_top_left,#fff_0,#f1fff0_40%,#e8ffe3_80%)] p-6 sm:p-8 shadow-lm-strong mb-16"
+      style={{ paddingTop: '33px', marginTop: '86px' }}
+      aria-labelledby="hero-title"
+    >
+      <div className="relative z-0 max-w-2xl">
+        <span className="inline-flex items-center gap-2 rounded-full border border-[var(--lm-green)]/25 bg-white/90 px-3.5 py-1.5 text-[13px] font-medium uppercase tracking-wider text-[var(--lm-green-dark)]">
+          Loja multidepartamental
+        </span>
+        <h1 id="hero-title" className="mt-4 text-3xl font-bold leading-tight tracking-tight text-[var(--lm-text)] sm:text-4xl md:text-5xl">
+          Equipamentos industriais e profissionais
+        </h1>
+        <p className="mt-4 max-w-[640px] text-[15px] leading-relaxed text-[var(--lm-text-muted)]">
+          Ferramentas, energia, climatização, cozinha industrial, EPIs e mais. Tudo
+          para o seu negócio em um só lugar.
+        </p>
+        <p className="mt-2 text-[15px] leading-relaxed text-[var(--lm-text-muted)]">
+          Interface inspirada no design system da Leroy Merlin: tipografia clara,
+          superfícies elevadas e ações principais bem destacadas.
+        </p>
+        <div className="mt-5 flex flex-wrap gap-3">
+          <a
+            href="#catalogo"
+            className="inline-flex items-center justify-center gap-2 rounded-full bg-[var(--lm-green)] px-5 py-2.5 text-sm font-medium text-white shadow-[0_10px_30px_rgba(21,129,16,0.35)] transition-[background-color,transform,box-shadow] duration-[220ms] ease-out hover:bg-[var(--lm-green-dark)] hover:-translate-y-px hover:shadow-[0_14px_36px_rgba(21,129,16,0.45)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--lm-green)]"
+          >
+            Explorar catálogo
+          </a>
+          <a
+            href="#catalogo"
+            className="inline-flex items-center justify-center gap-2 rounded-full border border-black/8 bg-white/95 px-5 py-2.5 text-sm font-medium text-[var(--lm-green-dark)] transition-[background-color,border-color,transform] duration-[220ms] ease-out hover:bg-white hover:border-black/14 hover:-translate-y-px focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--lm-green)]"
+          >
+            Ver ofertas
+          </a>
         </div>
       </div>
     </section>

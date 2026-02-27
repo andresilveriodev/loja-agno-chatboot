@@ -33,20 +33,18 @@ export function CatalogSection() {
 
   return (
     <>
-      <section className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+      <section className="mb-16 last:mb-0" aria-labelledby="catalogo-title">
         <div className="flex flex-col gap-8 lg:flex-row">
           <CategoryFilter />
           <div className="min-w-0 flex-1">
-            <div className="mb-4 flex items-center justify-between">
-              <h2 className="text-xl font-semibold text-primary-900">
-                Catálogo de produtos
-              </h2>
-              <p className="text-sm text-primary-600">
-                {filteredProducts.length} produto{filteredProducts.length !== 1 ? "s" : ""}
-              </p>
-            </div>
+            <h2 id="catalogo-title" className="text-[32px] leading-tight m-0 mb-2 text-[var(--lm-text)]">
+              Catálogo de produtos
+            </h2>
+            <p className="m-0 mb-6 text-[var(--lm-text-muted)]">
+              {filteredProducts.length} produto{filteredProducts.length !== 1 ? "s" : ""}
+            </p>
             {error && (
-              <div className="rounded-xl border border-red-200 bg-red-50 p-4 text-red-800">
+              <div className="rounded-lm-md border border-red-200 bg-red-50 p-4 text-red-800 shadow-lm-soft">
                 <p className="font-medium">Erro ao carregar produtos</p>
                 <p className="mt-1 text-sm">
                   O backend não está respondendo (conexão recusada). Inicie-o em outro terminal:

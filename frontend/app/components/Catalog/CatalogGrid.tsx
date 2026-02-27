@@ -11,9 +11,9 @@ interface CatalogGridProps {
 export function CatalogGrid({ products, onProductSelect }: CatalogGridProps) {
   if (products.length === 0) {
     return (
-      <div className="flex flex-col items-center justify-center rounded-xl border-2 border-dashed border-primary-200 bg-primary-50/50 py-16 text-center">
-        <p className="text-lg font-medium text-primary-700">Nenhum produto encontrado</p>
-        <p className="mt-1 text-sm text-primary-600">
+      <div className="flex flex-col items-center justify-center rounded-lm-md border-2 border-dashed border-[var(--lm-border)] bg-[var(--lm-surface-alt)] py-16 text-center">
+        <p className="text-lg font-medium text-[var(--lm-text)]">Nenhum produto encontrado</p>
+        <p className="mt-1 text-sm text-[var(--lm-text-muted)]">
           Tente alterar os filtros de categoria.
         </p>
       </div>

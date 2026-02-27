@@ -2,40 +2,35 @@ import Link from "next/link";
 
 export function Footer() {
   return (
-    <footer className="mt-auto border-t border-primary-200 bg-primary-900 text-primary-100">
-      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-          <div>
-            <h3 className="text-lg font-semibold text-white">Loja Multidepartamental</h3>
-            <p className="mt-2 text-sm text-primary-200">
+    <footer
+      className="mt-24 w-full border-t-2 border-[var(--lm-gray-200)] border-b-2 border-[var(--lm-green)] py-6 bg-[var(--lm-bg)]"
+      role="contentinfo"
+    >
+      <div className="mx-auto max-w-lm-container px-4 sm:px-6">
+        <div className="flex flex-col gap-6 sm:grid sm:grid-cols-2 lg:grid-cols-3 sm:gap-6 lg:gap-8">
+          <div className="rounded-lm-md bg-[var(--lm-surface)] p-6 shadow-lm-soft border border-black/5">
+            <h4 className="m-0 text-base font-semibold text-[var(--lm-text)]">Loja Multidepartamental</h4>
+            <p className="mt-2 text-sm text-[var(--lm-text-muted)] leading-normal">
               Equipamentos industriais e profissionais para o seu negócio. Qualidade e preço.
             </p>
           </div>
-          <div>
-            <h4 className="text-sm font-semibold uppercase tracking-wider text-white">Institucional</h4>
-            <ul className="mt-4 space-y-2">
-              <li><Link href="#" className="text-sm text-primary-200 hover:text-white">Sobre nós</Link></li>
-              <li><Link href="#" className="text-sm text-primary-200 hover:text-white">Contato</Link></li>
-              <li><Link href="#" className="text-sm text-primary-200 hover:text-white">Política de privacidade</Link></li>
+          <div className="rounded-lm-md bg-[var(--lm-surface)] p-6 shadow-lm-soft border border-black/5">
+            <h4 className="m-0 text-base font-semibold text-[var(--lm-text)]">Institucional</h4>
+            <ul className="mt-3 space-y-2 list-none pl-0">
+              <li><Link href="#" className="text-sm text-[var(--lm-text-muted)] hover:text-[var(--lm-green-dark)] transition-colors">Sobre nós</Link></li>
+              <li><Link href="#" className="text-sm text-[var(--lm-text-muted)] hover:text-[var(--lm-green-dark)] transition-colors">Contato</Link></li>
+              <li><Link href="#" className="text-sm text-[var(--lm-text-muted)] hover:text-[var(--lm-green-dark)] transition-colors">Política de privacidade</Link></li>
             </ul>
           </div>
-          <div>
-            <h4 className="text-sm font-semibold uppercase tracking-wider text-white">Ajuda</h4>
-            <ul className="mt-4 space-y-2">
-              <li><Link href="#" className="text-sm text-primary-200 hover:text-white">FAQ</Link></li>
-              <li><Link href="#" className="text-sm text-primary-200 hover:text-white">Formas de pagamento</Link></li>
-              <li><Link href="#" className="text-sm text-primary-200 hover:text-white">Entrega</Link></li>
-            </ul>
-          </div>
-          <div>
-            <h4 className="text-sm font-semibold uppercase tracking-wider text-white">Atendimento</h4>
-            <p className="mt-4 text-sm text-primary-200">
+          <div className="rounded-lm-md bg-[var(--lm-surface)] p-6 shadow-lm-soft border border-black/5">
+            <h4 className="m-0 text-base font-semibold text-[var(--lm-text)]">Atendimento</h4>
+            <p className="mt-2 text-sm text-[var(--lm-text-muted)] leading-normal">
               Dúvidas? Fale com nosso assistente pelo chat no canto da tela.
             </p>
           </div>
         </div>
-        <div className="mt-8 border-t border-primary-800 pt-8 text-center text-sm text-primary-300">
-          © {new Date().getFullYear()} Loja Multidepartamental. Catálogo de produtos. Não é e-commerce.
+        <div className="mt-6 pt-6 text-center text-sm text-[var(--lm-text-muted)]">
+          © {new Date().getFullYear()} Loja Multidepartamental. Catálogo de produtos.
         </div>
       </div>
     </footer>

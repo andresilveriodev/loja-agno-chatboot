@@ -5,6 +5,29 @@
 :root {
   --foreground: #052e16;
   --background: #ffffff;
+  /* Design System Loja (Leroy Merlin – tokens) */
+  --lm-green: #158110;
+  --lm-green-dark: #0f640c;
+  --lm-green-600: #158110;
+  --lm-green-700: #15803d;
+  --lm-bg: #f5f5f5;
+  --lm-surface: #ffffff;
+  --lm-surface-alt: #f0f0f0;
+  --lm-border: #dddddd;
+  --lm-text: #222222;
+  --lm-text-muted: #666666;
+  --lm-gray-100: #f3f4f6;
+  --lm-gray-200: #e5e7eb;
+  --lm-blue-900: #1e3a8a;
+  --lm-radius-md: 8px;
+  --lm-radius-lg: 16px;
+  --lm-shadow-soft: 0 8px 24px rgba(0, 0, 0, 0.06);
+  --lm-shadow-strong: 0 16px 40px rgba(0, 0, 0, 0.14);
+  --lm-transition-fast: 150ms ease-out;
+  --lm-transition-med: 220ms ease-out;
+  --lm-container-max: 1280px;
+  --lm-main-max: 1120px;
+  --lm-spacing-8: 32px;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -14,9 +37,44 @@
   }
 }
 
+/* Tipografia do design system: Inter + fallbacks */
+html {
+  font-family: var(--font-inter), "Segoe UI", system-ui, -apple-system, sans-serif;
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
 body {
   color: var(--foreground);
   background: var(--background);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Skip link (acessibilidade – só visível ao foco) */
+.lm-skip-link {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  padding: 12px 16px;
+  background: var(--lm-green);
+  color: #fff;
+  font-size: 14px;
+  text-decoration: none;
+  transform: translateY(-100%);
+  transition: transform var(--lm-transition-fast);
+}
+
+.lm-skip-link:focus {
+  transform: translateY(0);
+  outline: 2px solid #fff;
+  outline-offset: 2px;
 }
 
 @layer utilities {

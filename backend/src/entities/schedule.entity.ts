@@ -35,6 +35,18 @@ export class Schedule {
   @Column("text", { default: "" })
   description: string;
 
+  /** Endereço de entrega (tipo delivery) */
+  @Column({ type: "text", nullable: true })
+  address: string | null;
+
+  /** CEP (tipo delivery) */
+  @Column({ type: "varchar", length: 20, nullable: true })
+  cep: string | null;
+
+  /** Itens a entregar, ex: "2x Produto A, 1x Produto B" (tipo delivery) */
+  @Column({ type: "text", nullable: true })
+  deliveryItems: string | null;
+
   @Column({ length: 16, default: "pending" })
   status: string;
 

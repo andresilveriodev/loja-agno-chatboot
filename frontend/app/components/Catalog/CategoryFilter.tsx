@@ -10,36 +10,36 @@ export function CategoryFilter() {
 
   return (
     <aside className="w-full shrink-0 lg:w-64" aria-label="Filtros por categoria">
-      <div className="sticky top-24 rounded-xl border border-primary-200 bg-white p-4 shadow-sm">
+      <div className="sticky top-28 rounded-lm-md border border-black/4 bg-[var(--lm-surface)] p-4 shadow-lm-soft">
         <div className="flex items-center justify-between">
-          <h3 className="font-semibold text-primary-900">Categorias</h3>
+          <h3 className="font-semibold text-[var(--lm-text)]">Categorias</h3>
           {hasFilters && (
             <button
               type="button"
               onClick={clearFilters}
-              className="text-sm font-medium text-primary-600 hover:text-primary-800"
+              className="text-sm font-medium text-[var(--lm-green-700)] hover:text-[var(--lm-green-dark)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--lm-green)]"
             >
               Limpar
             </button>
           )}
         </div>
-        <ul className="mt-4 space-y-1">
+        <ul className="mt-4 space-y-1 list-none pl-0">
           {CATEGORIES.map((category) => {
             const isSelected = selectedCategories.includes(category);
             return (
               <li key={category}>
-                <label className="flex cursor-pointer items-center gap-2 rounded-lg py-2 px-2 transition hover:bg-primary-50">
+                <label className="flex cursor-pointer items-center gap-2 rounded-lg py-2 px-2 transition-colors hover:bg-[var(--lm-surface-alt)]">
                   <input
                     type="checkbox"
                     checked={isSelected}
                     onChange={() => toggleCategory(category)}
-                    className="h-4 w-4 rounded border-primary-300 text-primary-600 focus:ring-primary-500"
+                    className="h-4 w-4 rounded border-[var(--lm-border)] text-[var(--lm-green)] focus:ring-[var(--lm-green)] focus:ring-offset-0"
                     aria-label={`Filtrar por ${category}`}
                   />
                   <span
                     className={cn(
                       "text-sm",
-                      isSelected ? "font-medium text-primary-800" : "text-primary-700"
+                      isSelected ? "font-medium text-[var(--lm-text)]" : "text-[var(--lm-text-muted)]"
                     )}
                   >
                     {category}
@@ -50,7 +50,7 @@ export function CategoryFilter() {
           })}
         </ul>
         {hasFilters && (
-          <p className="mt-3 text-xs text-primary-500">
+          <p className="mt-3 text-xs text-[var(--lm-text-muted)]">
             {selectedCategories.length} categorias selecionadas
           </p>
         )}

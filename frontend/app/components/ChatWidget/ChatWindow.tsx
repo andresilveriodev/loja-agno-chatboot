@@ -21,16 +21,16 @@ export function ChatWindow() {
 
   return (
     <div
-      className="fixed bottom-24 right-6 z-40 flex h-[28rem] w-[22rem] flex-col overflow-hidden rounded-xl border border-primary-200 bg-white shadow-2xl sm:h-[32rem] sm:w-[24rem]"
+      className="fixed bottom-24 right-6 z-40 flex h-[28rem] w-[22rem] flex-col overflow-hidden rounded-lm-lg border border-black/5 bg-[var(--lm-surface)] shadow-lm-strong sm:h-[32rem] sm:w-[24rem]"
       role="dialog"
       aria-label="Janela do chat"
     >
-      <div className="flex items-center justify-between border-b border-primary-200 bg-primary-600 px-4 py-3 text-white">
+      <div className="flex items-center justify-between border-b border-black/5 bg-[linear-gradient(90deg,var(--lm-green),var(--lm-green-dark))] px-4 py-3 text-white">
         <h3 className="font-semibold">Chat de Suporte</h3>
         <button
           type="button"
           onClick={handleClose}
-          className="rounded p-1 transition hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-white"
+          className="rounded-full p-1 transition hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-white"
           aria-label="Fechar chat"
         >
           <X className="h-5 w-5" />

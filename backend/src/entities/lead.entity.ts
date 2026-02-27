@@ -30,6 +30,10 @@ export class Lead {
   @Column("varchar", { length: 255, nullable: true })
   email: string | null;
 
+  /** Cidade ou bairro (Fase 5 – coleta progressiva). */
+  @Column("varchar", { length: 120, nullable: true })
+  city: string | null;
+
   @Column("varchar", { length: 255, nullable: true })
   intent: string | null;
 

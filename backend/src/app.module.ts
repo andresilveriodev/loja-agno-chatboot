@@ -4,6 +4,8 @@ import { AppController } from "./app.controller";
 import { ProductsModule } from "./modules/products/products.module";
 import { ChatModule } from "./modules/chat/chat.module";
 import { AiModule } from "./modules/ai/ai.module";
+import { KnowledgeBaseModule } from "./modules/knowledge-base/knowledge-base.module";
+import { BotModule } from "./modules/bot/bot.module";
 import { WhatsAppModule } from "./modules/whatsapp/whatsapp.module";
 import { CrmModule } from "./modules/crm/crm.module";
 import { Product } from "./entities/product.entity";
@@ -38,6 +40,8 @@ const databasePath =
     }),
     ProductsModule,
     AiModule,
+    KnowledgeBaseModule,
+    BotModule,
     ChatModule,
     WhatsAppModule,
     CrmModule,
