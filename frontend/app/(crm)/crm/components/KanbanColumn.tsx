@@ -29,8 +29,7 @@ export function KanbanColumn({
   onCardDrop,
   onOpenLead,
 }: KanbanColumnProps) {
-  const items = column.type === "lead" ? leads : orders;
-  const count = items.length;
+  const count = column.type === "lead" ? leads.length : orders.length;
 
   function handleDragOver(e: React.DragEvent) {
     e.preventDefault();
@@ -70,7 +69,7 @@ export function KanbanColumn({
       </div>
       <div className="flex flex-col gap-2 overflow-y-auto max-h-[calc(100vh-220px)]">
         {column.type === "lead" &&
-          items.map((lead) => (
+          leads.map((lead) => (
             <DraggableLeadCard
               key={lead.id}
               lead={lead}
@@ -80,7 +79,7 @@ export function KanbanColumn({
             />
           ))}
         {column.type === "order" &&
-          items.map((order) => (
+          orders.map((order) => (
             <DraggableOrderCard
               key={order.id}
               order={order}
@@ -88,7 +87,7 @@ export function KanbanColumn({
               isUpdating={updatingId === order.id}
             />
           ))}
-        {items.length === 0 && (
+        {count === 0 && (
           <p className="crm-text-meta" style={{ padding: "16px 0", textAlign: "center" }}>
             Nenhum {column.type === "lead" ? "lead" : "pedido"} aqui
           </p>
