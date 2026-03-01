@@ -35,7 +35,9 @@ const databasePath =
         OrderItem,
         OrderCounter,
       ],
-      synchronize: process.env.NODE_ENV !== "production",
+      synchronize:
+        process.env.NODE_ENV !== "production" ||
+        process.env.SYNC_DB === "true",
       logging: process.env.NODE_ENV === "development",
     }),
     ProductsModule,
