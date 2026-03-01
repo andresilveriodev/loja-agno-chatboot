@@ -2,13 +2,18 @@
 
 Este projeto é um **monorepo**. No Vercel você faz deploy **apenas do frontend** (Next.js). O backend (NestJS) e o ai-service (Python) devem estar em outro provedor (Railway, Render, Fly.io, etc.).
 
+**Índice de deploy:** [docs/DEPLOY.md](docs/DEPLOY.md).
+
+---
+
 ## Passo a passo
 
-### 1. Conectar o repositório
+### 1. Conectar o repositório e Root Directory
 
 1. Acesse [vercel.com](https://vercel.com) e faça login.
 2. **Add New** → **Project** e importe o repositório do GitHub/GitLab/Bitbucket.
-3. **Importante:** em **Root Directory**, clique em **Edit** e defina: `frontend`.
+3. **Root Directory (obrigatório):** em **Root Directory**, clique em **Edit** e defina: **`frontend`**.
+   - Se deixar em branco ou na raiz, o build falha com *"No Next.js version detected"*, pois o Next.js está na pasta `frontend/`.
 4. Confirme que o **Framework Preset** está como **Next.js**.
 
 ### 2. Variáveis de ambiente

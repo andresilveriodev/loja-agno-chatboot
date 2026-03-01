@@ -2,6 +2,8 @@
 
 Documentação para subir o **backend (NestJS)**, o **AI Service (Agno)** e a **Evolution API** na plataforma [Render](https://render.com), com o frontend já publicado na Vercel (ex.: `https://ja-agno-chatboot-v7yq.vercel.app`).
 
+**Índice de deploy:** [DEPLOY.md](DEPLOY.md) | **Erros e soluções que funcionaram:** [DEPLOY_RENDER_PROCESSO_E_ERROS.md](DEPLOY_RENDER_PROCESSO_E_ERROS.md).
+
 **Como usar:** siga a [ordem de execução](#2-pré-requisitos-e-ordem-de-execução) (Passos 1 → 7). Anote cada URL gerada e preencha as variáveis indicadas antes de seguir para o próximo passo.
 
 ---

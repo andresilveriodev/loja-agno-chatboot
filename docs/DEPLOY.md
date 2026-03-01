@@ -1,55 +1,59 @@
 # Deploy – Loja Multidepartamental
 
-O frontend é um **Next.js** dentro da pasta `frontend/` (monorepo). Para Vercel e Netlify funcionarem, siga os passos abaixo.
+Ponto de entrada para deploy do projeto (monorepo: frontend Next.js + backend NestJS + AI Service + Evolution API).
 
 ---
 
-## 1. Backend em produção
+## Ordem recomendada
 
-Antes do frontend, o backend precisa estar no ar (ex.: Render, Railway) e você precisa da URL base, por exemplo:
-
-- `https://seu-backend.onrender.com`
-- `https://seu-backend.railway.app`
-
-Guarde essa URL para as variáveis de ambiente do frontend.
+1. **Backend na Render** (ou outro host) → ver [Deploy na Render](#documentos-detalhados).
+2. **Frontend na Vercel** → configurar Root Directory e variáveis; ver [Deploy no Vercel](#documentos-detalhados).
 
 ---
 
-## 2. Vercel
+## Vercel – configuração rápida
 
-1. Conecte o repositório ao projeto na Vercel.
-2. **Root Directory (obrigatório):**
-   - Em **Project Settings → General**, em **Root Directory**, clique em **Edit**.
-   - Defina como **`frontend`** (e salve).
-   - Se deixar a raiz do repo, o build falha porque o Next.js está em `frontend/`.
-3. **Variáveis de ambiente** (Project Settings → Environment Variables):
-   - `NEXT_PUBLIC_API_URL` = URL do backend (ex.: `https://seu-backend.onrender.com`)
-   - `NEXT_PUBLIC_WS_URL` = mesma URL do backend (ex.: `https://seu-backend.onrender.com`)
-4. **Build:** deixe o comando padrão (`npm run build` ou `next build`). Não é preciso definir **Output Directory**.
-5. Faça um novo deploy (Redeploy) após salvar Root Directory e variáveis.
+| Onde | O que definir |
+|------|----------------|
+| **Root Directory** | **`frontend`** (obrigatório; sem isso o build falha com "No Next.js version detected") |
+| **Environment Variables** | `NEXT_PUBLIC_API_URL` = URL do backend (ex.: `https://loja-agno-chatboot.onrender.com`) |
+| | `NEXT_PUBLIC_WS_URL` = mesma URL do backend |
+| **Environments** | Marque **Production** e **Preview** (para deploys de branch funcionarem) |
+| **Após alterar** | **Redeploy** (variáveis `NEXT_PUBLIC_*` são embutidas no build) |
 
----
-
-## 3. Netlify
-
-1. Conecte o repositório ao site no Netlify.
-2. O arquivo **`netlify.toml`** na raiz já está configurado:
-   - **Base directory:** `frontend`
-   - **Build command:** `npm run build`
-   - **Plugin:** `@netlify/plugin-nextjs`
-3. **Variáveis de ambiente** (Site settings → Environment variables):
-   - `NEXT_PUBLIC_API_URL` = URL do backend
-   - `NEXT_PUBLIC_WS_URL` = mesma URL do backend
-4. **Node:** o `netlify.toml` já define `NODE_VERSION = "20"`.
-5. Faça um novo deploy (Trigger deploy) após definir as variáveis.
+- Não use barra no final da URL. Não use `localhost` em produção.
+- Guia completo: [DEPLOY_VERCEL.md](../DEPLOY_VERCEL.md) (na raiz do projeto).
 
 ---
 
-## Resumo
+## Backend em produção
 
-| Plataforma | O que conferir |
-|------------|----------------|
-| **Vercel** | Root Directory = **`frontend`** + `NEXT_PUBLIC_API_URL` e `NEXT_PUBLIC_WS_URL` |
-| **Netlify** | Base = **`frontend`** (já no `netlify.toml`) + mesmas variáveis de ambiente |
+O frontend chama o backend pela URL definida em `NEXT_PUBLIC_API_URL`. O backend precisa:
 
-Sem a **URL do backend** em produção, a loja carrega mas não consegue listar produtos, chat nem CRM (tudo fica em localhost). Defina sempre as duas variáveis com a URL do backend em produção.
+- Estar no ar (Render, Railway, etc.).
+- Ter **CORS_ORIGIN** com a URL do app na Vercel (ex.: `https://seu-app.vercel.app`).
+
+Sem a URL do backend configurada no Vercel, o catálogo e o CRM mostram erro de conexão (o app tenta `localhost`).
+
+---
+
+## Documentos detalhados
+
+| Documento | Conteúdo |
+|-----------|----------|
+| [**DEPLOY_VERCEL.md**](../DEPLOY_VERCEL.md) (raiz) | Passo a passo Vercel, variáveis, CORS, troubleshooting "Erro ao carregar produtos" |
+| [**DEPLOY_RENDER.md**](DEPLOY_RENDER.md) | Passo a passo completo: Backend, AI Service, Evolution API, PostgreSQL, Redis, webhook, variáveis no Vercel |
+| [**DEPLOY_RENDER_PROCESSO_E_ERROS.md**](DEPLOY_RENDER_PROCESSO_E_ERROS.md) | O que funcionou no Render, erros encontrados e como foram resolvidos (ex.: seed de produtos, "no such table", IA sem produtos) |
+
+Outros: [CONFIGURAR_WEBHOOK_EVOLUTION.md](CONFIGURAR_WEBHOOK_EVOLUTION.md), [TROUBLESHOOTING_EVOLUTION_API_KEY.md](TROUBLESHOOTING_EVOLUTION_API_KEY.md).
+
+---
+
+## Resumo por plataforma
+
+| Parte | Onde sobe | Doc principal |
+|-------|-----------|----------------|
+| Frontend (Next.js) | **Vercel** | [DEPLOY_VERCEL.md](../DEPLOY_VERCEL.md) |
+| Backend (NestJS) | Render / Railway / etc. | [DEPLOY_RENDER.md](DEPLOY_RENDER.md) |
+| AI Service (Agno) | Render / mesmo host | [DEPLOY_RENDER.md](DEPLOY_RENDER.md) |
+| Evolution API | Render (Docker) | [DEPLOY_RENDER.md](DEPLOY_RENDER.md) |

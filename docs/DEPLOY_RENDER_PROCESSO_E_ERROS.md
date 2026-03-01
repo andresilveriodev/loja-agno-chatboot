@@ -2,6 +2,8 @@
 
 Este documento descreve o **processo de deploy no Render que deu certo** para o projeto Loja Multidepartamental, os **erros encontrados** e **como foram resolvidos**. Serve como histórico e referência para futuros deploys.
 
+**Índice de deploy:** [DEPLOY.md](DEPLOY.md) | **Passo a passo Render:** [DEPLOY_RENDER.md](DEPLOY_RENDER.md).
+
 ---
 
 ## Índice
