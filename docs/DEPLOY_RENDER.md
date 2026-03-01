@@ -159,12 +159,14 @@ Em **Environment** do serviço, adicione:
 
 | Key | Value | Obrigatório |
 |-----|--------|-------------|
+| `PYTHON_VERSION` | `3.12.7` | **Sim** – ChromaDB/Agno não são compatíveis com Python 3.14; use 3.12 |
 | `OPENAI_API_KEY` | Sua chave da OpenAI | Sim |
 | `BACKEND_URL` | URL do backend (ex.: `https://loja-backend.onrender.com`) | Sim (tools de produtos) |
 | `STORAGE_DB` | `tmp/loja_data.db` | Opcional |
 | `OPENAI_MODEL` | `gpt-4.1-mini` (ou outro) | Opcional |
 
-Não defina `PORT`; a Render define.
+Não defina `PORT`; a Render define. **Start Command** recomendado (porta explícita):  
+`python -c "import os; import uvicorn; uvicorn.run('main:app', host='0.0.0.0', port=int(os.environ.get('PORT', 10000)))"`
 
 ### 6.3 Deploy
 
