@@ -6,6 +6,7 @@ config({ path: path.resolve(process.cwd(), ".env") });
 
 import * as fs from "fs";
 import { NestFactory } from "@nestjs/core";
+import { DataSource } from "typeorm";
 import { AppModule } from "./app.module";
 import { IoAdapter } from "@nestjs/platform-socket.io";
 import { getCorsOrigins } from "./config";
@@ -18,6 +19,8 @@ async function bootstrap() {
   }
 
   const app = await NestFactory.create(AppModule);
+  const dataSource = app.get(DataSource);
+  await dataSource.synchronize();
   const port = process.env.PORT ?? 3001;
   app.enableCors({
   origin: getCorsOrigins(),
