@@ -1,4 +1,5 @@
 import { Body, Controller, Post, Get } from "@nestjs/common";
+import { DataSource } from "typeorm";
 import { WhatsAppService } from "./whatsapp.service";
 import { ChatService } from "../chat/chat.service";
 import { BotService } from "../bot/bot.service";
@@ -59,6 +60,7 @@ export class WhatsAppController {
     private readonly productsService: ProductsService,
     private readonly crmService: CrmService,
     private readonly audioService: AudioService,
+    private readonly dataSource: DataSource,
   ) {}
 
   /**
@@ -174,8 +176,9 @@ export class WhatsAppController {
     const sessionId = `${SESSION_PREFIX}${phone}`;
     const metadata = { source: "whatsapp", phone };
 
-    try {
-      const lead = await this.crmService.findOrCreateLeadByPhone(phone);
+    for (let attempt = 1; attempt <= 2; attempt++) {
+      try {
+        const lead = await this.crmService.findOrCreateLeadByPhone(phone);
       const leadId = lead.id;
 
       const extractedName = extractCustomerName(text);
@@ -300,8 +303,18 @@ export class WhatsAppController {
       } catch (handoffErr) {
         console.error("[WhatsApp] Erro ao registrar handoff no CRM:", handoffErr);
       }
-    } catch (err) {
-      console.error("[WhatsApp] Erro ao processar webhook:", err);
+        break;
+      } catch (err) {
+        const msg = String((err as Error)?.message ?? "");
+        if (attempt === 1 && msg.includes("no such table")) {
+          console.log("[WhatsApp] Tabelas ausentes; sincronizando schema...");
+          await this.dataSource.synchronize();
+          console.log("[WhatsApp] Schema sincronizado. Tentando novamente.");
+          continue;
+        }
+        console.error("[WhatsApp] Erro ao processar webhook:", err);
+        break;
+      }
     }
 
     return { ok: true };
