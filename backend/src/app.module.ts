@@ -35,9 +35,8 @@ const databasePath =
         OrderItem,
         OrderCounter,
       ],
-      synchronize:
-        process.env.NODE_ENV !== "production" ||
-        process.env.SYNC_DB === "true",
+      // SQLite: sempre criar/atualizar tabelas (Render usa disco efêmero; evita "no such table: leads").
+      synchronize: true,
       logging: process.env.NODE_ENV === "development",
     }),
     ProductsModule,

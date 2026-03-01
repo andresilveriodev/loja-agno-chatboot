@@ -127,9 +127,7 @@ Em **Environment** do serviço, adicione:
 | `EVOLUTION_INSTANCE_API_KEY` | Token da instância (pode ser igual a `EVOLUTION_API_KEY` se configurar assim na Evolution) | Opcional |
 | `BACKEND_PUBLIC_URL` | `https://loja-backend.onrender.com` *(trocar pelo nome real do seu serviço)* | Sim (Evolution/webhook) |
 | `PRODUCT_IMAGES_BASE_URL` | `https://ja-agno-chatboot-v7yq.vercel.app` | Sim (fotos no WhatsApp) |
-| `SYNC_DB` | `true` | Sim (SQLite: cria tabelas `leads`, etc. na primeira subida; sem isso dá "no such table: leads") |
-
-- **Não** defina `PORT`; a Render injeta automaticamente.
+- **Não** defina `PORT`; a Render injeta automaticamente. O backend usa `synchronize: true` com SQLite para criar as tabelas na subida (evita "no such table: leads").
 - Após criar o AI Service (Passo 4), volte aqui e preencha `AI_SERVICE_URL` com a URL do AI Service (ex.: `https://loja-ai-service.onrender.com`).
 - Após criar a Evolution (Passo 5), preencha `EVOLUTION_API_URL` (ex.: `https://loja-evolution.onrender.com`).
 
