@@ -22,7 +22,8 @@ Em **Settings → Environment Variables** do projeto, adicione:
 
 - **Não use** `localhost` em produção.
 - Não coloque barra no final da URL.
-- Após alterar variáveis, faça um novo deploy.
+- **Importante:** marque **Production** e **Preview**. Se só marcar Production, deploys de branch (ex.: `feature-xxx`) vão usar URL vazia e o app tentará `localhost`, gerando "Erro ao carregar produtos" ou "Erro ao carregar dados" no CRM.
+- Após alterar variáveis, faça **Redeploy** (Deployments → ⋮ → Redeploy). As variáveis `NEXT_PUBLIC_*` são embutidas no build; um deploy antigo não as usa.
 
 ### 3. Backend em produção
 
@@ -59,3 +60,11 @@ Para o frontend funcionar em produção:
 | AI Service (Python) | Mesmo host do backend ou outro serviço |
 
 O frontend em produção chama o backend pelas URLs configuradas em `NEXT_PUBLIC_*`.
+
+### "Erro ao carregar produtos" ou "Erro ao carregar dados" (CRM)
+
+Se o catálogo ou o CRM mostra erro de conexão mesmo com o backend no ar:
+
+1. **Variáveis para Preview:** Em Environment Variables, confira que `NEXT_PUBLIC_API_URL` e `NEXT_PUBLIC_WS_URL` estão marcadas para **Preview** (não só Production). URLs de branch (ex.: `*-andreadams-projects.vercel.app`) usam o ambiente Preview.
+2. **Redeploy:** Depois de salvar as variáveis, vá em **Deployments**, abra o menu (⋮) do deploy desejado e clique em **Redeploy**. O build precisa rodar de novo para embutir as URLs.
+3. **Valor correto:** Use a URL do backend sem barra no final (ex.: `https://loja-agno-chatboot.onrender.com`). O backend deve estar acessível e com `CORS_ORIGIN` incluindo o domínio do frontend no Vercel.

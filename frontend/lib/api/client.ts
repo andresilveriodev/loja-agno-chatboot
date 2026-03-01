@@ -1,12 +1,13 @@
 const DEFAULT_API_URL = "http://localhost:3001";
 
-const getBaseUrl = () => {
+/** URL base da API (backend). No Vercel, defina NEXT_PUBLIC_API_URL e faça Redeploy para que o build use a URL correta. */
+export function getBaseUrl(): string {
   const url = process.env.NEXT_PUBLIC_API_URL?.trim() || DEFAULT_API_URL;
-  return url;
-};
+  return url.replace(/\/$/, "");
+}
 
 export function getApiUrl(path: string): string {
-  const base = getBaseUrl().replace(/\/$/, "");
+  const base = getBaseUrl();
   const p = path.startsWith("/") ? path : `/${path}`;
   return `${base}${p}`;
 }

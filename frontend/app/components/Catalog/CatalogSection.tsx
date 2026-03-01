@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import { useFilterStore } from "@/app/store/filterStore";
 import type { Product } from "@/lib/types";
 import { useProducts } from "@/app/hooks/useProducts";
+import { getBaseUrl } from "@/lib/api/client";
 import { CategoryFilter } from "./CategoryFilter";
 import { CatalogGrid } from "./CatalogGrid";
 import { ProductDetailModal } from "./ProductDetailModal";
@@ -47,16 +48,10 @@ export function CatalogSection() {
               <div className="rounded-lm-md border border-red-200 bg-red-50 p-4 text-red-800 shadow-lm-soft">
                 <p className="font-medium">Erro ao carregar produtos</p>
                 <p className="mt-1 text-sm">
-                  O backend não está respondendo (conexão recusada). Inicie-o em outro terminal:
+                  O backend não está respondendo. URL usada: <code className="rounded bg-red-100 px-1">{getBaseUrl()}</code>
                 </p>
-                <code className="mt-2 block rounded bg-red-100 px-2 py-1 text-xs">
-                  cd backend; npm run start:dev
-                </code>
-                <p className="mt-1 text-xs text-red-600">
-                  (PowerShell: use ; em vez de &amp;&amp;. Antes: npm install na pasta backend.)
-                </p>
-                <p className="mt-2 text-xs text-red-700">
-                  URL esperada: {process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:3001"}
+                <p className="mt-2 text-xs text-red-600">
+                  Em desenvolvimento local: inicie o backend (<code>cd backend; npm run start:dev</code>). No Vercel: defina <code>NEXT_PUBLIC_API_URL</code> com a URL do backend (ex.: https://seu-backend.onrender.com) em <strong>Production</strong> e <strong>Preview</strong>, depois faça Redeploy.
                 </p>
               </div>
             )}

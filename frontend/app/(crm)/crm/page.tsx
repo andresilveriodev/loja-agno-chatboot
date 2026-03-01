@@ -3,6 +3,7 @@
 import { useState, useCallback } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { fetchLeads, fetchOrders, fetchSeedLeads } from "@/lib/api/crm";
+import { getBaseUrl } from "@/lib/api/client";
 import { KanbanBoard } from "./components/KanbanBoard";
 import { CrmFilters } from "./components/CrmFilters";
 import { LeadDetailModal } from "./components/LeadDetailModal";
@@ -73,8 +74,7 @@ export default function CrmPage() {
         {error && (
           <div className="crm-card crm-mb-4" style={{ borderColor: "var(--crm-ds-neutral-border)", marginBottom: "var(--crm-ds-spacing-04)" }}>
             <p className="crm-text-body" style={{ color: "#b91c1c" }}>
-              Erro ao carregar dados. Verifique se o backend está rodando em{" "}
-              <code>api/crm</code>.
+              Erro ao carregar dados. Backend usado: <code>{getBaseUrl()}</code> (rota <code>api/crm</code>). No Vercel, defina <code>NEXT_PUBLIC_API_URL</code> em Production e Preview e faça Redeploy.
             </p>
           </div>
         )}
