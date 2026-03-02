@@ -17,10 +17,6 @@ export function HeroSection() {
           Ferramentas, energia, climatização, cozinha industrial, EPIs e mais. Tudo
           para o seu negócio em um só lugar.
         </p>
-        <p className="mt-2 text-[15px] leading-relaxed text-[var(--lm-text-muted)]">
-          Interface inspirada no design system da Leroy Merlin: tipografia clara,
-          superfícies elevadas e ações principais bem destacadas.
-        </p>
         <div className="mt-5 flex flex-wrap gap-3">
           <a
             href="#catalogo"

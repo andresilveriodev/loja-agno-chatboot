@@ -261,13 +261,50 @@ Assim, cada mensagem recebida será enviada ao backend; o backend chama o AI Ser
 
 ---
 
-## 9. Passo 7 – Variáveis no Vercel (frontend)
+## 9. Passo 7 – Deploy do frontend no Vercel
 
-1. Abra o projeto no [Vercel](https://vercel.com) → **Settings** → **Environment Variables**.
-2. Defina (para Production e Preview, se quiser):
-   - `NEXT_PUBLIC_API_URL` = `https://loja-backend.onrender.com` (sua URL do backend).
-   - `NEXT_PUBLIC_WS_URL` = `https://loja-backend.onrender.com` (mesma URL).
-3. Salve e faça um **Redeploy** do frontend para aplicar.
+O frontend (Next.js) fica na pasta `frontend/` do monorepo. No Vercel você faz deploy **apenas do frontend**; o backend já está na Render (Passos 1–5).
+
+### 9.1 Conectar o repositório e Root Directory
+
+1. Acesse [vercel.com](https://vercel.com) e faça login.
+2. **Add New** → **Project** e importe o repositório (ex.: `andresilveriodev/loja-agno-chatboot`).
+3. **Root Directory (obrigatório):** em **Root Directory**, clique em **Edit** e defina: **`frontend`**.
+   - Se deixar em branco ou na raiz, o build falha com *"No Next.js version detected"*, pois o Next.js está na pasta `frontend/`.
+4. Confirme que o **Framework Preset** está como **Next.js**.
+5. (Opcional) Em **Settings → General**, em **Production Branch**, defina a branch que será produção (ex.: `main`). Se não alterar, o padrão é `main`.
+
+### 9.2 Variáveis de ambiente
+
+Em **Settings → Environment Variables** do projeto no Vercel, adicione:
+
+| Nome | Valor | Ambiente |
+|------|--------|----------|
+| `NEXT_PUBLIC_API_URL` | URL do backend na Render (ex.: `https://loja-agno-chatboot.onrender.com`) | **Production** e **Preview** |
+| `NEXT_PUBLIC_WS_URL` | Mesma URL do backend (WebSocket) | **Production** e **Preview** |
+
+- **Não use** `localhost` em produção. Não coloque barra no final da URL.
+- **Importante:** marque **Production** e **Preview**. Se só marcar Production, deploys de outras branches (Preview) vão usar URL vazia e o app tentará `localhost`, gerando "Erro ao carregar produtos" ou "Erro ao carregar dados" no CRM.
+- Após alterar variáveis, faça **Redeploy** (Deployments → ⋮ → Redeploy). As variáveis `NEXT_PUBLIC_*` são embutidas no build; um deploy antigo não as usa.
+
+### 9.3 Backend: CORS
+
+No **backend na Render** (Passo 3), a variável **`CORS_ORIGIN`** deve incluir a URL exata do app no Vercel (ex.: `https://loja-agno-chatboot.vercel.app`), sem barra no final. Se não incluir, o navegador bloqueia as requisições e o frontend mostra erro de conexão.
+
+### 9.4 Deploy
+
+- **Deploy automático:** a cada push na branch de produção (ex.: `main`), o Vercel faz o build e publica.
+- Após o primeiro deploy, anote a URL do app (ex.: `https://seu-app.vercel.app`) e confira se no backend (Render) o `CORS_ORIGIN` contém essa URL.
+
+### 9.5 "Erro ao carregar produtos" ou "Erro ao carregar dados" (CRM)
+
+Se a mensagem de erro **mostra a URL do backend** (ex.: `https://loja-agno-chatboot.onrender.com`) mas mesmo assim não carrega:
+
+1. **Backend dormindo (free tier):** Na Render, serviços free desligam após inatividade. A primeira requisição pode demorar 30–60 s ou dar timeout. Abra a URL do backend no navegador (ex.: `https://loja-agno-chatboot.onrender.com`) para "acordar" o serviço e teste de novo o app no Vercel.
+2. **CORS:** Confira no backend (Render) se `CORS_ORIGIN` inclui **exatamente** o domínio do app no Vercel (o que aparece na barra de endereço). Redeploy do backend após alterar.
+3. **Variáveis no Vercel:** Se a URL na mensagem de erro estiver errada ou for `localhost`, defina `NEXT_PUBLIC_API_URL` e `NEXT_PUBLIC_WS_URL` em **Production** e **Preview** e faça **Redeploy** do frontend.
+
+**Guia completo do frontend:** [DEPLOY_VERCEL.md](../DEPLOY_VERCEL.md) na raiz do projeto.
 
 ---
 
@@ -276,12 +313,12 @@ Assim, cada mensagem recebida será enviada ao backend; o backend chama o AI Ser
 ### Checklist
 
 - [ ] PostgreSQL e Redis na mesma região; URLs internas copiadas.
-- [ ] Backend: `CORS_ORIGIN` com a URL exata do frontend (Vercel).
 - [ ] Backend: Start Command com `npm run sync-db && npm run seed && npm run start`; `PRODUTOS_CATALOGO.json` na raiz do repo.
 - [ ] Backend: `AI_SERVICE_URL`, `EVOLUTION_API_URL`, `BACKEND_PUBLIC_URL`, `PRODUCT_IMAGES_BASE_URL` preenchidos.
 - [ ] AI Service: `OPENAI_API_KEY` e `BACKEND_URL` definidos.
 - [ ] Evolution: `AUTHENTICATION_API_KEY` igual ao `EVOLUTION_API_KEY` do backend; Postgres e Redis corretos; `SERVER_URL` com a URL pública da Evolution.
-- [ ] Vercel: `NEXT_PUBLIC_API_URL` e `NEXT_PUBLIC_WS_URL` apontando para o backend na Render.
+- [ ] Vercel: **Root Directory** = `frontend`; `NEXT_PUBLIC_API_URL` e `NEXT_PUBLIC_WS_URL` em **Production** e **Preview**; Redeploy após alterar variáveis.
+- [ ] Backend (Render): `CORS_ORIGIN` com a URL exata do app no Vercel.
 - [ ] Webhook da Evolution: URL = `{BACKEND_PUBLIC_URL}/api/whatsapp/webhook`.
 
 ### Problemas comuns
