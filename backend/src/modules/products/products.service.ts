@@ -57,6 +57,24 @@ const NAME_TO_FOLDER: Record<string, string> = {
     "Bosch ParafusadeiraChave Impacto GDX 18V-285 - 285Nm",
 };
 
+/**
+ * Apelidos comuns de categoria (como o modelo ou o usuário costumam falar)
+ * mapeados para o nome exato da categoria no catálogo.
+ *
+ * Isso permite que chamadas como `?category=Jardinagem` retornem
+ * os itens de "Jardinagem & Áreas Externas", por exemplo.
+ */
+const CATEGORY_ALIASES: Record<string, string> = {
+  Jardinagem: "Jardinagem & Áreas Externas",
+  "Jardinagem e Áreas Externas": "Jardinagem & Áreas Externas",
+  "Jardinagem & Areas Externas": "Jardinagem & Áreas Externas",
+  "Cozinha Industrial": "Cozinha Industrial & Alimentação",
+  "Cozinha Industrial & Alimentacao": "Cozinha Industrial & Alimentação",
+  EPIs: "Segurança do Trabalho (EPIs)",
+  "Segurança do Trabalho": "Segurança do Trabalho (EPIs)",
+  "Seguranca do Trabalho": "Segurança do Trabalho (EPIs)",
+};
+
 export interface ProductFilter {
   category?: string;
   /** Busca por texto em nome, descrição e especificações (todas as categorias). */
@@ -85,7 +103,9 @@ export class ProductsService {
   async findAll(filter?: ProductFilter): Promise<Product[]> {
     const qb = this.productRepo.createQueryBuilder("p");
     if (filter?.category) {
-      qb.andWhere("p.category = :category", { category: filter.category });
+      const rawCategory = filter.category.trim();
+      const mappedCategory = CATEGORY_ALIASES[rawCategory] ?? rawCategory;
+      qb.andWhere("p.category = :category", { category: mappedCategory });
     }
     if (filter?.search?.trim()) {
       const term = `%${filter.search.trim()}%`;
